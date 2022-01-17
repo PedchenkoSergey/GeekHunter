@@ -25,7 +25,7 @@
 {% if request.resolver_match.url_name != 'login' %}
     {% include './includes/inc_menu.html' %}
 {% endif %}
-<main class="{% if request.resolver_match.url_name == 'login' %}form-signin{% else %}container{% endif %}">
+<main class="{% if request.resolver_match.url_name == 'login' %}form-signin{% endif %}">
     {% block content %}
     {% endblock %}
 </main>
