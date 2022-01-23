@@ -38,8 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'geekhunter',
     'auth_app',
+    'admin_app',
+    'company_app',
+    'employee_app',
+    'main_app',
+    'news_app',
 ]
 
 MIDDLEWARE = [
@@ -137,3 +143,5 @@ STATICFILES_FINDERS = (
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'auth_app.PortalUser'
