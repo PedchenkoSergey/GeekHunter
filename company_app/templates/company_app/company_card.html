@@ -1,0 +1,55 @@
+{% extends 'company_app/base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+{% endblock %}
+
+
+{% block content %}
+    <div class="company_card">
+        <section class='h-100'>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="card mb-4">
+                            <div class="card-body text-center">
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                                     alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                                <h5 class="my-3">{{ card.company.name|capfirst }}</h5>
+                                <p class="text-muted mb-1">{{ card.company.short_description|capfirst }}</p>
+                                <p class="text-muted mb-4">{{ card.company.specialization|capfirst }}</p>
+                                <div class="d-flex justify-content-center mb-2">
+                                    <button type="button" class="btn btn-primary">Вакансии</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                {% for instance in card_data %}
+                                    {% for key, value in instance.fields.items|slice:":2" %}
+                                        {% if key in 'company status moderation_status error_text' %}
+                                        {% else %}
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <p class="mb-0">{{ key|capfirst }}</p>
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <p class="text-muted mb-0">{{ value|capfirst }}</p>
+                                                </div>
+                                            </div>
+                                            {% if key not in 'priorities' %}
+                                                <hr>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
