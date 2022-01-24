@@ -2,15 +2,16 @@ from django.core.paginator import Paginator
 from django.test import TestCase
 from django.test.client import Client
 
-from company_app.models import Company
 from news_app.models import News
 
 
 class MainAppTestCase(TestCase):
-    client = Client()
-    companies = Company.objects.all()
-    news_list = News.objects.get_queryset().order_by('id')
-    paginator = Paginator(news_list, 2)
+
+    def setUp(self) -> None:
+        client = Client()
+
+        self.news_list = News.objects.get_queryset().order_by('id')
+        self.paginator = Paginator(self.news_list, 2)
 
     def test_main_page_ok(self):
         response = self.client.get('')
@@ -27,3 +28,5 @@ class MainAppTestCase(TestCase):
     def test_login_page_ok(self):
         response = self.client.get('/auth/login/')
         self.assertEqual(200, response.status_code)
+
+# TODO: может сделать много новостей
