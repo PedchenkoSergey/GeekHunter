@@ -1,11 +1,11 @@
-{% extends 'geekhunter/base.html' %}
+{% extends 'auth_app/base.html' %}
 {% load static %}
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 {% endblock %}
 {% block content %}
         <form>
-            <a href="{% url 'index' %}" class="h1 text-white fw-bold text-decoration-none">GeekHunter</a>
+            <a href="{% url 'main:index' %}" class="h1 text-white fw-bold text-decoration-none">GeekHunter</a>
             <h1 class="h3 mt-5 mb-3 fw-normal text-white">Please sign in</h1>
 
             <div class="form-floating mb-1">
