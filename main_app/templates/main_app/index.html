@@ -1,0 +1,32 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'owlcarousel/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'owlcarousel/owl.theme.default.css' %}">
+{% endblock %}
+{% block js %}
+
+{% endblock %}
+{% block content %}
+    {% include 'main_app/includes/inc_hero.html' %}
+    <div class="container">
+        <h1 class='pt-5'>Компании:</h1>
+        <div class="dropdown-divider"></div>
+        {% include 'main_app/includes/inc_companies_carousel.html' %}
+    </div>
+    <div class="container">
+        <h1>Новости:</h1>
+        <div class="dropdown-divider mb-4"></div>
+        <div class="d-flex flex-column flex-wrap mb-2">
+            {% include 'main_app/includes/inc_news.html' %}
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block footer-js %}
+    <script src={% static 'owlcarousel/jquery.min.js' %}></script>
+    <script src="{% static 'owlcarousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/infinite_news.js' %}"></script>
+    <script src="{% static 'js/companies_carousel.js' %}"></script>
+{% endblock %}
