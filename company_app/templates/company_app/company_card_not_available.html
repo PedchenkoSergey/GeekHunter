@@ -1,0 +1,7 @@
+{% extends 'company_app/base.html' %}
+
+{% block content %}
+    <h1>Ошибка</h1>
+    <p>Карточка {{ card.company.name }} не доступна!</p>
+    <p>{{ card.status }}   {{ card.moderation_status }}</p>
+{% endblock %}
