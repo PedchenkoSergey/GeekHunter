@@ -18,8 +18,9 @@ from django.urls import path
 from django.conf.urls import include
 from geekhunter.views import main
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', main, name='index'),
-    path('auth/', include('auth_app.urls', namespace='auth'))
+    path('auth/', include('auth_app.urls', namespace='auth')),
 ]
