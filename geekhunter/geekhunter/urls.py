@@ -20,12 +20,7 @@ from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-<<<<<<< HEAD:geekhunter/geekhunter/urls.py
-    path('', main, name='index'),
-    path('auth/', include('auth_app.urls', namespace='auth')),
-=======
     path('', include('main_app.urls', namespace='main')),
     path('auth/', include('auth_app.urls', namespace='auth')),
     path('company/', include('company_app.urls', namespace='company')),
->>>>>>> ba71d7bc11d6d9371981f58f09604deb31fe96d5:geekhunter/urls.py
 ]
