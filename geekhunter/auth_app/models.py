@@ -4,8 +4,8 @@ from django.utils.translation import gettext_lazy as _
 
 
 class PortalUser(AbstractUser):
-    is_staff = models.BooleanField(_('staff'), null=True)
-    is_superuser = models.BooleanField(_('superuser'), null=True)
+    is_employee = models.BooleanField(_('employee'), default=False)
+    is_company = models.BooleanField(_('company'), default=False)
     phone = models.CharField(_('phone'), max_length=50, unique=True)
     email = models.EmailField(_('email address'), unique=True)
 
