@@ -1,19 +1,14 @@
 from django.db import models
-
 from django.utils.translation import gettext_lazy as _
 
 from auth_app.models import PortalUser
 
 
 class Employee(models.Model):
-    first_name = models.CharField(_('first_name'), max_length=200, blank=False)
-    last_name = models.CharField(_('last_name'), max_length=200, blank=False)
-    phone = models.CharField(_('phone'), max_length=50, blank=True)
-    email = models.EmailField(_('email'), unique=True)
-    user = models.ForeignKey(PortalUser, on_delete=models.CASCADE, related_name='users')
+    user = models.OneToOneField(PortalUser, on_delete=models.CASCADE, primary_key=True)
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.user.first_name} {self.user.last_name}"
 
 
 class Resume(models.Model):

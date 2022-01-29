@@ -22,15 +22,15 @@
     {% block js %}
     {% endblock %}
 </head>
-<body class="{% if request.resolver_match.url_name == 'login' %}bg-dark text-center body-login{% else %}d-flex flex-column h-100{% endif %}">
-{% if request.resolver_match.url_name != 'login' %}
+<body class="{% if request.resolver_match.url_name in 'login signup' %}bg-dark text-center body-login{% else %}d-flex flex-column h-100{% endif %}">
+{% if request.resolver_match.url_name not in 'login signup' %}
     {% include 'main_app/includes/inc_menu.html' %}
 {% endif %}
-<main class="{% if request.resolver_match.url_name == 'login' %}form-signin{% endif %}">
+<main class="{% if request.resolver_match.url_name in 'login signup' %}form-signin{% endif %}">
     {% block content %}
     {% endblock %}
 </main>
-{% if request.resolver_match.url_name != 'login' %}
+{% if request.resolver_match.url_name not in 'login signup' %}
     <footer class="footer mt-auto py-3 bg-light">
         <div class="container">
             <span class="text-muted">Lorem ipsum dolor sit amet.</span>
