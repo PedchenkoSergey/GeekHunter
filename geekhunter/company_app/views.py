@@ -1,7 +1,7 @@
 from django.core import serializers
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
 from .models import Card, Vacancy
 
@@ -26,8 +26,9 @@ def get_company_card(request, pk=None):
             return redirect('main:index')
 
 
-class VacanciesView(LoginRequiredMixin, ListView):
+class VacanciesView(PermissionRequiredMixin, ListView):
     login_url = 'auth_app:login'
+    permission_required = 'company_app.view_vacancy'
     queryset = Vacancy.objects.filter(moderation_status='APPROVED', status='ACTIVE')
     template_name = 'company_app/vacancies.html'
     extra_context = {'title': 'вакансии'}

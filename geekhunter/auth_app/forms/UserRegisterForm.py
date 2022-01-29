@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import Permission
 from django.db import transaction
 
 from auth_app.models import PortalUser
@@ -64,6 +65,8 @@ class PortalUserRegisterForm(UserCreationForm):
 
         if role == 'EMPLOYEE':
             user.is_employee = True
+            permission = Permission.objects.get(codename='view_vacancy')
+            user.user_permissions.add(permission)
             employee = Employee.objects.create(user=user)
         else:
             user.is_company = True
