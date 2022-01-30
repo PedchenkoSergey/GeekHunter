@@ -41,7 +41,7 @@ class Card(models.Model):
         ('APPROVED', 'approved'),
         ('NOT_APPROVED', 'not_approved'),
     ]
-    company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='card')
+    company = models.OneToOneField(Company, on_delete=models.CASCADE, primary_key=True)
     title = models.CharField(_('title'), max_length=200, blank=False)
     about = models.CharField(_('about'), max_length=500, blank=False)
     awards = models.CharField(_('awards'), max_length=500, blank=True)
