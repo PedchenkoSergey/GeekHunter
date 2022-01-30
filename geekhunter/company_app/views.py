@@ -25,8 +25,18 @@ class CompanyCardView(DetailView):
 class VacanciesView(PermissionRequiredMixin, ListView):
     login_url = 'auth_app:login'
     permission_required = 'company_app.view_vacancy'
-    queryset = Vacancy.objects.filter(moderation_status='APPROVED', status='ACTIVE')
     template_name = 'company_app/vacancies.html'
     extra_context = {'title': 'вакансии'}
     context_object_name = 'vacancies'
     ordering = ['-updated_at']
+
+    def get_queryset(self):
+        if 'pk' in self.kwargs:
+            return Vacancy.objects.filter(
+                company_id=self.kwargs.get('pk'),
+                moderation_status='APPROVED',
+                status='ACTIVE'
+            )
+        else:
+            return Vacancy.objects.filter(moderation_status='APPROVED', status='ACTIVE')
+
