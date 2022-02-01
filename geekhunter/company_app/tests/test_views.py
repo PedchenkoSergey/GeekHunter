@@ -53,6 +53,6 @@ class CompanyAppTestCase(TestCase):
         response = self.client.get('/company/3/')
         self.assertEqual(200, response.status_code)
 
-    def test_company_card_redirect(self):
+    def test_company_card_404(self):
         response = self.client.get(f'/company/{Company.objects.all().count() + 1}/')
-        self.assertEqual(302, response.status_code)
+        self.assertEqual(404, response.status_code)

@@ -1,36 +1,42 @@
-from django.core import serializers
-from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import ListView
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.core import serializers
+from django.shortcuts import get_object_or_404
+from django.views.generic import ListView, DetailView
 
-from .models import Card, Vacancy
+from .models import Card, Vacancy, Company
 
 
 # Create your views here.
 
-def get_company_card(request, pk=None):
-    if pk is not None:
-        if pk <= Card.objects.all().count():
-            card = get_object_or_404(Card, pk=pk)
-            card_data = serializers.serialize("python", Card.objects.filter(id=pk))
-            context = {
-                'title': 'company card',
-                'card': card,
-                'card_data': card_data,
-            }
-            if card.status == 'ACTIVE' and card.moderation_status == 'APPROVED':
-                return render(request, 'company_app/company_card.html', context)
-            else:
-                return render(request, 'company_app/company_card_not_available.html', context)
-        else:
-            return redirect('main:index')
+class CompanyCardView(DetailView):
+    template_name = 'company_app/company_card.html'
+
+    def get_object(self, **kwargs):
+        return get_object_or_404(Card, pk=self.kwargs.get('pk'))
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pk = self.kwargs.get('pk')
+        context['title'] = Company.objects.get(id=pk).name
+        context['card_data'] = serializers.serialize("python", Card.objects.filter(company_id=pk))
+        return context
 
 
 class VacanciesView(PermissionRequiredMixin, ListView):
     login_url = 'auth_app:login'
     permission_required = 'company_app.view_vacancy'
-    queryset = Vacancy.objects.filter(moderation_status='APPROVED', status='ACTIVE')
     template_name = 'company_app/vacancies.html'
     extra_context = {'title': 'вакансии'}
     context_object_name = 'vacancies'
     ordering = ['-updated_at']
+
+    def get_queryset(self):
+        if 'pk' in self.kwargs:
+            return Vacancy.objects.filter(
+                company_id=self.kwargs.get('pk'),
+                moderation_status='APPROVED',
+                status='ACTIVE'
+            )
+        else:
+            return Vacancy.objects.filter(moderation_status='APPROVED', status='ACTIVE')
+

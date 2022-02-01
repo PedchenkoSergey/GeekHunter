@@ -19,7 +19,8 @@
                                 <p class="text-muted mb-1">{{ card.company.short_description|capfirst }}</p>
                                 <p class="text-muted mb-4">{{ card.company.specialization|capfirst }}</p>
                                 <div class="d-flex justify-content-center mb-2">
-                                    <button type="button" class="btn btn-primary">Вакансии</button>
+                                    <a href="{% url 'company_app:vacancies' card.company_id %}" type="button"
+                                       class="btn btn-primary">Вакансии</a>
                                 </div>
                             </div>
                         </div>

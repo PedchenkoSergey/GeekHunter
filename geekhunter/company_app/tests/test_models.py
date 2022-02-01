@@ -6,7 +6,12 @@ from company_app.models import Card, Company, Vacancy, Offer, HrManager
 
 class CompanyAppModelsTestCase(TestCase):
     def setUp(self) -> None:
-        self.test_user = PortalUser.objects.create(phone='123456', email='user@geekhunter.com')
+        self.test_user = PortalUser.objects.create(
+            first_name='test',
+            last_name='user',
+            phone='123456',
+            email='user@geekhunter.com'
+        )
         self.company_1 = Company.objects.create(name='company_1', short_description='descr', specialization='IT')
         self.company_1_card = Card.objects.create(
             title='test title',
@@ -34,9 +39,6 @@ class CompanyAppModelsTestCase(TestCase):
             vacancy_id=self.vacancy_1.id
         )
         self.hr_manager_1 = HrManager.objects.create(
-            first_name='hr',
-            last_name='manager',
-            email='hr@manager.com',
             company=self.company_1,
             company_id=self.company_1.id,
             user_id=self.test_user.id
@@ -46,7 +48,7 @@ class CompanyAppModelsTestCase(TestCase):
         self.assertEqual('company_1', str(Company.objects.get(id=1)))
 
     def test_card_str(self):
-        self.assertEqual('test title', str(Card.objects.get(id=1)))
+        self.assertEqual('test title', str(Card.objects.get(company_id=1)))
 
     def test_vacancy_str(self):
         self.assertEqual('test vacancy', str(Vacancy.objects.get(id=1)))
@@ -55,4 +57,4 @@ class CompanyAppModelsTestCase(TestCase):
         self.assertEqual('test offer 1 SENT', str(Offer.objects.get(id=1)))
 
     def test_hr_manager_str(self):
-        self.assertEqual('hr manager', str(HrManager.objects.get(id=1)))
+        self.assertEqual('test user', str(HrManager.objects.get(user_id=1)))
