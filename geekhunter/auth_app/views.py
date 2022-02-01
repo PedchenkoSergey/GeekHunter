@@ -31,9 +31,10 @@ class PortalUserRegisterView(FormView):
     success_url = reverse_lazy('main_app:index')
 
     def form_valid(self, form):
-        user = form.save()
+        form.save()
         return super(PortalUserRegisterView, self).form_valid(form)
 
     def get(self, *args, **kwargs):
         if self.request.user.is_authenticated:
             return redirect('main_app:index')
+        return self.render_to_response(self.get_context_data())
