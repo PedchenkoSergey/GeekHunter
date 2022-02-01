@@ -1,55 +1,39 @@
-from django.contrib import auth
-from django.shortcuts import render, redirect
-from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.views import LoginView, LogoutView, FormView
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
 
 from .forms.UserLoginForm import PortalUserLoginForm
 from .forms.UserRegisterForm import PortalUserRegisterForm
 
 
-@csrf_exempt
-def login(request):
-    if request.user.is_authenticated:
-        return redirect('main:index')
-
-    title = 'Login'
-    login_form = PortalUserLoginForm(data=request.POST)
-    if request.method == 'POST' and login_form.is_valid():
-        username = request.POST['username']
-        password = request.POST['password']
-
-        user = auth.authenticate(username=username, password=password)
-        print(user, user.is_active)
-        if user and user.is_active:
-            auth.login(request, user)
-            return redirect('main:index')
-    context = {
-        'title': title,
-        'login_form': login_form
-    }
-    return render(request, 'auth_app/login_page.html', context)
-
-
-def logout(request):
-    auth.logout(request)
-    return redirect('main:index')
-
-
-def register(request):
-    title = 'Sign Up'
-
-    if request.method == 'POST':
-        register_form = PortalUserRegisterForm(request.POST, request.FILES)
-        if register_form.is_valid():
-            print(register_form.is_valid())
-            register_form.save()
-            return redirect('auth:login')
-
-    else:
-        register_form = PortalUserRegisterForm()
-
-    context = {
-        'title': title,
-        'register_form': register_form,
+class PortalUserLoginView(LoginView):
+    template_name = 'auth_app/login_page.html'
+    form_class = PortalUserLoginForm
+    redirect_authenticated_user = True
+    extra_context = {
+        'title': 'вход',
     }
 
-    return render(request, 'auth_app/sign_up_page.html', context)
+    def get_success_url(self):
+        return reverse_lazy('main_app:index')
+
+
+class PortalUserLogoutView(LogoutView):
+    next_page = 'main_app:index'
+
+
+class PortalUserRegisterView(FormView):
+    template_name = 'auth_app/sign_up_page.html'
+    form_class = PortalUserRegisterForm
+    extra_context = {
+        'title': 'регистрация',
+    }
+    success_url = reverse_lazy('main_app:index')
+
+    def form_valid(self, form):
+        user = form.save()
+        return super(PortalUserRegisterView, self).form_valid(form)
+
+    def get(self, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            return redirect('main_app:index')
