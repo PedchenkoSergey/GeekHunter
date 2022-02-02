@@ -12,35 +12,35 @@
         <h1 class="h3 mt-5 mb-3 fw-normal text-white">Please sign up</h1>
 
         <div class="form-floating mb-1">
-            {{ register_form.email }}
+            {{ form.email }}
             <label for="floatingInput">Email address</label>
         </div>
         <div class="form-floating mb-1">
-            {{ register_form.username }}
+            {{ form.username }}
             <label for="floatingInput">Username</label>
         </div>
         <div class="form-floating mb-1">
-            {{ register_form.first_name }}
+            {{ form.first_name }}
             <label for="floatingInput">First name</label>
         </div>
         <div class="form-floating mb-1">
-            {{ register_form.last_name }}
+            {{ form.last_name }}
             <label for="floatingInput">Last name</label>
         </div>
         <div class="form-floating mb-1">
-            {{ register_form.phone }}
+            {{ form.phone }}
             <label for="floatingInput">Phone number</label>
         </div>
         <div class="form-floating mb-1">
-            {{ register_form.password1 }}
+            {{ form.password1 }}
             <label for="floatingPassword">Password</label>
         </div>
         <div class="form-floating mb-1">
-            {{ register_form.password2 }}
+            {{ form.password2 }}
             <label for="floatingPassword">Confirm password</label>
         </div>
         <div class="form-floating mb-1">
-            {{ register_form.roles }}
+            {{ form.roles }}
             <label for="floatingSelect">Who are you?</label>
         </div>
 
@@ -52,8 +52,8 @@
             </p>
         </div>
         <p class="mt-2 mb-3 text-muted">© GeekHunterDev</p>
-        {% if register_form.errors %}
-            {% for field in register_form %}
+        {% if form.errors %}
+            {% for field in form %}
 
                 {% for error in field.errors %}
                     <p class="mt-5 mb-3 text-muted"> {{ field.label }}: {{ error|escape }}</p>

@@ -1,24 +1,20 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.core import serializers
-from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
 
-from .models import Card, Vacancy, Company
+from .models import Card, Vacancy
 
 
 # Create your views here.
 
 class CompanyCardView(DetailView):
     template_name = 'company_app/company_card.html'
-
-    def get_object(self, **kwargs):
-        return get_object_or_404(Card, pk=self.kwargs.get('pk'))
+    queryset = Card.objects.all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        pk = self.kwargs.get('pk')
-        context['title'] = Company.objects.get(id=pk).name
-        context['card_data'] = serializers.serialize("python", Card.objects.filter(company_id=pk))
+        context['title'] = self.get_object().company.name
+        context['card_data'] = serializers.serialize("python", [self.get_object()])
         return context
 
 
@@ -39,4 +35,3 @@ class VacanciesView(PermissionRequiredMixin, ListView):
             )
         else:
             return Vacancy.objects.filter(moderation_status='APPROVED', status='ACTIVE')
-
