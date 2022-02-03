@@ -5,3 +5,5 @@ sqlparse==0.4.2
 psycopg2-binary==2.9.1
 gunicorn==20.1.0
 django-cors-headers
+six==1.16.0
+django-betterforms==1.2

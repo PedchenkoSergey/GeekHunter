@@ -1,0 +1,9 @@
+{% extends 'company_app/base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>{{ company.name }}</h1>
+    <p><a href="{% url 'company:card_edit' request.user.id %}">Моя карточка</a></p>
+    <p><a href="">Мои вакансии</a></p>
+
+{% endblock %}

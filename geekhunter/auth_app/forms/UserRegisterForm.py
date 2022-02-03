@@ -4,7 +4,7 @@ from django.contrib.auth.models import Permission
 from django.db import transaction
 
 from auth_app.models import PortalUser
-from company_app.models import HrManager, Company
+from company_app.models import HrManager, Company, Card
 from employee_app.models import Employee
 
 
@@ -71,7 +71,12 @@ class PortalUserRegisterForm(UserCreationForm):
         else:
             user.is_company = True
             company = HrManager.objects.create(
-                user=user, company=Company.objects.create(id=user.id, name=f'компания {user.username}')
+                user=user, company=Company.objects.create(
+                    id=user.id,
+                    name=f'компания {user.username}',
+                    card=Card.objects.create(company_id=user.id)
+                ),
+
             )
 
         user.save()
