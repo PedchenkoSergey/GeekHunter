@@ -70,3 +70,11 @@ class CompanyCardEditView(UpdateView):
             'company': self.object.company,
         })
         return kwargs
+
+
+class CompanyProfileVacanciesView(ListView):
+    template_name = 'company_app/profille_vacancies.html'
+    context_object_name = 'vacancies'
+
+    def get_queryset(self):
+        return Vacancy.objects.filter(company_id=self.request.user.id)
