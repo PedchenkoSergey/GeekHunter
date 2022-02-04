@@ -36,9 +36,11 @@ class VacanciesView(PermissionRequiredMixin, ListView):
                 company_id=self.kwargs.get('pk'),
                 moderation_status='APPROVED',
                 status='ACTIVE'
-            )
+            ).order_by(*self.ordering)
         else:
-            return Vacancy.objects.filter(moderation_status='APPROVED', status='ACTIVE')
+            return Vacancy.objects.filter(moderation_status='APPROVED', status='ACTIVE').order_by(*self.ordering)
+          
+          
 
 
 class CompanyProfileView(View):
