@@ -55,10 +55,10 @@ class VacancyCreationView(FormView):
         return self.render_to_response(self.get_context_data())
 
     def post(self, request, *args, **kwargs):
-        hrmanager_company = HrManager.objects.get(user=PortalUser.objects.get(username=request.user)).company
+        company = Company.objects.get(id=self.request.user.id)
         vacancy = Vacancy(
             title=request.POST.get('title'),
-            company=hrmanager_company,
+            company=company,
             description=request.POST.get('description'), 
             salary=request.POST.get('salary'),
             location=request.POST.get('location'),
