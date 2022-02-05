@@ -65,7 +65,7 @@ class VacancyCreationView(FormView):
             status=request.POST.get('status')
         )
         vacancy.save()
-        return HttpResponseRedirect(reverse('company_app:vacancies'))
+        return HttpResponseRedirect(reverse('company_app:profile_vacancies'))
 
 
 class CompanyProfileView(View):
