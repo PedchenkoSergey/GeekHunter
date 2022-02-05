@@ -1,18 +1,16 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.views import FormView
 from django.core import serializers
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
-from django.http import HttpResponseRedirect
 from django.views import View
 from django.views.generic import ListView, DetailView, UpdateView
-from django.contrib.auth.views import FormView
-
-from .forms.CompanyCardEditForm import CompanyCardEditForm
-from .models import Card, Vacancy, Company
-from .forms.VacancyCreationForm import VacancyCreationForm
-from auth_app.models import PortalUser
 
 from employee_app.models import FavoriteVacancies
+from .forms.CompanyCardEditForm import CompanyCardEditForm
+from .forms.VacancyCreationForm import VacancyCreationForm
+from .models import Card, Vacancy, Company
 
 
 class CompanyCardView(DetailView):
@@ -52,8 +50,8 @@ class VacanciesView(PermissionRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['favorite_vacancies'] = FavoriteVacancies.objects.filter(employee=self.request.user.id)
         return context
-          
-          
+
+
 class VacancyCreationView(FormView):
     template_name = 'company_app/vacancy_create_page.html'
     form_class = VacancyCreationForm
