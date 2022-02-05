@@ -1,15 +1,17 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.core import serializers
 from django.shortcuts import render
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
+from django.http import HttpResponseRedirect
 from django.views import View
 from django.views.generic import ListView, DetailView, UpdateView
+from django.contrib.auth.views import FormView
 
 from .forms.CompanyCardEditForm import CompanyCardEditForm
-from .models import Card, Vacancy, Company
+from .models import Card, Vacancy, Company, HrManager
+from .forms.VacancyCreationForm import VacancyCreationForm
+from auth_app.models import PortalUser
 
-
-# Create your views here.
 
 class CompanyCardView(DetailView):
     template_name = 'company_app/company_card.html'
@@ -41,6 +43,29 @@ class VacanciesView(PermissionRequiredMixin, ListView):
             return Vacancy.objects.filter(moderation_status='APPROVED', status='ACTIVE').order_by(*self.ordering)
           
           
+class VacancyCreationView(FormView):
+    template_name = 'company_app/vacancy_create_page.html'
+    form_class = VacancyCreationForm
+    extra_context = {
+        'title': 'Создание вакансии',
+    }
+    success_url = reverse_lazy('company_app:vacancies')
+
+    def get(self, *args, **kwargs):
+        return self.render_to_response(self.get_context_data())
+
+    def post(self, request, *args, **kwargs):
+        company = Company.objects.get(id=self.request.user.id)
+        vacancy = Vacancy(
+            title=request.POST.get('title'),
+            company=company,
+            description=request.POST.get('description'), 
+            salary=request.POST.get('salary'),
+            location=request.POST.get('location'),
+            status=request.POST.get('status')
+        )
+        vacancy.save()
+        return HttpResponseRedirect(reverse('company_app:vacancies'))
 
 
 class CompanyProfileView(View):
