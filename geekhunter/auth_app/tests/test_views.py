@@ -127,10 +127,13 @@ class AuthAppTestCase(TestCase):
         self.register_start()
         self.client.post('/auth/signup/', data=self.new_employee_user_data)
         self.user_logout()
-        response = self.client.post('/auth/login/', data={'username': self.new_employee_user_data['username'],
-                                                          'password': self.new_employee_user_data['password1']
-                                                          }
-                                    )
+        response = self.client.post(
+            '/auth/login/',
+            data={
+                'username': self.new_employee_user_data['username'],
+                'password': self.new_employee_user_data['password1']
+            }
+        )
         self.assertRedirects(response, '/company/vacancies')
 
     def test_user_company_register(self):
