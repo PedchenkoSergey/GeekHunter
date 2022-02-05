@@ -9,6 +9,6 @@ GeekHunter
 
 Запуск из директории GeekHunter на сервере:
 Используем утилиту docker-compose: 
-sudo docker-compose down && sudo docker-compose build && sudo docker-compose up -d
+`sudo docker-compose down && sudo docker-compose build && sudo docker-compose up -d`
 
 Том GeekHunter/data - для постоянного хранения информации БД Postgres из докера.
