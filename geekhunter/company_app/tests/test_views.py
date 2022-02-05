@@ -1,6 +1,6 @@
+from django.contrib.auth.models import Permission
 from django.test import TestCase
 from django.test.client import Client
-from django.contrib.auth.models import Permission
 
 from auth_app.models import PortalUser
 from company_app.models import Company, Card, Vacancy
@@ -72,7 +72,7 @@ class CompanyAppTestCase(TestCase):
         self.vacancy = Vacancy.objects.create(**self.approved_and_active_vacancy_credentials)
 
         self.favorite_vacancy = FavoriteVacancies.objects.create(
-            employee=self.employee, company=self.company_1, vacancy=self.vacancy
+            employee=self.employee, vacancy=self.vacancy
         )
 
     def test_company_card_page_approved_and_active_ok(self):
@@ -113,5 +113,8 @@ class CompanyAppTestCase(TestCase):
         response = self.client.get('/company/vacancies')
 
         self.assertEqual(response.context_data['favorite_vacancies'][0].id, self.favorite_vacancy.id)
-        self.assertEqual(response.context_data['favorite_vacancies'][0].company, self.favorite_vacancy.company)
+        self.assertEqual(
+            response.context_data['favorite_vacancies'][0].vacancy.company,
+            self.favorite_vacancy.vacancy.company
+        )
         self.assertEqual(response.context_data['favorite_vacancies'][0].employee, self.favorite_vacancy.employee)
