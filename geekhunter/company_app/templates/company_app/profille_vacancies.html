@@ -1,0 +1,41 @@
+{% extends 'company_app/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container mt-5">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Descr</th>
+                <th scope="col">Salary</th>
+                <th scope="col">location</th>
+                <th scope="col">Status</th>
+                <th scope="col">Moderation status</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for vacancy in vacancies %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ vacancy.title }}</td>
+                    <td>{{ vacancy.description }}</td>
+                    <td>{{ vacancy.salary }}</td>
+                    <td>{{ vacancy.location }}</td>
+                    <td>{{ vacancy.status }}</td>
+                    <td>{{ vacancy.moderation_status }}</td>
+                    <td>
+                        <a class="btn btn-warning" href="">Edit</a>
+                        <a class="btn btn-danger" href="">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-center">
+            <a type="button" class="btn btn-success" href="">Add</a>
+        </div>
+    </div>
+{% endblock %}
