@@ -170,3 +170,4 @@ cython_debug/
 # Ignore to the database files:
 data/*.*
 data/*/
+.vscode/settings.json
