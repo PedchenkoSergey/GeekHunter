@@ -12,9 +12,6 @@ class VacancyCreationForm(forms.ModelForm):
     title = forms.CharField(widget=forms.TextInput(attrs={
         'placeholder': 'Название Должности'
     }))
-    # company = forms.ModelChoiceField(queryset=Company.objects.get(id=product_id),widget=forms.Select(attrs={
-    #     'placeholder': 'Название Компании'
-    # }))
     description = forms.CharField(widget=forms.Textarea(attrs={
         'placeholder': 'Описание',
         'rows':'10',
