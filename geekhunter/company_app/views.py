@@ -8,9 +8,11 @@ from django.views.generic import ListView, DetailView, UpdateView
 from django.contrib.auth.views import FormView
 
 from .forms.CompanyCardEditForm import CompanyCardEditForm
-from .models import Card, Vacancy, Company, HrManager
+from .models import Card, Vacancy, Company
 from .forms.VacancyCreationForm import VacancyCreationForm
 from auth_app.models import PortalUser
+
+from employee_app.models import FavoriteVacancies
 
 
 class CompanyCardView(DetailView):
@@ -28,7 +30,11 @@ class VacanciesView(PermissionRequiredMixin, ListView):
     login_url = 'auth_app:login'
     permission_required = 'company_app.view_vacancy'
     template_name = 'company_app/vacancies.html'
-    extra_context = {'title': 'вакансии'}
+    extra_context = {
+        'title': 'вакансии',
+        'favorite_vacancies': 'favorite_vacancies',
+
+    }
     context_object_name = 'vacancies'
     ordering = ['-updated_at']
 
@@ -41,6 +47,11 @@ class VacanciesView(PermissionRequiredMixin, ListView):
             ).order_by(*self.ordering)
         else:
             return Vacancy.objects.filter(moderation_status='APPROVED', status='ACTIVE').order_by(*self.ordering)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['favorite_vacancies'] = FavoriteVacancies.objects.filter(employee=self.request.user.id)
+        return context
           
           
 class VacancyCreationView(FormView):
@@ -59,7 +70,7 @@ class VacancyCreationView(FormView):
         vacancy = Vacancy(
             title=request.POST.get('title'),
             company=company,
-            description=request.POST.get('description'), 
+            description=request.POST.get('description'),
             salary=request.POST.get('salary'),
             location=request.POST.get('location'),
             status=request.POST.get('status')

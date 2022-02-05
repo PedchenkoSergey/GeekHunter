@@ -30,9 +30,10 @@ class Resume(models.Model):
 class FavoriteVacancies(models.Model):
     vacancy = models.ForeignKey('company_app.Vacancy', on_delete=models.CASCADE, related_name='vacancies')
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='employees')
+    company = models.ForeignKey('company_app.Company', on_delete=models.CASCADE, related_name='companies_fav')
 
     def __str__(self):
-        return f"{self.vacancy.__str__()} {self.employee.__str__()}"
+        return f"{self.vacancy.__str__()} {self.company.__str__()}"
 
 
 class Experience(models.Model):
