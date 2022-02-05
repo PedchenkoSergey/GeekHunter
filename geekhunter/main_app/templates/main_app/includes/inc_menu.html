@@ -13,7 +13,7 @@
             </ul>
             <div class="text-end d-flex">
                 {% if user.is_authenticated %}
-                    <p class="text-white h-100 me-2">Hello, {{ user.username }}!</p>
+                    <p class="text-white h-100 m-2">Hello, {{ user.username }}!</p>
                     <a role="button" class="btn btn-outline-light me-2" href='{% url 'auth:logout' %}'>Logout</a>
                 {% else %}
                     {% if request.resolver_match.url_name != 'login' %}

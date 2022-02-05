@@ -117,7 +117,7 @@ class AuthAppTestCase(TestCase):
             '/auth/signup/',
             data=self.new_employee_user_data,
         )
-        self.assertEqual(302, response.status_code)
+        self.assertRedirects(response, '/company/vacancies')
         new_user = PortalUser.objects.get(username=self.new_employee_user_data['username'])
         self.assertTrue(new_user.is_active)
         self.assertTrue(new_user.is_employee)

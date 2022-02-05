@@ -1,3 +1,4 @@
+from django.contrib import auth
 from django.contrib.auth.views import LoginView, LogoutView, FormView
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
@@ -15,6 +16,8 @@ class PortalUserLoginView(LoginView):
     }
 
     def get_success_url(self):
+        if self.request.user.is_employee:
+            return reverse_lazy('company:vacancies')
         return reverse_lazy('main_app:index')
 
 
@@ -28,10 +31,15 @@ class PortalUserRegisterView(FormView):
     extra_context = {
         'title': 'регистрация',
     }
-    success_url = reverse_lazy('main_app:index')
+
+    def get_success_url(self):
+        if self.request.user.is_employee:
+            return reverse_lazy('company:vacancies')
+        return reverse_lazy('main_app:index')
 
     def form_valid(self, form):
-        form.save()
+        user = form.save()
+        auth.login(self.request, user)
         return super(PortalUserRegisterView, self).form_valid(form)
 
     def get(self, *args, **kwargs):
