@@ -59,7 +59,6 @@ class VacancyCreationView(FormView):
     extra_context = {
         'title': 'Создание вакансии',
     }
-    success_url = reverse_lazy('company_app:vacancies')
 
     def get(self, *args, **kwargs):
         return self.render_to_response(self.get_context_data())
