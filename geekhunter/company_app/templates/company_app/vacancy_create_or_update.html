@@ -6,12 +6,11 @@
 {% endblock %}
 
 {% block content %}
-
     <div class="d-flex flex-column align-items-center">
         <div class="card bg-dark bg-gradient text-black m-3 w-50 px-2">
-            <form class="" action="{% url 'company_app:vacancy_create' %}" method="post">
+            <form class="" action="" method="post">
                 {% csrf_token %}
-                <a href="{% url 'company_app:vacancies' %}" class="h1 text-white fw-bold text-decoration-none">К
+                <a href="{% url 'company_app:profile_vacancies' %}" class="h1 text-white fw-bold text-decoration-none">К
                     вакансиям</a>
                 <h1 class="h3 mt-5 mb-3 fw-normal text-white">Создание вакансии</h1>
                 <div class="d-flex flex-nowrap">
@@ -38,7 +37,13 @@
                         {{ form.status }}
                         <label for="floatingSelect">Черновик?</label>
                     </div>
-                    <button class="w-50 btn btn-lg btn-warning" type="submit">Создать</button>
+                    <button class="w-50 btn btn-lg btn-warning" type="submit">
+                        {% if request.resolver_match.url_name == 'vacancy_create' %}
+                            Создать
+                        {% else %}
+                            Сохранить
+                        {% endif %}
+                    </button>
                 </div>
                 <p class="mt-2 mb-3 text-muted">© GeekHunterDev</p>
                 {% if form.errors %}

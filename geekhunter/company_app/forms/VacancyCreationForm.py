@@ -1,6 +1,6 @@
 from django import forms
 
-from company_app.models import Vacancy, HrManager, Company
+from company_app.models import Vacancy
 
 
 class VacancyCreationForm(forms.ModelForm):
@@ -14,8 +14,8 @@ class VacancyCreationForm(forms.ModelForm):
     }))
     description = forms.CharField(widget=forms.Textarea(attrs={
         'placeholder': 'Описание',
-        'rows':'10',
-        'style':"height:100%;"
+        'rows': '10',
+        'style': "height:100%;"
     }))
     salary = forms.CharField(widget=forms.TextInput(attrs={
         'placeholder': 'Зарплата'
@@ -31,11 +31,11 @@ class VacancyCreationForm(forms.ModelForm):
     class Meta:
         model = Vacancy
         fields = (
-            'title', 
-            # 'company', 
-            'description', 
-            'salary', 
-            'location', 
+            'title',
+            'description',
+            'salary',
+            'location',
+            'status'
         )
 
     def __init__(self, *args, **kwargs):
@@ -47,4 +47,3 @@ class VacancyCreationForm(forms.ModelForm):
                 field.widget.attrs['class'] = 'form-select'
             else:
                 field.widget.attrs['id'] = 'floatingInput'
-                
