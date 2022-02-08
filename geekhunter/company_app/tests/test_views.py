@@ -3,7 +3,7 @@ from django.test import TestCase
 from django.test.client import Client
 
 from auth_app.models import PortalUser
-from company_app.models import Company, Card, Vacancy
+from company_app.models import Company, Card, Vacancy, HrManager
 from employee_app.models import FavoriteVacancies, Employee
 
 
@@ -56,6 +56,13 @@ class CompanyAppTestCase(TestCase):
             'password': 'password',
         }
 
+        self.hr_credentials = {
+            'username': 'company',
+            'email': 'company@geekhunter.com',
+            'phone': '987789',
+            'password': 'password',
+        }
+
         self.approved_and_active_vacancy_credentials = {
             'title': 'awesome work',
             'company': self.company_1,
@@ -65,9 +72,22 @@ class CompanyAppTestCase(TestCase):
             'moderation_status': 'APPROVED',
         }
 
+        self.new_vacancy_credentials = {
+            'title': 'new job',
+            'company': self.company_1,
+            'description': 'test description',
+            'salary': 200,
+            'location': 'Anything',
+            'status': 'ACTIVE',
+        }
+
         self.user = PortalUser.objects.create_user(**self.user_credentials)
 
+        self.hr = PortalUser.objects.create_user(**self.hr_credentials)
+
         self.employee = Employee.objects.create(user=self.user)
+
+        self.hr_manager = HrManager.objects.create(user=self.hr)
 
         self.vacancy = Vacancy.objects.create(**self.approved_and_active_vacancy_credentials)
 
@@ -101,6 +121,12 @@ class CompanyAppTestCase(TestCase):
         response = self.client.get('/company/vacancies')
         self.assertEqual(self.SUCCESS_RESPONSE_CODE, response.status_code)
 
+    def test_exact_company_vacancies_for_user_has_perm(self):
+        self.user.user_permissions.add(Permission.objects.get(codename='view_vacancy'))
+        self.client.login(username='employee', password="password")
+        response = self.client.get(f'/company/vacancies/{self.company_1.id}/')
+        self.assertEqual(self.SUCCESS_RESPONSE_CODE, response.status_code)
+
     def test_vacancies_for_user_has_no_perm(self):
         self.client.login(username='employee', password="password")
         response = self.client.get('/company/vacancies')
@@ -118,3 +144,40 @@ class CompanyAppTestCase(TestCase):
             self.favorite_vacancy.vacancy.company
         )
         self.assertEqual(response.context_data['favorite_vacancies'][0].employee, self.favorite_vacancy.employee)
+
+    def test_view_company_profile_ok(self):
+        self.client.login(username=self.hr.username, password=self.hr_credentials['password'])
+
+        response = self.client.get('/company/profile/')
+        self.assertEqual(self.SUCCESS_RESPONSE_CODE, response.status_code)
+
+    def test_view_profile_vacancies_ok(self):
+        self.client.login(username=self.hr.username, password=self.hr_credentials['password'])
+
+        response = self.client.get('/company/profile/vacancies/')
+        self.assertEqual(self.SUCCESS_RESPONSE_CODE, response.status_code)
+
+    def test_view_profile_vacancies_create_ok(self):
+        self.client.login(username=self.hr.username, password=self.hr_credentials['password'])
+
+        response = self.client.get('/company/profile/vacancies/create/')
+        self.assertEqual(self.SUCCESS_RESPONSE_CODE, response.status_code)
+
+    def test_view_profile_card_ok(self):
+        self.client.login(username=self.hr.username, password=self.hr_credentials['password'])
+
+        response = self.client.get(f'/company/profile/card/edit/{self.company_1.id}/')
+        self.assertEqual(self.SUCCESS_RESPONSE_CODE, response.status_code)
+
+    def test_view_profile_vacancies_create_post(self):
+        self.client.login(username=self.hr.username, password=self.hr_credentials['password'])
+
+        response = self.client.post(
+            '/company/profile/vacancies/create/',
+            data=self.new_vacancy_credentials
+        )
+        self.assertEqual(self.REDIRECT_RESPONSE_CODE, response.status_code)
+        new_vacancy = Vacancy.objects.get(title=self.new_vacancy_credentials['title'])
+        self.assertEqual(self.new_vacancy_credentials['title'], new_vacancy.title)
+
+
