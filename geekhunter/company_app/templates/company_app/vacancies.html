@@ -2,6 +2,15 @@
 {% load static %}
 {% block content %}
     <div class="d-flex flex-column align-items-center">
+        <h7>Избранные вакансии</h7>
+        <div class="card bg-dark bg-gradient text-white m-3 w-50">
+            <ul class="list-group list-group-flush">
+                {% for favorite_vacancy in favorite_vacancies %}
+                    <li class="list-group-item">{{ favorite_vacancy }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <h7>Все вакансии</h7>
         {% for vacancy in vacancies %}
             <div class="card bg-dark bg-gradient text-white m-3 w-50">
                 <div class="card-body">

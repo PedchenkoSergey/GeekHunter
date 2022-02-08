@@ -1,9 +1,10 @@
+from django.contrib.auth.models import Permission
 from django.test import TestCase
 from django.test.client import Client
-from django.contrib.auth.models import Permission
 
 from auth_app.models import PortalUser
 from company_app.models import Company, Card, Vacancy
+from employee_app.models import FavoriteVacancies, Employee
 
 
 class CompanyAppTestCase(TestCase):
@@ -55,7 +56,24 @@ class CompanyAppTestCase(TestCase):
             'password': 'password',
         }
 
+        self.approved_and_active_vacancy_credentials = {
+            'title': 'awesome work',
+            'company': self.company_1,
+            'description': 'hello',
+            'salary': 1000,
+            'status': 'ACTIVE',
+            'moderation_status': 'APPROVED',
+        }
+
         self.user = PortalUser.objects.create_user(**self.user_credentials)
+
+        self.employee = Employee.objects.create(user=self.user)
+
+        self.vacancy = Vacancy.objects.create(**self.approved_and_active_vacancy_credentials)
+
+        self.favorite_vacancy = FavoriteVacancies.objects.create(
+            employee=self.employee, vacancy=self.vacancy
+        )
 
     def test_company_card_page_approved_and_active_ok(self):
         response = self.client.get('/company/1/')
@@ -88,3 +106,15 @@ class CompanyAppTestCase(TestCase):
         response = self.client.get('/company/vacancies')
         self.assertEqual(self.PERMISSON_DENIED_CODE, response.status_code)
 
+    def test_view_favorite_vacancies_200(self):
+        self.user.user_permissions.add(Permission.objects.get(codename='view_vacancy'))
+        self.client.login(username='employee', password="password")
+
+        response = self.client.get('/company/vacancies')
+
+        self.assertEqual(response.context_data['favorite_vacancies'][0].id, self.favorite_vacancy.id)
+        self.assertEqual(
+            response.context_data['favorite_vacancies'][0].vacancy.company,
+            self.favorite_vacancy.vacancy.company
+        )
+        self.assertEqual(response.context_data['favorite_vacancies'][0].employee, self.favorite_vacancy.employee)
