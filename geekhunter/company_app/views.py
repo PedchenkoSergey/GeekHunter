@@ -5,11 +5,12 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views import View
-from django.views.generic import ListView, DetailView, UpdateView
+from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 
 from employee_app.models import FavoriteVacancies
 from .forms.CompanyCardEditForm import CompanyCardEditForm
 from .forms.VacancyCreationForm import VacancyCreationForm
+from .forms.VacancyEditForm import VacancyEditForm
 from .models import Card, Vacancy, Company
 
 
@@ -53,12 +54,11 @@ class VacanciesView(PermissionRequiredMixin, ListView):
 
 
 class VacancyCreationView(FormView):
-    template_name = 'company_app/vacancy_create_page.html'
+    template_name = 'company_app/vacancy_create_or_update.html'
     form_class = VacancyCreationForm
     extra_context = {
         'title': 'Создание вакансии',
     }
-    success_url = reverse_lazy('company_app:vacancies')
 
     def get(self, *args, **kwargs):
         return self.render_to_response(self.get_context_data())
@@ -114,3 +114,18 @@ class CompanyProfileVacanciesView(ListView):
 
     def get_queryset(self):
         return Vacancy.objects.filter(company_id=self.request.user.id)
+
+
+class VacancyEditView(UpdateView):
+    template_name = 'company_app/vacancy_create_or_update.html'
+    queryset = Vacancy.objects.all()
+    model = Vacancy
+    form_class = VacancyEditForm
+    success_url = reverse_lazy('company_app:profile_vacancies')
+
+
+class VacancyDeleteView(DeleteView):
+    model = Vacancy
+    template_name = 'company_app/vacancy_delete.html'
+    context_object_name = 'vacancy'
+    success_url = reverse_lazy('company:profile_vacancies')
