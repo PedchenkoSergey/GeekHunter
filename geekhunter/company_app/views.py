@@ -32,7 +32,6 @@ class VacanciesView(PermissionRequiredMixin, ListView):
     extra_context = {
         'title': 'вакансии',
         'favorite_vacancies': 'favorite_vacancies',
-
     }
     context_object_name = 'vacancies'
     ordering = ['-updated_at']
