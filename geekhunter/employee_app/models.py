@@ -54,16 +54,6 @@ class Experience(models.Model):
     def __str__(self):
         return self.position
 
-    # @receiver(post_save, sender=Resume)
-    # def create_resume_experience(sender, instance, created, **kwargs):
-    #     if created:
-    #         Experience.objects.create(resume=instance, position='test')
-
-    # @receiver(post_save, sender=Resume)
-    # def save_resume_experience(sender, instance, **kwargs):
-    #     print('INSTANCE!!!!!!!!!!!!!', instance)
-    #     instance.experience.save()
-
 
 class Education(models.Model):
     educational_institution = models.CharField(_('educational_institution'), max_length=400, blank=False)
@@ -74,15 +64,6 @@ class Education(models.Model):
     def __str__(self):
         return self.educational_institution
 
-    # @receiver(post_save, sender=Resume)
-    # def create_resume_education(sender, instance, created, **kwargs):
-    #     if created:
-    #         Resume.objects.create(employee=instance)
-    #
-    # @receiver(post_save, sender=Resume)
-    # def save_resume_education(sender, instance, **kwargs):
-    #     instance.education.save()
-
 
 class Courses(models.Model):
     company = models.CharField(_('company'), max_length=200, blank=False)
@@ -92,15 +73,6 @@ class Courses(models.Model):
 
     def __str__(self):
         return self.company
-
-    # @receiver(post_save, sender=Resume)
-    # def create_resume_courses(sender, instance, created, **kwargs):
-    #     if created:
-    #         Resume.objects.create(employee=instance)
-    #
-    # @receiver(post_save, sender=Resume)
-    # def save_resume_courses(sender, instance, **kwargs):
-    #     instance.courses.save()
 
 
 class Response(models.Model):
