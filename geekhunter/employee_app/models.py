@@ -17,8 +17,17 @@ class Resume(models.Model):
         ('ACTIVE', 'active'),
 
     ]
+    MODERATION_STATUSES = [
+        ('UNDER_REVIEW', 'under_review'),
+        ('APPROVED', 'approved'),
+        ('NOT_APPROVED', 'not_approved'),
+    ]
     title = models.CharField(_('title'), max_length=200, blank=False)
     status = models.CharField(_('status'), max_length=10, choices=STATUS_CHOICES, default='DRAFT')
+    moderation_status = models.CharField(
+        _('moderation_status'), max_length=20,
+        choices=MODERATION_STATUSES, default='UNDER_REVIEW',
+    )
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='resumes')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
@@ -45,25 +54,53 @@ class Experience(models.Model):
     def __str__(self):
         return self.position
 
+    # @receiver(post_save, sender=Resume)
+    # def create_resume_experience(sender, instance, created, **kwargs):
+    #     if created:
+    #         Experience.objects.create(resume=instance, position='test')
+
+    # @receiver(post_save, sender=Resume)
+    # def save_resume_experience(sender, instance, **kwargs):
+    #     print('INSTANCE!!!!!!!!!!!!!', instance)
+    #     instance.experience.save()
+
 
 class Education(models.Model):
     educational_institution = models.CharField(_('educational_institution'), max_length=400, blank=False)
     specialization = models.CharField(_('specialization'), max_length=300, blank=False)
-    year_of_ending = models.DateField(auto_now_add=False)
+    year_of_ending = models.CharField(max_length=5, null=True, blank=True)
     resume = models.ForeignKey(Resume, on_delete=models.CASCADE, related_name='education_resumes')
 
     def __str__(self):
         return self.educational_institution
 
+    # @receiver(post_save, sender=Resume)
+    # def create_resume_education(sender, instance, created, **kwargs):
+    #     if created:
+    #         Resume.objects.create(employee=instance)
+    #
+    # @receiver(post_save, sender=Resume)
+    # def save_resume_education(sender, instance, **kwargs):
+    #     instance.education.save()
+
 
 class Courses(models.Model):
     company = models.CharField(_('company'), max_length=200, blank=False)
     specialization = models.CharField(_('specialization'), max_length=300, blank=False)
-    year_of_ending = models.DateField(auto_now_add=False)
+    year_of_ending = models.CharField(max_length=5, null=True, blank=True)
     resume = models.ForeignKey(Resume, on_delete=models.CASCADE, related_name='courses_resumes')
 
     def __str__(self):
         return self.company
+
+    # @receiver(post_save, sender=Resume)
+    # def create_resume_courses(sender, instance, created, **kwargs):
+    #     if created:
+    #         Resume.objects.create(employee=instance)
+    #
+    # @receiver(post_save, sender=Resume)
+    # def save_resume_courses(sender, instance, **kwargs):
+    #     instance.courses.save()
 
 
 class Response(models.Model):

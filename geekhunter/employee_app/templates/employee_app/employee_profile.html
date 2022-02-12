@@ -3,6 +3,6 @@
 
 {% block content %}
     <h1>{{ employee }}</h1>
-    <p><a href="">Моё резюме</a></p>
+    <p><a href="{% url 'employee:profile_resumes' %}">Мои резюме</a></p>
     <p><a href="">Мои отклики</a></p>
 {% endblock %}
