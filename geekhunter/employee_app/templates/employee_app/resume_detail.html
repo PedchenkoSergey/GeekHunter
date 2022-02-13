@@ -11,41 +11,48 @@
             <p><span class="text fw-bold">Moderation status: </span>{{ resume.moderation_status }}</p>
         </div>
         <hr>
-        <h4>Experience</h4>
-        <div class="d-flex flex-wrap">
-            {% for experience in experiencies %}
-                <div class="card-body border m-3 w-25">
-                    <p><span class="text fw-bold">Company: </span>{{ experience.company }}</p>
-                    <p><span class="text fw-bold">Period: </span> {{ experience.period }}</p>
-                    <p><span class="text fw-bold">Position: </span> {{ experience.position }}</p>
-                    <p><span class="text fw-bold">Duties: </span> {{ experience.duties }}</p>
-                </div>
-            {% endfor %}
-        </div>
-        <hr>
-        <h4>Education</h4>
-        <div class="d-flex flex-wrap">
-            {% for education in educations %}
-                <div class="card-body border m-3 w-25">
-                    <p><span
-                            class="text fw-bold">Educational institution: </span>{{ education.educational_institution }}
-                    </p>
-                    <p><span class="text fw-bold">Specialization: </span> {{ education.specialization }}</p>
-                    <p><span class="text fw-bold">Year of ending: </span> {{ education.year_of_ending }}</p>
-                </div>
-            {% endfor %}
-        </div>
-        <hr>
-        <h4>Courses</h4>
-        <div class="d-flex flex-wrap">
-            {% for course in courses %}
-                <div class="card-body border m-3 w-25">
-                    <p><span class="text fw-bold">Company: </span>{{ course.company }}</p>
-                    <p><span class="text fw-bold">Specialization: </span> {{ course.specialization }}</p>
-                    <p><span class="text fw-bold">Year of ending: </span> {{ course.year_of_ending }}</p>
-                </div>
-            {% endfor %}
-        </div>
-        <hr>
+        {% if experiencies %}
+            <h4>Experience</h4>
+            <div class="d-flex flex-wrap">
+                {% for experience in experiencies %}
+                    <div class="card-body border m-3 w-25">
+                        <p><span class="text fw-bold">Company: </span>{{ experience.company }}</p>
+                        <p><span class="text fw-bold">Period: </span> {{ experience.period }}</p>
+                        <p><span class="text fw-bold">Position: </span> {{ experience.position }}</p>
+                        <p><span class="text fw-bold">Duties: </span> {{ experience.duties }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+            <hr>
+        {% endif %}
+        {% if educations %}
+            <h4>Education</h4>
+            <div class="d-flex flex-wrap">
+                {% for education in educations %}
+                    <div class="card-body border m-3 w-25">
+                        <p><span
+                                class="text fw-bold">Educational institution: </span>{{ education.educational_institution }}
+                        </p>
+                        <p><span class="text fw-bold">Specialization: </span> {{ education.specialization }}</p>
+                        <p><span class="text fw-bold">Year of ending: </span> {{ education.year_of_ending }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+            <hr>
+        {% endif %}
+        {% if courses %}
+            <h4>Courses</h4>
+            <div class="d-flex flex-wrap">
+                {% for course in courses %}
+                    <div class="card-body border m-3 w-25">
+                        <p><span class="text fw-bold">Company: </span>{{ course.company }}</p>
+                        <p><span class="text fw-bold">Specialization: </span> {{ course.specialization }}</p>
+                        <p><span class="text fw-bold">Year of ending: </span> {{ course.year_of_ending }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+            <hr>
+        {% endif %}
+
     </div>
 {% endblock %}
