@@ -23,11 +23,12 @@ const STRUCTURE = {
 };
 
 function add(param) {
-    let html = STRUCTURE[param].map((p) => '<div class="field">' +
-        '<span>' + p + '</span>' +
+    let html = STRUCTURE[param].map((p) => '<p class="field">' +
+        '<span class="text fw-bold">' + p[0].toUpperCase() + p.substring(1) + ': ' + '</span>' +
         '<input type="text" name="' + p + '" />' +
-        '</div>');
-    $("." + param).append(html);
+        '</p>');
+    let card_html = '<div class="card-body border m-3 w-25">' + html.join(' ') + '</div>'
+    $("." + param).append(card_html);
 }
 
 function save() {

@@ -43,6 +43,7 @@ class ResumeCreationView(FormView):
     extra_context = {
         'title': 'Создание резюме',
     }
+    success_url = reverse_lazy('employee:profile_resumes')
 
     def get(self, *args, **kwargs):
         return self.render_to_response(self.get_context_data())
