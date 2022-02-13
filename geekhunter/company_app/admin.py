@@ -13,11 +13,24 @@ class BigTextarea(Textarea):
         super().__init__(default_attrs)
 
 
-class AdminChangeFrom(forms.ModelForm):
+class AdminCardFrom(forms.ModelForm):
     class Meta:
         model = Card
         widgets = {
-            'about': BigTextarea
+            'about': BigTextarea,
+            'priorities': BigTextarea,
+            'awards': BigTextarea,
+            'error_text': BigTextarea
+        }
+        fields = '__all__'
+
+
+class AdminVacancyFrom(forms.ModelForm):
+    class Meta:
+        model = Vacancy
+        widgets = {
+            'description': BigTextarea,
+            'error_text': BigTextarea
         }
         fields = '__all__'
 
@@ -28,11 +41,11 @@ class ForReviewFilter(SimpleListFilter):
 
     def lookups(self, request, model_admin):
         return [
-            ('all', 'For review'),
+            ('for_review', 'For review'),
         ]
 
     def queryset(self, request, queryset):
-        if self.value() == 'all':
+        if self.value() == 'for_review':
             return queryset.exclude(status='DRAFT').filter(moderation_status='UNDER_REVIEW')
 
 
@@ -60,7 +73,19 @@ def make_declined(modeladmin, request, queryset):
 class AdminCard(admin.ModelAdmin):
     list_display = ('company', 'title', 'about', 'moderation_status', 'status')
     list_filter = (ForReviewFilter,)
-    form = AdminChangeFrom
+    form = AdminCardFrom
+    fieldsets = (
+        ('General Information', {
+            'fields': (('company', 'title', 'status'), 'about')
+        }),
+        ('Additional Descriptions', {
+            'classes': ('collapse',),
+            'fields': ('priorities', 'awards')
+        }),
+        ('Approval', {
+            'fields': ('moderation_status', 'error_text')
+        }),
+    )
     actions = [make_approved, make_declined]
 
 
@@ -68,7 +93,19 @@ class AdminCard(admin.ModelAdmin):
 class AdminVacancy(admin.ModelAdmin):
     list_display = ('title', 'moderation_status', 'status')
     list_filter = (ForReviewFilter,)
-    form = AdminChangeFrom
+    form = AdminVacancyFrom
+    fieldsets = (
+        ('General Information', {
+            'fields': (('company', 'title', 'status'), 'description')
+        }),
+        ('Additional Descriptions', {
+            'classes': ('collapse',),
+            'fields': (('salary', 'location'),)
+        }),
+        ('Approval', {
+            'fields': ('moderation_status', 'error_text')
+        }),
+    )
     actions = [make_approved, make_declined]
 
 
