@@ -71,7 +71,7 @@ def make_declined(modeladmin, request, queryset):
 
 @admin.register(Card)
 class AdminCard(admin.ModelAdmin):
-    list_display = ('company', 'title', 'about', 'moderation_status', 'status')
+    list_display = ('title', 'about', 'moderation_status', 'status')
     list_filter = (ForReviewFilter,)
     form = AdminCardFrom
     fieldsets = (
