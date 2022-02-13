@@ -1,38 +1,10 @@
-from django import forms
 from django.contrib import admin, messages
 from django.contrib.admin import SimpleListFilter
-from django.forms.widgets import Textarea
 from django.utils.translation import ngettext
 
 from .models import Company, HrManager, FavoriteResume, Card, Vacancy, Offer
-
-
-class BigTextarea(Textarea):
-    def __init__(self):
-        default_attrs = {'cols': '120', 'rows': '10'}
-        super().__init__(default_attrs)
-
-
-class AdminCardFrom(forms.ModelForm):
-    class Meta:
-        model = Card
-        widgets = {
-            'about': BigTextarea,
-            'priorities': BigTextarea,
-            'awards': BigTextarea,
-            'error_text': BigTextarea
-        }
-        fields = '__all__'
-
-
-class AdminVacancyFrom(forms.ModelForm):
-    class Meta:
-        model = Vacancy
-        widgets = {
-            'description': BigTextarea,
-            'error_text': BigTextarea
-        }
-        fields = '__all__'
+from .forms.AdminCompanyCardForm import AdminCompanyCardFrom
+from .forms.AdminVacancyForm import AdminVacancyFrom
 
 
 class ForReviewFilter(SimpleListFilter):
@@ -73,7 +45,7 @@ def make_declined(modeladmin, request, queryset):
 class AdminCard(admin.ModelAdmin):
     list_display = ('title', 'about', 'moderation_status', 'status')
     list_filter = (ForReviewFilter,)
-    form = AdminCardFrom
+    form = AdminCompanyCardFrom
     fieldsets = (
         ('General Information', {
             'fields': (('company', 'title', 'status'), 'about')
