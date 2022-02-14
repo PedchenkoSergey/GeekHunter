@@ -18,6 +18,8 @@ class PortalUserLoginView(LoginView):
     def get_success_url(self):
         if self.request.user.is_employee:
             return reverse_lazy('company:vacancies')
+        elif self.request.user.is_company:
+            return reverse_lazy('employee:resumes')
         return reverse_lazy('main_app:index')
 
 
