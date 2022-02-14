@@ -1,13 +1,14 @@
 import json
 
 from django.apps import apps
-from django.http import JsonResponse
+from django.core import serializers
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import ListView, FormView, DetailView, DeleteView
+from django.views.generic import ListView, FormView, DetailView, DeleteView, UpdateView
 
 from employee_app.forms.EmployeeResumeForm import EmployeeResumeForm
 from employee_app.models import Employee, Resume, Experience, Education, Courses
@@ -51,30 +52,87 @@ class ResumeCreationView(FormView):
     def post(self, request, *args, **kwargs):
         employee = Employee.objects.get(user_id=self.request.user.id)
         body_unicode = request.body.decode('utf-8')
-        body = json.loads(body_unicode)
-        if 'id' in body:
-            resume = None
-            print('never')
-            # resume = Resume.objects.get(id=body['id'])
-            # resume.title = body['title']
-            # resume.status = body['status']
-        else:
+        try:
+            body = json.loads(body_unicode)
             resume = Resume(
                 title=body['title'],
                 status=body['status'],
                 employee=employee
             )
-        resume.save()
-        for key in body['fields']:
-            for value in body["fields"][key]:
-                # if 'id' in value:
-                # model = apps.get_model('employee_app', key.capitalize())(id=value['id'], **value)
-                # else:
-                model = apps.get_model('employee_app', key.capitalize())(
-                    **value,
-                    resume=resume
-                )
-                model.save()
+            resume.save()
+            print(body['fields'])
+            for key in body['fields']:
+                for value in body["fields"][key]:
+                    model = apps.get_model('employee_app', key.capitalize())(
+                        **value,
+                        resume=resume
+                    )
+                    model.save()
+
+        except Exception as e:
+            print(e)
+
+        return HttpResponseRedirect(self.success_url)
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class ResumeEditView(UpdateView):
+    template_name = 'employee_app/resume_edit.html'
+    model = Resume
+    queryset = Resume.objects.all()
+    form_class = EmployeeResumeForm
+    success_url = reverse_lazy('employee:profile_resumes')
+
+    def get_context_data(self, **kwargs):
+        context = super(ResumeEditView, self).get_context_data()
+        resume_id = self.get_object().id
+        context['title'] = f'Редактирование {self.get_object().title}'
+
+        experiences = Experience.objects.filter(resume_id=resume_id)
+        experiences_json = serializers.serialize('python', experiences)
+
+        educations = Education.objects.filter(resume_id=resume_id)
+        educations_json = serializers.serialize('python', educations)
+
+        courses = Courses.objects.filter(resume_id=resume_id)
+        courses_json = serializers.serialize('python', courses)
+
+        context['experiencies'] = experiences_json
+        context['educations'] = educations_json
+        context['courses'] = courses_json
+        return context
+
+    def post(self, request, *args, **kwargs):
+        body_unicode = request.body.decode('utf-8')
+        try:
+            body = json.loads(body_unicode)
+            resume = Resume.objects.get(id=body['pk'])
+            resume.title = body['title']
+            resume.status = body['status']
+            resume.save()
+            for key in body['fields']:
+                for value in body["fields"][key]:
+                    if int(value['pk']) > 0:
+                        print(value['pk'])
+                        model = apps.get_model('employee_app', key.capitalize()).objects.get(id=value['pk'])
+                        for _key in value:
+                            if _key != 'pk':
+                                setattr(model, _key, value[_key])
+                    else:
+                        print('new')
+                        value2 = {}
+                        for _key in value:
+                            if _key != 'pk':
+                                value2[_key] = value[_key]
+                        model = apps.get_model('employee_app', key.capitalize())(
+                            **value2,
+                            resume=resume
+                        )
+
+                    model.save()
+        except Exception as e:
+            print(e)
+
         return JsonResponse([], safe=False)
 
 

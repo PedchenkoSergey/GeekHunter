@@ -22,7 +22,7 @@
                     <td>{{ resume.moderation_status }}</td>
                     <td>
                         <a class="btn btn-info" href="{% url 'employee:resume_detail' resume.id %}">View</a>
-                        <a class="btn btn-warning" href="">Edit</a>
+                        <a class="btn btn-warning" href="{% url 'employee:resume_edit' resume.id %}">Edit</a>
                         <a class="btn btn-danger" href="{% url 'employee:resume_delete' resume.id %}">Delete</a>
                     </td>
                 </tr>
