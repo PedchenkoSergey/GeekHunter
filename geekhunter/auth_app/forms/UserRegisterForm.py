@@ -70,6 +70,8 @@ class PortalUserRegisterForm(UserCreationForm):
             employee = Employee.objects.create(user=user)
         else:
             user.is_company = True
+            permission = Permission.objects.get(codename='view_resume')
+            user.user_permissions.add(permission)
             company = HrManager.objects.create(
                 user=user,
                 company=Company.objects.create(
