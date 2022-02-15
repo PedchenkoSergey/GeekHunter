@@ -124,12 +124,12 @@ class ResumeEditView(UpdateView):
                                 setattr(model, _key, value[_key])
                     else:
                         print('new')
-                        value2 = {}
+                        new_model_credentials = {}
                         for _key in value:
                             if _key != 'pk':
-                                value2[_key] = value[_key]
+                                new_model_credentials[_key] = value[_key]
                         model = apps.get_model('employee_app', key.capitalize())(
-                            **value2,
+                            **new_model_credentials,
                             resume=resume
                         )
 
