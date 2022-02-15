@@ -1,0 +1,41 @@
+{% extends 'employee_app/base.html' %}
+{% load static %}
+
+{% block content %}
+    <a class="btn btn-outline-dark mt-3 ms-3" href="{% url 'employee:profile_resumes' %}">Назад</a>
+    <div class="container">
+        <form id="resume" action="" method="post">
+            <h4>Resume</h4>
+            <div class="d-flex justify-content-evenly">
+                {{ form.as_p }}
+            </div>
+            <hr>
+            <h4>Experience</h4>
+            <button type="button" class="btn" onclick="add('experience')">+</button>
+            <div class="experience d-flex flex-wrap">
+            </div>
+            <hr>
+            <h4>Education</h4>
+            <button type="button" class="btn" onclick="add('education')">+</button>
+            <div class="education d-flex flex-wrap">
+            </div>
+            <hr>
+            <h4>Courses</h4>
+            <button type="button" class="btn" onclick="add('courses')">+</button>
+            <div class="courses d-flex flex-wrap">
+            </div>
+            <hr>
+            <div class="d-flex justify-content-center">
+                <input type="submit" class="btn btn-success" onclick="save()" value="save">
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block footer-js %}
+    <script
+            src="//code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+    <script src="{% static 'js/resume.js' %}"></script>
+{% endblock %}

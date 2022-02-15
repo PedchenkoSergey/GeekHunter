@@ -13,6 +13,9 @@
                 {% if request.user.is_company %}
                     <li><a href="{% url 'company:profile' %}" class="nav-link px-2 text-white">Profile</a></li>
                 {% endif %}
+                {% if request.user.is_employee %}
+                    <li><a href="{% url 'employee:profile' %}" class="nav-link px-2 text-white">Profile</a></li>
+                {% endif %}
             </ul>
             <div class="text-end d-flex">
                 {% if user.is_authenticated %}

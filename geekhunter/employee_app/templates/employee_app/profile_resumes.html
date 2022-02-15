@@ -1,0 +1,36 @@
+{% extends 'employee_app/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container mt-5">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Status</th>
+                <th scope="col">Moderation status</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for resume in resumes %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ resume.title }}</td>
+                    <td>{{ resume.status }}</td>
+                    <td>{{ resume.moderation_status }}</td>
+                    <td>
+                        <a class="btn btn-info" href="{% url 'employee:resume_detail' resume.id %}">View</a>
+                        <a class="btn btn-warning" href="{% url 'employee:resume_edit' resume.id %}">Edit</a>
+                        <a class="btn btn-danger" href="{% url 'employee:resume_delete' resume.id %}">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-center">
+            <a type="button" class="btn btn-success" href="{% url 'employee:resume_create' %}">Add</a>
+        </div>
+    </div>
+{% endblock %}

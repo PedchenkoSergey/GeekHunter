@@ -26,7 +26,7 @@
 {% if request.resolver_match.url_name != 'login' %}
     {% include 'main_app/includes/inc_menu.html' %}
 {% endif %}
-<main class="{% if request.resolver_match.url_name == 'login' %}form-signin{% endif %}">
+<main class="{% if request.resolver_match.url_name == 'login' %}form-signin{% endif %}overflow-auto">
     {% block content %}
     {% endblock %}
 </main>
@@ -36,6 +36,7 @@
             <span class="text-muted">Lorem ipsum dolor sit amet.</span>
         </div>
         {% block footer-js %}
+
         {% endblock %}
     </footer>
 {% endif %}
