@@ -1,5 +1,16 @@
-<div class="infinite-container">
-    {% for post in news %}
+{% extends 'news_app/base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'owlcarousel/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'owlcarousel/owl.theme.default.css' %}">
+{% endblock %}
+{% block js %}
+
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h1>Новости:</h1>
+        <div class="dropdown-divider mb-4"></div>
         <div class="col-md-12">
             <div
                     class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
@@ -9,9 +20,9 @@
                     <h3 class="mb-0">{{ post.title }}</h3>
                     <div class="mb-1 text-muted">{{ post.created_at|date:"M d, Y" }}</div>
                     <p class="card-text mb-auto">
-                        {{ post.text | truncatewords:20 }}
+                        {{ post.text }}
                     </p>
-                    <a href="{% url 'news:post' post.pk %}" class="stretched-link">Continue reading</a>
+                    <a href="#" class="stretched-link">Continue reading</a>
                 </div>
                 <div class="col-3 d-none d-lg-block">
                     <img
@@ -21,9 +32,13 @@
                 </div>
             </div>
         </div>
-    {% endfor %}
-</div>
+    </div>
 
-{% if news.has_next %}
-    <a href="javascript: void(0);" class="more mx-auto" onclick="load()">load more</a>
-{% endif %}
+{% endblock %}
+
+{% block footer-js %}
+    <script src={% static 'owlcarousel/jquery.min.js' %}></script>
+    <script src="{% static 'owlcarousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/infinite_news.js' %}"></script>
+    <script src="{% static 'js/companies_carousel.js' %}"></script>
+{% endblock %}

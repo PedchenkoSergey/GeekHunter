@@ -1,0 +1,517 @@
+[
+    {
+        "model": "auth_app.portaluser",
+        "pk": 1,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$8ol1LUyPWPYiE93JgM138S$EUmVo8p+Mvd1gdlgmZRSXEo2TTOUkpLWXsrhmGMDAWs=",
+            "last_login": "2022-02-08T14:09:02.084Z",
+            "is_superuser": true,
+            "username": "admin",
+            "first_name": "",
+            "last_name": "",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2022-02-08T13:48:32.581Z",
+            "is_employee": false,
+            "is_company": false,
+            "phone": "+79876543211",
+            "email": "admin@mail.mail",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "auth_app.portaluser",
+        "pk": 2,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$KJYP9nsdsLmbRexhhwrM1v$An41aKJ8iw0vzaCtgXaBxVwLKAUXZ70vNvIU+JtvI04=",
+            "last_login": "2022-02-08T14:07:48.457Z",
+            "is_superuser": false,
+            "username": "hr_manager_one",
+            "first_name": "John",
+            "last_name": "Smith",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2022-02-08T13:55:36.470Z",
+            "is_employee": true,
+            "is_company": false,
+            "phone": "+79876543210",
+            "email": "hr_manager_one@mail.mail",
+            "groups": [],
+            "user_permissions": [
+                48
+            ]
+        }
+    },
+    {
+        "model": "auth_app.portaluser",
+        "pk": 3,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$Du2t0AgkjR7BmVrdXDbbWw$AZImUw/VOP8KBkCUDqaO23gOK4cyMM3IWdBbNzwFES4=",
+            "last_login": "2022-02-08T13:56:19.732Z",
+            "is_superuser": false,
+            "username": "hr_manager_two",
+            "first_name": "Ivan",
+            "last_name": "Ivanov",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2022-02-08T13:56:19.390Z",
+            "is_employee": true,
+            "is_company": false,
+            "phone": "+789754654213",
+            "email": "hr_manager_two@mail.mail",
+            "groups": [],
+            "user_permissions": [
+                48
+            ]
+        }
+    },
+    {
+        "model": "auth_app.portaluser",
+        "pk": 4,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$cJk3bqFD8Lx4khyVpnEyhl$94e4wLABNUgh0tMJetHPIeoyNUmSLNQgiDr/jQWQT4U=",
+            "last_login": "2022-02-08T13:57:00.952Z",
+            "is_superuser": false,
+            "username": "hr_manager_three",
+            "first_name": "Olga",
+            "last_name": "Petrova",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2022-02-08T13:57:00.595Z",
+            "is_employee": true,
+            "is_company": false,
+            "phone": "+7989865632",
+            "email": "hr_manager_three@mail.mail",
+            "groups": [],
+            "user_permissions": [
+                48
+            ]
+        }
+    },
+    {
+        "model": "auth_app.portaluser",
+        "pk": 5,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$mPTWkik8xuLYabDLe2qTBK$9dt9SIU8DzSF1bPFM/zffZaPiFPtcHSmsO6TPQoLObU=",
+            "last_login": "2022-02-08T13:58:32.009Z",
+            "is_superuser": false,
+            "username": "applicant_one",
+            "first_name": "Petr",
+            "last_name": "Sidorov",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2022-02-08T13:58:31.640Z",
+            "is_employee": true,
+            "is_company": false,
+            "phone": "+7456454789",
+            "email": "applicant_one@mail.mail",
+            "groups": [],
+            "user_permissions": [
+                48
+            ]
+        }
+    },
+    {
+        "model": "auth_app.portaluser",
+        "pk": 6,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$yFOao8Uy8OZamac9hRsgso$+bupiL1WYcEEkFa/UT7CsPLVLSCOfZCOkaK2To+ZtHs=",
+            "last_login": "2022-02-08T13:59:15.099Z",
+            "is_superuser": false,
+            "username": "applicant_two",
+            "first_name": "Irina",
+            "last_name": "Fedorova",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2022-02-08T13:59:14.746Z",
+            "is_employee": true,
+            "is_company": false,
+            "phone": "+745678991231",
+            "email": "applicant_two@mail.mail",
+            "groups": [],
+            "user_permissions": [
+                48
+            ]
+        }
+    },
+    {
+        "model": "auth_app.portaluser",
+        "pk": 7,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$lflEN98ZJAYZvOs5mWGsnJ$Olw0+84xKdUIJwdgN/iLdnjmiD5WxfiT7Ln0XezSV/o=",
+            "last_login": "2022-02-08T13:59:53.971Z",
+            "is_superuser": false,
+            "username": "applicant_three",
+            "first_name": "Kevin",
+            "last_name": "Last",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2022-02-08T13:59:53.621Z",
+            "is_employee": true,
+            "is_company": false,
+            "phone": "+1545789321",
+            "email": "applicant_three@mail.mail",
+            "groups": [],
+            "user_permissions": [
+                48
+            ]
+        }
+    },
+    {
+        "model": "auth_app.portaluser",
+        "pk": 8,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$dAz96ykDFQKY0pCQr72IQW$gQZl0OOZjS1A7eqNUI/1t7kY3uqSYIdocca43DLrx3w=",
+            "last_login": "2022-02-08T14:06:01.736Z",
+            "is_superuser": false,
+            "username": "hr_manager_four",
+            "first_name": "Adam",
+            "last_name": "Smiths",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2022-02-08T14:06:01.389Z",
+            "is_employee": false,
+            "is_company": true,
+            "phone": "+15465465789",
+            "email": "hr_manager_four@mail.mail",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "company_app.company",
+        "pk": 1,
+        "fields": {
+            "name": "IT-helpers",
+            "specialization": "Providing IT staff outsourcing to the US and EU Cusotomers",
+            "short_description": "IT outsource"
+        }
+    },
+    {
+        "model": "company_app.company",
+        "pk": 2,
+        "fields": {
+            "name": "Googl",
+            "specialization": "The leading search and context advertisement provider",
+            "short_description": "WWW Search"
+        }
+    },
+    {
+        "model": "company_app.company",
+        "pk": 3,
+        "fields": {
+            "name": "Yandx",
+            "specialization": "The Russian based search provider and multiservice company",
+            "short_description": "Russian search"
+        }
+    },
+    {
+        "model": "company_app.company",
+        "pk": 8,
+        "fields": {
+            "name": "компания hr_manager_four",
+            "specialization": "",
+            "short_description": ""
+        }
+    },
+    {
+        "model": "company_app.hrmanager",
+        "pk": 2,
+        "fields": {
+            "company": 1
+        }
+    },
+    {
+        "model": "company_app.hrmanager",
+        "pk": 3,
+        "fields": {
+            "company": 2
+        }
+    },
+    {
+        "model": "company_app.hrmanager",
+        "pk": 4,
+        "fields": {
+            "company": 3
+        }
+    },
+    {
+        "model": "company_app.hrmanager",
+        "pk": 8,
+        "fields": {
+            "company": 8
+        }
+    },
+    {
+        "model": "company_app.card",
+        "pk": 1,
+        "fields": {
+            "title": "IT-helpers",
+            "about": "A corporation’s global supply chain usually consists of enterprises and manufacturers that are graphically dispersed around the world, whereby each company is involved in a wide variety of supply chain activities such as order fulfilment, international procurement, acquisition of information technology, manufacturing, and customer service. Therefore, continuously tracking performance of suppliers and an appropriate selection mechanism is one of the crucial activities in supply chain management.",
+            "awards": "",
+            "priorities": "Priority",
+            "status": "ACTIVE",
+            "moderation_status": "APPROVED",
+            "error_text": ""
+        }
+    },
+    {
+        "model": "company_app.card",
+        "pk": 2,
+        "fields": {
+            "title": "Googl",
+            "about": "Google, in full Google LLC formerly Google Inc. (1998–2017), American search engine company, founded in 1998 by Sergey Brin and Larry Page, that is a subsidiary of the holding company Alphabet Inc. More than 70 percent of worldwide online search requests are handled by Google, placing it at the heart of most Internet users’ experience. Its headquarters are in Mountain View, California.",
+            "awards": "",
+            "priorities": "Search",
+            "status": "ACTIVE",
+            "moderation_status": "APPROVED",
+            "error_text": ""
+        }
+    },
+    {
+        "model": "company_app.card",
+        "pk": 3,
+        "fields": {
+            "title": "Yandx",
+            "about": "Yandex is a technology company that builds intelligent products and services powered by machine learning. Our goal is to help consumers and businesses better navigate the online and offline world. Since 1997, we have delivered world-class, locally relevant search and information services. Additionally, we have developed market-leading on-demand transportation services, navigation products, and other mobile applications for millions of consumers across the globe. Yandex, which has over 30 offices",
+            "awards": "",
+            "priorities": "",
+            "status": "ACTIVE",
+            "moderation_status": "APPROVED",
+            "error_text": ""
+        }
+    },
+    {
+        "model": "company_app.card",
+        "pk": 8,
+        "fields": {
+            "title": "",
+            "about": "",
+            "awards": "",
+            "priorities": "",
+            "status": "DRAFT",
+            "moderation_status": "UNDER_REVIEW",
+            "error_text": ""
+        }
+    },
+    {
+        "model": "company_app.vacancy",
+        "pk": 1,
+        "fields": {
+            "title": "Python backend",
+            "company": 1,
+            "description": "We are looking for a Python Developer to join our engineering team and help us develop and maintain various software products.  Python Developer responsibilities include writing and testing code, debugging programs and integrating applications with third-party web services. To be successful in this role, you should have experience using server-side logic and work well in a team.  Ultimately, you’ll build highly responsive web applications that align with our business needs.",
+            "salary": "2200-2400",
+            "location": "Moscow",
+            "created_at": "2022-02-08 14:16:33.916Z",
+            "updated_at": "2022-02-08 14:16:33.916Z",
+            "status": "ACTIVE",
+            "moderation_status": "APPROVED",
+            "error_text": ""
+        }
+    },
+    {
+        "model": "company_app.vacancy",
+        "pk": 2,
+        "fields": {
+            "title": "React.js Developer",
+            "company": 1,
+            "description": "We are looking for a skilled react.js developer to join our front-end development team. In this role, you will   be responsible for developing and implementing user interface components using React.js concepts and workflows such as Redux, Flux, and Webpack. You will also be responsible for profiling and improving front-end performance and documenting our front-end codebase.  To ensure success as a react.js developer, you should have in-depth knowledge of JavaScript and React concepts, excellent front-end coding skills, and a good understanding of progressive web applications. Ultimately, a top-class react.js developer should be able to design and build modern user interface components to  enhance application performance.",
+            "salary": "2500-2800",
+            "location": "Saint-Petersburg",
+            "created_at": "2022-02-08 14:17:27.159Z",
+            "updated_at": "2022-02-08 14:17:27.159Z",
+            "status": "ACTIVE",
+            "moderation_status": "APPROVED",
+            "error_text": ""
+        }
+    },
+    {
+        "model": "company_app.vacancy",
+        "pk": 3,
+        "fields": {
+            "title": "Django Developer",
+            "company": 2,
+            "description": "Django is a high-level Python web framework that encourages rapid development and clean, pragmatic design. Built by experienced developers, it takes care of much of the hassle of web development, so you can focus on writing your app without needing to reinvent the wheel. It’s free and open source.",
+            "salary": "1700-1900",
+            "location": "Sochi",
+            "created_at": "2022-02-08T14:18:07.715Z",
+            "updated_at": "2022-02-08T14:18:07.715Z",
+            "status": "ACTIVE",
+            "moderation_status": "APPROVED",
+            "error_text": ""
+        }
+    },
+    {
+        "model": "company_app.vacancy",
+        "pk": 4,
+        "fields": {
+            "title": ".Net Developer",
+            "company": 2,
+            "description": "We are looking for a .Net developer to build software using languages and technologies of the .NET framework. You will create applications from scratch, configure existing systems and provide user  support.  In this role, you should be able to write functional code with a sharp eye for spotting defects. You should be a team player and excellent communicator. If you are also passionate about the .NET framework and software design/architecture, we’d like to meet you.  Your goal will be to work with internal teams to design, develop and maintain software.",
+            "salary": "1500-1800",
+            "location": "London",
+            "created_at": "2022-02-08 14:19:06.162Z",
+            "updated_at": "2022-02-08 14:19:06.162Z",
+            "status": "ACTIVE",
+            "moderation_status": "APPROVED",
+            "error_text": ""
+        }
+    },
+    {
+        "model": "company_app.vacancy",
+        "pk": 5,
+        "fields": {
+            "title": "ML Engineer",
+            "company": 3,
+            "description": "We are looking for a Machine Learning (ML) Engineer to help us create artificial intelligence products.  Machine Learning Engineer responsibilities include creating machine learning models and retraining     systems. To do this job successfully, you need exceptional skills in statistics and programming. If you also have knowledge of data science and software engineering, we’d like to meet you.  Your ultimate goal will be to shape and build efficient self-learning applications.",
+            "salary": "2750-3200",
+            "location": "Kazan",
+            "created_at": "2022-02-08 14:19:46.066Z",
+            "updated_at": "2022-02-08 14:19:46.066Z",
+            "status": "ACTIVE",
+            "moderation_status": "APPROVED",
+            "error_text": ""
+        }
+    },
+    {
+        "model": "company_app.vacancy",
+        "pk": 6,
+        "fields": {
+            "title": "Artificial Intelligence Engineer",
+            "company": 3,
+            "description": "The Artificial Intelligence Engineer is an IT expert whose mission is to develop intelligent algorithms capable of learning,     analysing and predicting future events. Their role is to create machines capable of reasoning like the human brain.   The AI engineer is therefore also a researcher: he or she analyses the functioning of the human brain in order to build computer programs with the same cognitive abilities as humans.   The Artificial Intelligence engineer can specialise in different areas such as Machine Learning or Deep Learning, which are derived from AI. Machine Learning is based on algorithms and decision trees, while Deep Learning is based on neural networks.",
+            "salary": "2500-3000",
+            "location": "Ekaterinburg",
+            "created_at": "2022-02-08 14:20:36.231Z",
+            "updated_at": "2022-02-08 14:20:36.232Z",
+            "status": "ACTIVE",
+            "moderation_status": "APPROVED",
+            "error_text": ""
+        }
+    },
+    {
+        "model": "employee_app.employee",
+        "pk": 2,
+        "fields": {}
+    },
+    {
+        "model": "employee_app.employee",
+        "pk": 3,
+        "fields": {}
+    },
+    {
+        "model": "employee_app.employee",
+        "pk": 4,
+        "fields": {}
+    },
+    {
+        "model": "employee_app.employee",
+        "pk": 5,
+        "fields": {}
+    },
+    {
+        "model": "employee_app.employee",
+        "pk": 6,
+        "fields": {}
+    },
+    {
+        "model": "employee_app.employee",
+        "pk": 7,
+        "fields": {}
+    },
+    {
+        "model": "employee_app.resume",
+        "pk": 1,
+        "fields": {
+            "title": "DevOps Engineer",
+            "status": "ACTIVE",
+            "employee": 5,
+            "created_at": "2022-02-08T14:14:41.476Z",
+            "updated_at": "2022-02-08T14:14:41.476Z"
+        }
+    },
+    {
+        "model": "employee_app.resume",
+        "pk": 2,
+        "fields": {
+            "title": "Python Backend",
+            "status": "ACTIVE",
+            "employee": 6,
+            "created_at": "2022-02-08T14:15:04.009Z",
+            "updated_at": "2022-02-08T14:15:04.009Z"
+        }
+    },
+    {
+        "model": "employee_app.resume",
+        "pk": 3,
+        "fields": {
+            "title": "JS frontend",
+            "status": "ACTIVE",
+            "employee": 7,
+            "created_at": "2022-02-08T14:15:23.317Z",
+            "updated_at": "2022-02-08T14:15:23.317Z"
+        }
+    },
+    {
+        "model": "news_app.news",
+        "pk": 1,
+        "fields": {
+            "title": "UK chip firm Arm sale by Softbank collapses amid competition fears",
+            "text": "Japanese conglomerate SoftBank has called off its planned sale of UK microchip designer Arm to US technology group Nvidia.  When the deal was first announced in September 2020 it was valued at around $40bn (£29.6bn).  SoftBank now aims to float Arm's shares on the stock market by the end of March next year.  The planned sale had faced     major regulatory hurdles in the UK, United States and European Union.  SoftBank and Nvidia agreed to end their sale agreement \"because of significant regulatory challenges preventing the consummation of the transaction, despite good faith efforts by the parties,\" the companies said in a joint statement to investors.",
+            "topic": "Tech",
+            "status": "APPROVED",
+            "created_at": "2022-02-08T14:12:18.456Z",
+            "updated_at": "2022-02-08T14:12:18.456Z"
+        }
+    },
+    {
+        "model": "news_app.news",
+        "pk": 2,
+        "fields": {
+            "title": "Meta told to overhaul policies over doxxing fears",
+            "text": "Meta's Oversight Board has advised the social network to change its policy on allowing the sharing of people's addresses, even if the information is considered public.  Meta requested the advice last year - the first time it has asked the board to help define one of its policies.  It follows a series of leaks     on social media of high-profile people's addresses.  This so-called doxxing could cause real-world harms, the board advised.  Doxxing refers to the release of private information about individuals online, usually with malicious intent.",
+            "topic": "Social",
+            "status": "APPROVED",
+            "created_at": "2022-02-08 14:12:41.120Z",
+            "updated_at": "2022-02-08 14:12:41.120Z"
+        }
+    },
+    {
+        "model": "news_app.news",
+        "pk": 3,
+        "fields": {
+            "title": "Peloton boss John Foley to step down as firm axes 2, 800 jobs",
+            "text": "The co-founder of exercise brand Peloton will step down from the leading the company as it plans to cut thousands of jobs.  John Foley, chief executive of the firm for 10 years, will be replaced by Barry McCarthy, the former chief financial officer of Spotify.  Peloton also confirmed it will cut about 2,            800 jobs globally due to a drop in demand for its products.  Amazon, Nike and Apple are rumoured to be interested in bidding for Peloton.  Peloton, which pairs its equipment with streaming and live exercise classes, had seen sales soar of its bikes and treadmills during the pandemic, but the post-lockdown return to gyms has left the firm worth less than a fifth of its peak $50bn valuation.  Mr Foley said Mr McCarthy was the \"right leader to take the company into its next phase of growth\". Mr Foley will become Peloton's executive chairman.",
+            "topic": "Business",
+            "status": "APPROVED",
+            "created_at": "2022-02-08T14:13:05.086Z",
+            "updated_at": "2022-02-08T14:13:05.086Z"
+        }
+    },
+    {
+        "model": "news_app.news",
+        "pk": 4,
+        "fields": {
+            "title": "Пекин-2022 | Хоккей. Мужчины. Сборная ROC второй раз обыграла Данию и вышла в полуфинал",
+            "text": "Три шайбы олимпийских чемпионов Пхенчхана принесли команде Алексея Жамнова победу в четвертьфинале.В четвертьфинальном матче хоккейного турнира Олимпийских игр в Пекине сборная ROC одержала победу над командой Дании – 3:1. Все три шайбы в ворота датчан в этой встрече забросили олимпийские чемпионы Игр 2018 года в Пхенчхане – Вадим Шипачев, Никита Нестеров и Вячеслав Войнов.\n\nПосле голевой перестрелки в заключительном матче группового турнира с Чехией тренерский штаб сборной ROC не произвел никаких перестановок в звеньях – видимо, такая игра удовлетворила Алексея Жамнова гораздо больше, чем продемонстрированная его командой в невзрачных первых двух играх олимпийского турнира. На первый для себя матч плей-офф команда вышла предельно мотивированной и в первом периоде просто прижала хоккеистов Дании к их воротам. Впрочем, те не особо этому и сопротивлялись, так как именно надежная и самоотверженная оборона со ставкой на подвиги вратаря Себастьяна Дама и на редкие контратаки является основной игровой моделью датской сборной. В итоге в первом периоде хоккеисты ROC перебросали соперников со счетом 18:1, и эта статистика говорит сама за себя. Вот только реализовать свое тотальное доминирование в игре команде Жамнова удалось лишь однажды. Сработала давняя связка Никиты Гусева и Вадима Шипачева. Даже будучи разведенными по ходу турнира по разным звеньям, они, оказавшись вместе на льду, организовали гол: Гусев то ли по неточно бросил по воротам, то ли отдал хитрую передачу через лицевой борт – а в итоге у Шипачева появилась возможность нанести бросок в одно касание в незащищенный угол ворот Дама.Во втором периоде характер игры изменился. Отчасти этому поспособствовал Сергей Плотников, заработавший совершенно необязательное удаление в чужой зоне. На реализацию лишнего у датчан ушло всего 23 секунды – после отраженного голкипером Иваном Федотовым первого броска и рикошета Франс Нильсен получил возможность бросить с острого угла практически по пустым воротам. И использовал ее – 1:1. После беспроблемного первого периода такой поворот событий явно психологически подействовал на хоккеистов ROC, и они даже на какое-то время упустили инициативу в игре. В результате Ивану Федотову пришлось потрудиться, выручив команду после пары очень опасных бросков датчан.\n\nВ концовке второго периода игра вновь перешла под контроль команды Жамнова. Возможно, сказалось, что у сборной Дании, в составе которой немало возрастных хоккеистов, накануне была очень трудная игра с Латвией. И очень вовремя состоялся второй гол в ворота Дама – Никите Нестерову удался великолепный щелчок примерно с середины зоны, и шайба со звоном от «транзитного» попадания в штангу влетела в сетку.В третьем периоде сборная Дании, терять которой было уже нечего, пошла вперед большими силами. И оказалось, что датчане неплохо умеют не только обороняться, но и проводить позиционные атаки, подолгу контролируя шайбу в чужой зоне. Вновь не раз выручал Федотов, а в эпизоде, когда оказался отыгран и он, шайбу смог не пустить в ворота защитник Вячеслав Войнов. В нервной концовке очень своевременным для команды ROC оказалось удаление Юлиана Якобсена за 6 минут до конца третьего периода. Правда, оно же едва не стало для нее роковым. При попытке завести шайбу в зону соперника в большинстве Гусев просто подарил ее соперникам, и те получили чистый выход «два в одного». Пас, бросок Франса Нильсена – и Федотов совершает какое-то невероятное спасение! Наверное, это был главный эпизод матча, так как вскоре Войнов все-таки смог реализовать это большинство и снял все вопросы относительно исхода борьбы за место в полуфинале.\n\nПромежуточная цель хоккеистами ROC достигнута, но вопросы по поводу качества игры команды еще остаются. Их соперник по полуфиналу определится вечером – после окончания всех четвертьфинальных встреч, а пройдут игры за выход в финал в пятницу, 18 февраля.",
+            "topic": "Business",
+            "status": "DRAFT",
+            "created_at": "2022-02-08T14:13:05.086Z",
+            "updated_at": "2022-02-08T14:13:05.086Z"
+        }
+    },
+    {
+        "model": "news_app.news",
+        "pk": 5,
+        "fields": {
+            "title": "Пекин-2022 | Биатлон. Сенсационное серебро команды ROC в женской эстафете, золото у Швеции",
+            "text": "По итогам женской эстафеты первое место у Швеции, следом финишировали ROC и Германия. На Олимпийских играх 2022 в Пекине состоялась женская эстафетная гонка 4x6 км по биатлону. Золото завоевала сборная Швеции, серебро у команды ROC c отставанием в 24.7 секунды, бронза за Германией (+34.6). В составе ROC олимпийские медали добыли Ирина Казакевич, Кристина Резцова, Светлана Миронова и Ульяна Нигматуллина.После не очень успешного выступления в личных гонках биатлонистки команды ROC явно хотели реабилитироваться. Это было видно по настрою с самого начала.\n\nСтартером ROC стала Ирина Казакевич, она уверенно прошла первую часть дистанции в группе лидеров. На огневом рубеже Казакевич использовала один запасной патрон, ушла с рубежа 13-й, но быстро отыграла несколько позиций. Во второй стрельбе спортсменка вновь промахнулась один раз, однако отлично шла по дистанции и передала эстафету седьмой.\n\nНастоящее чудо сотворила Кристина Резцова на втором этапе. Она быстро нагнала соперниц и хорошо отработала на огневых рубежах. Но главное — потрясающий ход! Резцова была быстрее Доротеи Вирер почти на 32 секунды и передала эстафету первой. На третий этап отправилась Светлана Миронова.\n\nОна чисто отстреляла в стрельбе лежа, но на второй ушла на штрафной круг. Миронова уступила лидерство, однако по-прежнему сохранила место в группе сильнейших вместе с итальянками и шведками.\n\nНа последний этап отправилась Ульяна Нигматуллина. Отличная стрельба и быстрый ход позволили ей держаться в тройке лидеров. После заключительной стрельбы все стало ясно: первой будет сборная Швеции, а следом за ней финиширует команда ROC. И это была сенсация со знаком плюс. С учетом нестабильного состава мало кто ждал от этой четверки медалей.\n\nОсобенно отметим блестящий ход биатлонисток. Если бы не отдельные ошибки в стрельбе, можно было бы бороться за золото. Но и ошибки были компенсированы высокой скоростью.\n\nЗаключительной дисциплиной в женском биатлоне станет масс-старт 19 февраля.",
+            "topic": "Sport",
+            "status": "APPROVED",
+            "created_at": "2022-02-08T14:13:05.086Z",
+            "updated_at": "2022-02-08T14:13:05.086Z"
+        }
+    }
+]
