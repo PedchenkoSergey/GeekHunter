@@ -1,6 +1,7 @@
 import json
 
 from django.apps import apps
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.core import serializers
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
@@ -9,13 +10,10 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, FormView, DetailView, DeleteView, UpdateView
-from django.contrib.auth.mixins import PermissionRequiredMixin
-
-from employee_app.forms.EmployeeResumeForm import EmployeeResumeForm
-from employee_app.models import Employee, Resume, Experience, Education, Courses
 
 from company_app.models import FavoriteResume
-
+from employee_app.forms.EmployeeResumeForm import EmployeeResumeForm
+from employee_app.models import Employee, Resume, Experience, Education, Courses
 
 
 class EmployeeProfileView(View):
@@ -117,13 +115,11 @@ class ResumeEditView(UpdateView):
             for key in body['fields']:
                 for value in body["fields"][key]:
                     if int(value['pk']) > 0:
-                        print(value['pk'])
                         model = apps.get_model('employee_app', key.capitalize()).objects.get(id=value['pk'])
                         for _key in value:
                             if _key != 'pk':
                                 setattr(model, _key, value[_key])
                     else:
-                        print('new')
                         new_model_credentials = {}
                         for _key in value:
                             if _key != 'pk':
