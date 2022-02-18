@@ -95,3 +95,22 @@ function update() {
         data: JSON.stringify(data),
     });
 }
+
+function delete_instance(el) {
+    const data = {
+        model: $(el).parent().parent().attr('class').match(/\w+$/)?.[0],
+        pk: $(el).parent().children('input[name="pk"]').val(),
+    };
+    console.log(data);
+
+    $.ajax({
+        url: '/employee/profile/resume/entity_delete/',
+        type: 'post',
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (response) {
+            window.location.reload();
+        },
+        data: JSON.stringify(data),
+    });
+}

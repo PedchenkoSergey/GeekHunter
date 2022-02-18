@@ -2,13 +2,25 @@
 {% load static %}
 
 {% block content %}
-    <a class="btn btn-outline-dark mt-3 ms-3" href="{% url 'employee:profile_resumes' %}">Назад</a>
+    {% if request.user.is_employee %}
+        <a class="btn btn-outline-dark mt-3 ms-3" href="{% url 'employee:profile_resumes' %}">Назад</a>
+    {% endif %}
     <div class="container">
         <h4>Resume</h4>
-        <div class="d-flex justify-content-between">
+        <hr>
+        <div class="d-flex flex-column justify-content-between">
             <p><span class="text fw-bold">Title: </span>{{ resume.title }}</p>
-            <p><span class="text fw-bold">Status: </span>{{ resume.status }}</p>
-            <p><span class="text fw-bold">Moderation status: </span>{{ resume.moderation_status }}</p>
+            {% if reques.user.is_employee %}
+                <p><span class="text fw-bold">Status: </span>{{ resume.status }}</p>
+                <p><span class="text fw-bold">Moderation status: </span>{{ resume.moderation_status }}</p>
+            {% else %}
+                <p><span class="text fw-bold">Username: </span>{{ resume.employee.user.username }}</p>
+                <p><span class="text fw-bold">First name: </span>{{ resume.employee.user.first_name }}</p>
+                <p><span class="text fw-bold">Last name: </span>{{ resume.employee.user.last_name }}</p>
+                <p><span class="text fw-bold">Phone: </span>{{ resume.employee.user.phone }}</p>
+                <p><span class="text fw-bold">Email: </span>{{ resume.employee.user.email }}</p>
+
+            {% endif %}
         </div>
         <hr>
         {% if experiencies %}
@@ -53,6 +65,10 @@
             </div>
             <hr>
         {% endif %}
-
+        {% if request.user.is_company %}
+            <div class="d-flex justify-content-center mb-2">
+                <a class="btn btn-success" href="#">Предложить вакансию</a>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}

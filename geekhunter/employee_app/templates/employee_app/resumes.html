@@ -14,7 +14,7 @@
         {% for resume in resumes %}
             <div class="card bg-dark bg-gradient text-white m-3 w-50">
                 <div class="card-body">
-                    <a class="clearfix text-warning" href="#">
+                    <a class="clearfix text-warning" href="{% url 'employee:resume_detail' resume.pk %}">
                         <h5 class="card-title float-start">{{ resume.title }}</h5>
                     </a>
                     <div class="vstack fst-italic mb-3">

@@ -12,69 +12,66 @@
                 <p><span class="text fw-bold">Status: </span>{{ form.status }}</p>
             </div>
             <hr>
-            {% if experiencies %}
-                <h4>Experience</h4>
-                <button type="button" class="btn" onclick="add('experience', true)">+</button>
-                <div class="d-flex flex-wrap experience">
-                    {% for item in experiencies %}
-                        <div class="card-body border m-3 w-25">
-                            <input type="hidden" value="{{ item.pk }}" name="pk">
-                            {% for key, value in item.fields.items %}
-                                {% if key != 'resume' %}
-                                    <p>
-                                        <span class="text fw-bold">{{ key|capfirst }}:  </span>
-                                        <input type="text" value="{{ value }}" name="{{ key }}">
-                                    </p>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-                    {% endfor %}
-                </div>
-                <hr>
-            {% endif %}
-            {% if educations %}
-                <h4>Education</h4>
-                <button type="button" class="btn" onclick="add('education', true)">+</button>
+            <h4>Experience</h4>
+            <button type="button" class="btn" onclick="add('experience', true)">+</button>
+            <div class="d-flex flex-wrap experience">
+                {% for item in experiencies %}
+                    <div class="card-body border m-3 w-25">
+                        <input type="hidden" value="{{ item.pk }}" name="pk">
+                        {% for key, value in item.fields.items %}
+                            {% if key != 'resume' %}
+                                <p>
+                                    <span class="text fw-bold">{{ key|capfirst }}:  </span>
+                                    <input type="text" value="{{ value }}" name="{{ key }}">
+                                </p>
+                            {% endif %}
+                        {% endfor %}
+                        <button type="button" class="btn btn-danger" onclick="delete_instance(this)">delete</button>
+                    </div>
+                {% endfor %}
+            </div>
+            <hr>
+            <h4>Education</h4>
+            <button type="button" class="btn" onclick="add('education', true)">+</button>
 
-                <div class="d-flex flex-wrap education">
-                    {% for item in educations %}
-                        <div class="card-body border m-3 w-25">
-                            <input type="hidden" value="{{ item.pk }}" name="pk">
-                            {% for key, value in item.fields.items %}
-                                {% if key != 'resume' %}
-                                    <p>
-                                        <span class="text fw-bold">{{ key|capfirst }}:  </span>
-                                        <input type="text" value="{{ value }}" name="{{ key }}">
-                                    </p>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-                    {% endfor %}
-                </div>
-                <hr>
-            {% endif %}
-            {% if courses %}
-                <h4>Courses</h4>
-                <button type="button" class="btn" onclick="add('courses', true)">+</button>
+            <div class="d-flex flex-wrap education">
+                {% for item in educations %}
+                    <div class="card-body border m-3 w-25">
+                        <input type="hidden" value="{{ item.pk }}" name="pk">
+                        {% for key, value in item.fields.items %}
+                            {% if key != 'resume' %}
+                                <p>
+                                    <span class="text fw-bold">{{ key|capfirst }}:  </span>
+                                    <input type="text" value="{{ value }}" name="{{ key }}">
+                                </p>
+                            {% endif %}
+                        {% endfor %}
+                        <button type="button" class="btn btn-danger" onclick="delete_instance(this)">delete</button>
+                    </div>
+                {% endfor %}
+            </div>
+            <hr>
+            <h4>Courses</h4>
+            <button type="button" class="btn" onclick="add('courses', true)">+</button>
 
 
-                <div class="d-flex flex-wrap courses">
-                    {% for item in courses %}
-                        <div class="card-body border m-3 w-25">
-                            <input type="hidden" value="{{ item.pk }}" name="pk">
-                            {% for key, value in item.fields.items %}
-                                {% if key != 'resume' %}
-                                    <p>
-                                        <span class="text fw-bold">{{ key|capfirst }}:  </span>
-                                        <input type="text" value="{{ value }}" name="{{ key }}">
-                                    </p>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-                    {% endfor %}
-                </div>
-                <hr>
-            {% endif %}
+            <div class="d-flex flex-wrap courses">
+                {% for item in courses %}
+                    <div class="card-body border m-3 w-25">
+                        <input type="hidden" value="{{ item.pk }}" name="pk">
+                        {% for key, value in item.fields.items %}
+                            {% if key != 'resume' %}
+                                <p>
+                                    <span class="text fw-bold">{{ key|capfirst }}:  </span>
+                                    <input type="text" value="{{ value }}" name="{{ key }}">
+                                </p>
+                            {% endif %}
+                        {% endfor %}
+                        <button type="button" class="btn btn-danger" onclick="delete_instance(this)">delete</button>
+                    </div>
+                {% endfor %}
+            </div>
+            <hr>
             <div class="d-flex justify-content-center">
                 <input type="button" class="btn btn-success" onclick="update()" value="save">
             </div>

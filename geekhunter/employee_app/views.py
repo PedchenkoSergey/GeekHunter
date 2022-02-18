@@ -3,6 +3,8 @@ import json
 from django.apps import apps
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.core import serializers
+from django.db.models.signals import pre_save, post_save
+from django.dispatch import receiver
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -183,3 +185,25 @@ class ResumesView(PermissionRequiredMixin, ListView):
         context['favorite_resumes'] = FavoriteResume.objects.filter(hr_manager=self.request.user.id)
 
         return context
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class ResumeEntityDeleteView(View):
+    @staticmethod
+    def post(request):
+        try:
+            body_unicode = request.body.decode('utf-8')
+            body = json.loads(body_unicode)
+            model = apps.get_model('employee_app', body['model'].capitalize()).objects.get(id=body['pk'])
+            model.delete()
+        except Exception as e:
+            print(e)
+        return JsonResponse([], safe=False)
+
+
+@receiver(pre_save, sender=Resume)
+def resume_status_change(sender, instance, **kwargs):
+    if instance.status == 'ACTIVE':
+        for item in Resume.objects.filter(employee=instance.employee).exclude(id=instance.id):
+            item.status = 'DRAFT'
+            item.save()
