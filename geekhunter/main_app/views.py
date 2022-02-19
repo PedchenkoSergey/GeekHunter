@@ -7,7 +7,7 @@ from news_app.models import News
 
 # Create your views here.
 def index(request):
-    news_list = News.objects.get_queryset().order_by('-created_at')
+    news_list = News.objects.get_queryset().filter(status='APPROVED').order_by('-created_at')
     page = request.GET.get('page', 1)
     paginator = Paginator(news_list, 2)
     try:

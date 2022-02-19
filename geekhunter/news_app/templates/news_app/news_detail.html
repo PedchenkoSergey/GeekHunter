@@ -1,12 +1,7 @@
 {% extends 'news_app/base.html' %}
 {% load static %}
-{% block css %}
-    <link rel="stylesheet" href="{% static 'owlcarousel/owl.carousel.min.css' %}">
-    <link rel="stylesheet" href="{% static 'owlcarousel/owl.theme.default.css' %}">
-{% endblock %}
-{% block js %}
 
-{% endblock %}
+
 {% block content %}
     <div class="container">
         <h1>Новости:</h1>
@@ -15,30 +10,30 @@
             <div
                     class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
             >
+                <strong class="d-inline-block mb-2 text-primary">{{ post.topic|default:"Default theme" }}</strong>
+                <h2 class="mb-0">{{ post.title }}</h2>
+                <div class="mb-1 text-muted">{{ post.created_at|date:"M d, Y" }}</div>
                 <div class="col p-4 d-flex flex-column position-static">
-                    <strong class="d-inline-block mb-2 text-primary">{{ post.topic|default:"Default theme" }}</strong>
-                    <h3 class="mb-0">{{ post.title }}</h3>
-                    <div class="mb-1 text-muted">{{ post.created_at|date:"M d, Y" }}</div>
+
                     <p class="card-text mb-auto">
                         {{ post.text }}
                     </p>
-                    <a href="#" class="stretched-link">Continue reading</a>
+
                 </div>
+
                 <div class="col-3 d-none d-lg-block">
                     <img
                             src="https://images.unsplash.com/photo-1553901753-215db344677a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=350&q=80"
                             alt=""
                     />
                 </div>
+                <a role="button" type="button" class="btn btn-primary" href="javascript:history.go(-1)">Back</a>
             </div>
+
         </div>
     </div>
-
 {% endblock %}
 
 {% block footer-js %}
-    <script src={% static 'owlcarousel/jquery.min.js' %}></script>
-    <script src="{% static 'owlcarousel/owl.carousel.min.js' %}"></script>
     <script src="{% static 'js/infinite_news.js' %}"></script>
-    <script src="{% static 'js/companies_carousel.js' %}"></script>
 {% endblock %}

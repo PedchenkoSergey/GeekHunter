@@ -1,10 +1,9 @@
 from django.urls import path
-
-import news_app.views as news_app
+from .views import PostListView, PostDetailView
 
 app_name = 'news_app'
 
 urlpatterns = [
-    path('', news_app.news, name='news'),
-    path('<int:pk>/', news_app.post, name='post'),
+    path('', PostListView.as_view(), name='news'),
+    path('<int:pk>/', PostDetailView.as_view(), name='post'),
 ]

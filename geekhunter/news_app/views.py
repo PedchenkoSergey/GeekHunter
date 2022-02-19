@@ -1,21 +1,31 @@
 from django.shortcuts import render, get_object_or_404
+from django.views.generic import (ListView, DetailView)
 from .models import News
 
 
-def news(request):
-    title = 'новости'
-    news_list = News.objects.filter(status='APPROVED')
-    context = {
-        'title': title,
-        'news': news_list
-    }
-    return render(request, 'news_app/news.html', context)
+class PostListView(ListView):
+    """
+    Список всех APPROVED новостей
+    """
+    model = News
+    # Под данным именем наш список статей будет доступен в шаблоне
+    context_object_name = 'news'
 
+    # Название шаблона
+    template_name = 'news_app/news_list.html'
 
-def post(request, pk):
-    title = 'новость'
-    context = {
-        'title': title,
-        'post': get_object_or_404(News, pk=pk),
-    }
-    return render(request, 'news_app/post.html', context)
+    def get_queryset(self):
+        return News.objects.filter(status='APPROVED').order_by('-created_at')
+
+class PostDetailView(DetailView):
+    """
+    Одна новость
+    """
+
+    model = News
+
+    # Под данным именем наш список статей будет доступен в шаблоне
+    context_object_name = 'post'
+
+    # Название шаблона
+    template_name = 'news_app/news_detail.html'
