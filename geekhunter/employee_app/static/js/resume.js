@@ -101,7 +101,6 @@ function delete_instance(el) {
         model: $(el).parent().parent().attr('class').match(/(\w+)$/)?.[1],
         pk: $(el).parent().children('input[name="pk"]').val(),
     };
-    console.log(data)
 
     $.ajax({
         url: '/employee/profile/resume/entity_delete/',
