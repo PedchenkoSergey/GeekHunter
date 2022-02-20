@@ -64,7 +64,6 @@ class ResumeCreationView(FormView):
                 employee=employee
             )
             resume.save()
-            print(body['fields'])
             for key in body['fields']:
                 for value in body["fields"][key]:
                     model = apps.get_model('employee_app', key.capitalize())(
