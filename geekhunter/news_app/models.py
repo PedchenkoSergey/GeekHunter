@@ -15,5 +15,9 @@ class News(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
 
+    @staticmethod
+    def get_items():
+        return News.objects.filter(status='APPROVED').order_by('created_at')
+
     def __str__(self):
         return self.title
