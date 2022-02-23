@@ -46,6 +46,7 @@ class Card(models.Model):
     about = models.CharField(_('about'), max_length=500, blank=False)
     awards = models.CharField(_('awards'), max_length=500, blank=True)
     priorities = models.CharField(_('priorities'), max_length=500, blank=True)
+    logo = models.ImageField(upload_to='company_logo', blank=True)
     status = models.CharField(_('status'), max_length=10, choices=STATUS_CHOICES, default='DRAFT')
     moderation_status = models.CharField(
         _('moderation_status'), max_length=20,
