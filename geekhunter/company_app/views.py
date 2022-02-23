@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.views import FormView
 from django.core import serializers
+from django.core.files.storage import default_storage
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
@@ -98,13 +99,45 @@ class CompanyCardEditView(UpdateView):
     form_class = CompanyCardEditForm
     success_url = reverse_lazy('company:profile')
 
+    def get_context_data(self, **kwargs):
+        context = super(CompanyCardEditView, self).get_context_data(**kwargs)
+        context['company'] = self.get_object().company
+        return context
+
     def get_form_kwargs(self):
         kwargs = super(CompanyCardEditView, self).get_form_kwargs()
         kwargs.update(instance={
             'card': self.object,
             'company': self.object.company,
         })
+        print(kwargs['instance']['company'].logo)
         return kwargs
+
+    def post(self, request, *args, **kwargs):
+        company = Company.objects.get(id=request.user.id)
+        company.name = request.POST.get('company-name')
+        company.short_description = request.POST.get('company-short_description')
+        company.specialization = request.POST.get('company-specialization')
+
+        card = Card.objects.get(company=company)
+        card.title = request.POST.get('card-title')
+        card.about = request.POST.get('card-about')
+        card.awards = request.POST.get('card-awards')
+        card.priorities = request.POST.get('card-priorities')
+        card.status = request.POST.get('card-status')
+
+        if request.FILES:
+            logo = request.FILES['company-logo']
+            logo_path = f'company_logo/company_{request.user.id}_logo.png'
+            with default_storage.open(logo_path, 'wb+') as f:
+                for chunk in logo.chunks():
+                    f.write(chunk)
+            company.logo = logo_path
+
+        company.save()
+        card.save()
+
+        return HttpResponseRedirect(self.success_url)
 
 
 class CompanyProfileVacanciesView(ListView):

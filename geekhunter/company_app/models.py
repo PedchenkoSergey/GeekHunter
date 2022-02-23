@@ -9,6 +9,7 @@ class Company(models.Model):
     name = models.CharField(_('name'), max_length=200, blank=False)
     specialization = models.CharField(_('specialization'), max_length=300, blank=True)
     short_description = models.CharField(_('short_description'), max_length=500, blank=True)
+    logo = models.ImageField(upload_to='company_logo/', blank=True)
 
     def __str__(self):
         return self.name
@@ -46,7 +47,6 @@ class Card(models.Model):
     about = models.CharField(_('about'), max_length=500, blank=False)
     awards = models.CharField(_('awards'), max_length=500, blank=True)
     priorities = models.CharField(_('priorities'), max_length=500, blank=True)
-    logo = models.ImageField(upload_to='company_logo', blank=True)
     status = models.CharField(_('status'), max_length=10, choices=STATUS_CHOICES, default='DRAFT')
     moderation_status = models.CharField(
         _('moderation_status'), max_length=20,
