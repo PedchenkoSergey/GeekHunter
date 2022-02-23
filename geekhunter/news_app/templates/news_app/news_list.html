@@ -9,9 +9,8 @@
             {% include 'main_app/includes/inc_news.html' %}
         </div>
     </div>
-<div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center">
         <span style="margin: 0 auto;">
-        <nav>
             {% if is_paginated %}
                 <ul class="pagination">
                     {% if page_obj.has_previous %}
@@ -34,9 +33,8 @@
                     {% endif %}
                 </ul>
             {% endif %}
-        </nav>
         </span>
-</div>
+    </div>
 
 
 {% endblock %}

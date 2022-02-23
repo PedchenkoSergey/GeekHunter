@@ -9,6 +9,7 @@ class Company(models.Model):
     name = models.CharField(_('name'), max_length=200, blank=False)
     specialization = models.CharField(_('specialization'), max_length=300, blank=True)
     short_description = models.CharField(_('short_description'), max_length=500, blank=True)
+    logo = models.ImageField(upload_to='company_logo/', blank=True)
 
     def __str__(self):
         return self.name

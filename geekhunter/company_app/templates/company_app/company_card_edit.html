@@ -1,12 +1,13 @@
 {% extends 'company_app/base.html' %}
 {% load static %}
+{% load company_logo %}
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 {% endblock %}
 
 
 {% block content %}
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
         <div class="company_card">
@@ -16,8 +17,8 @@
                         <div class="col-lg-5">
                             <div class="card mb-4">
                                 <div class="card-body text-center">
-                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
-                                         alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                                    <img src="{{ company.logo|company_logo }}" class="w-75" alt="">
+                                    {{ form.company.logo }}
                                     <div class="row mt-3 mb-3">
                                         <div class="col-sm-3">
                                             <p class="mb-0">Name</p>

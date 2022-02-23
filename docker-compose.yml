@@ -4,21 +4,22 @@ services:
   geekhunter:
     build: ./geekhunter
     # command: python manage.py runserver 0.0.0.0:8000  # use if we run internal django srv
-    command: gunicorn geekhunter.wsgi:application --bind 0.0.0.0:8000
+    command: sh -c "python manage.py migrate && python manage.py loaddata fixtures/db.json && python manage.py collectstatic --noinput && gunicorn geekhunter.wsgi:application --bind 0.0.0.0:8000"
     volumes:
       - ./geekhunter/:/home/geekhunter/
     # ports:  # if we use dev environment without nginx
     #   - 8000:8000
-    expose:  # if we use with nginx
+    expose: # if we use with nginx
       - 8000
     env_file:
       - ./.env.dev
     depends_on:
       - db
   db:
+    restart: always
     image: postgres:13.0-alpine
     volumes:
-      - ./data/:/var/lib/postgresql/data
+      - pgvolume:/var/lib/postgresql/data/
     env_file:
       - ./.env.db
   nginx:
@@ -30,3 +31,6 @@ services:
       - 5050:80
     depends_on:
       - geekhunter
+
+volumes:
+  pgvolume:

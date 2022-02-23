@@ -1,3 +1,7 @@
+import hashlib
+from random import random
+
+from django.core.files.storage import default_storage
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -49,6 +53,15 @@ class UserProfileView(FormView):
 
         if credentials['password'] != '':
             user.set_password(credentials['password'])
+
+        if request.FILES:
+            avatar = request.FILES['avatar']
+            avatar_path = f'user_photo/{request.user.username}_user_avatar.png'
+            with default_storage.open(avatar_path, 'wb+') as f:
+                for chunk in avatar.chunks():
+                    f.write(chunk)
+            user.avatar = avatar_path
+
         user.save()
 
         return HttpResponseRedirect(self.success_url)

@@ -11,6 +11,7 @@ class News(models.Model):
     title = models.CharField(_('title'), max_length=200, blank=False)
     text = models.CharField(_('text'), max_length=1000, blank=False)
     topic = models.CharField(_('topic'), max_length=100, blank=True)
+    photo = models.ImageField(upload_to='news_image/', blank=True)
     status = models.CharField(_('status'), max_length=10, choices=STATUS_CHOICES, default='DRAFT')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)

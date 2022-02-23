@@ -8,5 +8,6 @@ class PortalUser(AbstractUser):
     is_company = models.BooleanField(_('company'), default=False)
     phone = models.CharField(_('phone'), max_length=50, unique=True)
     email = models.EmailField(_('email address'), unique=True)
+    avatar = models.ImageField(upload_to='user_photo/', blank=True)
 
     REQUIRED_FIELDS = ['email', 'phone']
