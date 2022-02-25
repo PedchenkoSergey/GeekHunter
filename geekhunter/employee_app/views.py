@@ -3,7 +3,7 @@ import json
 from django.apps import apps
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.core import serializers
-from django.db.models.signals import pre_save, post_save
+from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
@@ -13,7 +13,7 @@ from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, FormView, DetailView, DeleteView, UpdateView
 
-from company_app.models import FavoriteResume
+from company_app.models import FavoriteResume, Offer
 from employee_app.forms.EmployeeResumeForm import EmployeeResumeForm
 from employee_app.models import Employee, Resume, Experience, Education, Courses
 
@@ -206,3 +206,11 @@ def resume_status_change(sender, instance, **kwargs):
         for item in Resume.objects.filter(employee=instance.employee).exclude(id=instance.id):
             item.status = 'DRAFT'
             item.save()
+
+
+class EmployeeOffersView(ListView):
+    template_name = 'employee_app/profile_offers.html'
+    context_object_name = 'offers'
+
+    def get_queryset(self):
+        return Offer.objects.filter(resume__employee=self.request.user.id)

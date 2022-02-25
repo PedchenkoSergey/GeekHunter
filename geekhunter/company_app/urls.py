@@ -1,7 +1,7 @@
 from django.urls import path
 
 from .views import CompanyCardView, VacanciesView, CompanyProfileView, CompanyCardEditView, CompanyProfileVacanciesView, \
-    VacancyCreationView, VacancyEditView, VacancyDeleteView
+    VacancyCreationView, VacancyEditView, VacancyDeleteView, MakeOfferView
 
 app_name = 'company_app'
 
@@ -16,6 +16,7 @@ urlpatterns = [
     path('profile/vacancies/edit/<int:pk>', VacancyEditView.as_view(), name='vacancy_edit'),
     path('profile/vacancies/delete/<int:pk>', VacancyDeleteView.as_view(), name='vacancy_delete'),
 
-
     path('profile/card/edit/<int:pk>/', CompanyCardEditView.as_view(), name='card_edit'),
+
+    path('makeoffer/<int:resume_id>/', MakeOfferView.as_view(), name='make_offer'),
 ]

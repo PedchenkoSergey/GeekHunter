@@ -8,11 +8,12 @@ from django.urls import reverse_lazy, reverse
 from django.views import View
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 
-from employee_app.models import FavoriteVacancies
+from employee_app.models import FavoriteVacancies, Resume
 from .forms.CompanyCardEditForm import CompanyCardEditForm
+from .forms.CompanyOfferForm import CompanyOfferForm
 from .forms.VacancyCreationForm import VacancyCreationForm
 from .forms.VacancyEditForm import VacancyEditForm
-from .models import Card, Vacancy, Company
+from .models import Card, Vacancy, Company, Offer
 
 
 class CompanyCardView(DetailView):
@@ -161,3 +162,30 @@ class VacancyDeleteView(DeleteView):
     template_name = 'company_app/vacancy_delete.html'
     context_object_name = 'vacancy'
     success_url = reverse_lazy('company:profile_vacancies')
+
+
+class MakeOfferView(FormView):
+    form_class = CompanyOfferForm
+    template_name = 'company_app/make_offer.html'
+    success_url = reverse_lazy('employee:resumes')
+
+    def get_form_kwargs(self):
+        kwargs = super(MakeOfferView, self).get_form_kwargs()
+        kwargs['resume_id'] = self.kwargs['resume_id']
+        return kwargs
+
+    def get_initial(self):
+        initial = super(MakeOfferView, self).get_initial()
+        initial['resume'] = Resume.objects.get(id=self.kwargs['resume_id'])
+        return initial
+
+    def post(self, request, *args, **kwargs):
+        offer = Offer(
+            title=request.POST.get('title'),
+            text=request.POST.get('text'),
+            resume=Resume.objects.get(id=request.POST.get('resume')),
+            vacancy=Vacancy.objects.get(id=request.POST.get('vacancy'))
+        )
+        offer.save()
+
+        return HttpResponseRedirect(self.success_url)

@@ -2,7 +2,7 @@ from django.urls import path
 
 
 from .views import EmployeeProfileView, EmployeeProfileResumeView, ResumeCreationView, ResumeDetailView, \
-    ResumeDeleteView, ResumeEditView, ResumesView, ResumeEntityDeleteView
+    ResumeDeleteView, ResumeEditView, ResumesView, ResumeEntityDeleteView, EmployeeOffersView
 
 app_name = 'employee_app'
 
@@ -17,6 +17,9 @@ urlpatterns = [
 
     path('profile/resume/entity_delete/', ResumeEntityDeleteView.as_view(), name='entity_delete'),
 
+    path('profile/offers/', EmployeeOffersView.as_view(), name='profile_offers'),
+
     path('resumes', ResumesView.as_view(), name='resumes'),
     path('resumes/<int:pk>/', ResumesView.as_view(), name='resumes'),
+    path('resumes/view/<int:pk>/', ResumeDetailView.as_view(), name='resume_view'),
 ]
