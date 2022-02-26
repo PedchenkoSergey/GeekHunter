@@ -1,6 +1,6 @@
 from django import forms
 
-from ..models import Vacancy
+from company_app.models import Vacancy
 from .widgets import BigTextarea
 
 

@@ -24,8 +24,8 @@
                     <td>{{ vacancy.description }}</td>
                     <td>{{ vacancy.salary }}</td>
                     <td>{{ vacancy.location }}</td>
-                    <td>{{ vacancy.status }}</td>
-                    <td>{{ vacancy.moderation_status }}</td>
+                    <td>{{ vacancy.get_status_display|capfirst }}</td>
+                    <td>{{ vacancy.get_moderation_status_display|capfirst }}</td>
                     <td>
                         <a class="btn btn-warning" href="{% url 'company:vacancy_edit' vacancy.id %}">Edit</a>
                         <a class="btn btn-danger" href="{% url 'company:vacancy_delete' vacancy.id %}">Delete</a>

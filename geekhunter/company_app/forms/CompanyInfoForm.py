@@ -1,6 +1,6 @@
 from django import forms
 
-from ..models import Company
+from company_app.models import Company
 
 
 class CompanyInfoForm(forms.ModelForm):

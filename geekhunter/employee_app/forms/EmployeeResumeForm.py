@@ -1,6 +1,6 @@
 from django import forms
 
-from ..models import Resume
+from employee_app.models import Resume
 
 
 class EmployeeResumeForm(forms.ModelForm):

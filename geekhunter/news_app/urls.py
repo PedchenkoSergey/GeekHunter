@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import PostListView, PostDetailView
+from news_app.views import PostListView, PostDetailView
 
 app_name = 'news_app'
 

@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import CompanyCardView, VacanciesView, CompanyProfileView, CompanyCardEditView, CompanyProfileVacanciesView, \
+from company_app.views import CompanyCardView, VacanciesView, CompanyProfileView, CompanyCardEditView, CompanyProfileVacanciesView, \
     VacancyCreationView, VacancyEditView, VacancyDeleteView, MakeOfferView, CompanyOffersListView, OfferDeleteView
 
 app_name = 'company_app'
