@@ -8,7 +8,7 @@ from django.urls import reverse_lazy, reverse
 from django.views import View
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 
-from employee_app.models import FavoriteVacancies, Resume
+from employee_app.models import FavoriteVacancies, Resume, Employee
 from company_app.forms.CompanyCardEditForm import CompanyCardEditForm
 from company_app.forms.CompanyOfferForm import CompanyOfferForm
 from company_app.forms.VacancyCreationForm import VacancyCreationForm
@@ -52,6 +52,25 @@ class VacanciesView(PermissionRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['favorite_vacancies'] = FavoriteVacancies.objects.filter(employee=self.request.user.id)
         return context
+
+    def post(self, request, *args, **kwargs):
+        vacancy_id = request.POST.get('vacancy')
+        vacancy = Vacancy.objects.get(id=vacancy_id)
+        employee = Employee.objects.get(user_id=self.request.user.id)
+
+        favorite_vacancy = FavoriteVacancies.objects.filter(
+            vacancy=vacancy,
+            employee=employee,
+        )
+
+        if not favorite_vacancy:
+            favorite_vacancy = FavoriteVacancies.objects.create(
+                vacancy=vacancy,
+                employee=employee,
+            )
+            favorite_vacancy.save()
+
+        return HttpResponseRedirect(reverse('company_app:vacancies'))
 
 
 class VacancyCreationView(FormView):

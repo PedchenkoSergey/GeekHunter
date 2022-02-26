@@ -7,13 +7,13 @@ from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, FormView, DetailView, DeleteView, UpdateView
 
-from company_app.models import FavoriteResume, Offer
+from company_app.models import FavoriteResume, Offer, HrManager
 from employee_app.forms.EmployeeOfferAnswerForm import EmployeeOfferAnswerForm
 from employee_app.forms.EmployeeResumeForm import EmployeeResumeForm
 from employee_app.models import Employee, Resume, Experience, Education, Courses
@@ -185,6 +185,25 @@ class ResumesView(PermissionRequiredMixin, ListView):
         context['favorite_resumes'] = FavoriteResume.objects.filter(hr_manager=self.request.user.id)
 
         return context
+
+    def post(self, request, *args, **kwargs):
+        resume_id = request.POST.get('resume')
+        resume = Resume.objects.get(id=resume_id)
+        hr_manager = HrManager.objects.get(user_id=self.request.user.id)
+
+        favorite_resume = FavoriteResume.objects.filter(
+            resume=resume,
+            hr_manager=hr_manager,
+        )
+
+        if not favorite_resume:
+            favorite_resume = FavoriteResume.objects.create(
+                resume=resume,
+                hr_manager=hr_manager,
+            )
+            favorite_resume.save()
+
+        return HttpResponseRedirect(reverse('employee_app:resumes'))
 
 
 @method_decorator(csrf_exempt, name='dispatch')
