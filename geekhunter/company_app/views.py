@@ -189,3 +189,18 @@ class MakeOfferView(FormView):
         offer.save()
 
         return HttpResponseRedirect(self.success_url)
+
+
+class CompanyOffersListView(ListView):
+    template_name = 'company_app/profile_offers.html'
+    context_object_name = 'offers'
+
+    def get_queryset(self):
+        return Offer.objects.filter(vacancy__company=self.request.user.id)
+
+
+class OfferDeleteView(DeleteView):
+    model = Offer
+    template_name = 'company_app/offer_delete.html'
+    context_object_name = 'offer'
+    success_url = reverse_lazy('company:profile_offers')
