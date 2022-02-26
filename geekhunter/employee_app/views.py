@@ -14,6 +14,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, FormView, DetailView, DeleteView, UpdateView
 
 from company_app.models import FavoriteResume, Offer
+from employee_app.forms.EmployeeOfferAnswerForm import EmployeeOfferAnswerForm
 from employee_app.forms.EmployeeResumeForm import EmployeeResumeForm
 from employee_app.models import Employee, Resume, Experience, Education, Courses
 
@@ -213,4 +214,26 @@ class EmployeeOffersView(ListView):
     context_object_name = 'offers'
 
     def get_queryset(self):
-        return Offer.objects.filter(resume__employee=self.request.user.id)
+        return Offer.objects.filter(resume__employee=self.request.user.id).filter(status__in=['SENT', 'ACCEPTED'])
+
+
+class EmployeeOfferAnswerView(FormView):
+    template_name = 'employee_app/offer_answer.html'
+    form_class = EmployeeOfferAnswerForm
+    success_url = reverse_lazy('employee:profile_offers')
+
+    def get_context_data(self, **kwargs):
+        context = super(EmployeeOfferAnswerView, self).get_context_data(**kwargs)
+        context['offer'] = Offer.objects.get(id=self.kwargs['pk'])
+        return context
+
+    def post(self, request, *args, **kwargs):
+        offer = self.get_context_data()['offer']
+        offer.feedback = request.POST.get('feedback')
+        if 'accept' in request.POST:
+            offer.status = 'ACCEPTED'
+        else:
+            offer.status = 'NOT_ACCEPTED'
+        offer.save()
+
+        return HttpResponseRedirect(self.success_url)
