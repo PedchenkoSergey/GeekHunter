@@ -172,6 +172,7 @@ class MakeOfferView(FormView):
     def get_form_kwargs(self):
         kwargs = super(MakeOfferView, self).get_form_kwargs()
         kwargs['resume_id'] = self.kwargs['resume_id']
+        kwargs['request'] = self.request
         return kwargs
 
     def get_initial(self):

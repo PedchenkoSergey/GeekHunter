@@ -7,9 +7,11 @@ from ..models import Offer, Vacancy
 class CompanyOfferForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.resume_id = kwargs.pop('resume_id')
+        self.request = kwargs.pop('request')
         super(CompanyOfferForm, self).__init__()
         self.fields['resume'].queryset = Resume.objects.filter(id=self.resume_id)
-        self.fields['vacancy'].queryset = Vacancy.objects.filter(status='ACTIVE', moderation_status='APPROVED')
+        self.fields['vacancy'].queryset = Vacancy.objects.filter(company_id=self.request.user.id, status='ACTIVE',
+                                                                 moderation_status='APPROVED')
 
     class Meta:
         model = Offer
