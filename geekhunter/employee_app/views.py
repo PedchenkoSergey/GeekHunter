@@ -3,7 +3,7 @@ import json
 from django.apps import apps
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.core import serializers
-from django.db.models.signals import pre_save, post_save
+from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
@@ -13,7 +13,8 @@ from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, FormView, DetailView, DeleteView, UpdateView
 
-from company_app.models import FavoriteResume
+from company_app.models import FavoriteResume, Offer
+from employee_app.forms.EmployeeOfferAnswerForm import EmployeeOfferAnswerForm
 from employee_app.forms.EmployeeResumeForm import EmployeeResumeForm
 from employee_app.models import Employee, Resume, Experience, Education, Courses
 
@@ -206,3 +207,33 @@ def resume_status_change(sender, instance, **kwargs):
         for item in Resume.objects.filter(employee=instance.employee).exclude(id=instance.id):
             item.status = 'DRAFT'
             item.save()
+
+
+class EmployeeOffersView(ListView):
+    template_name = 'employee_app/profile_offers.html'
+    context_object_name = 'offers'
+
+    def get_queryset(self):
+        return Offer.objects.filter(resume__employee=self.request.user.id).filter(status__in=['SENT', 'ACCEPTED'])
+
+
+class EmployeeOfferAnswerView(FormView):
+    template_name = 'employee_app/offer_answer.html'
+    form_class = EmployeeOfferAnswerForm
+    success_url = reverse_lazy('employee:profile_offers')
+
+    def get_context_data(self, **kwargs):
+        context = super(EmployeeOfferAnswerView, self).get_context_data(**kwargs)
+        context['offer'] = Offer.objects.get(id=self.kwargs['pk'])
+        return context
+
+    def post(self, request, *args, **kwargs):
+        offer = self.get_context_data()['offer']
+        offer.feedback = request.POST.get('feedback')
+        if 'accept' in request.POST:
+            offer.status = 'ACCEPTED'
+        else:
+            offer.status = 'NOT_ACCEPTED'
+        offer.save()
+
+        return HttpResponseRedirect(self.success_url)

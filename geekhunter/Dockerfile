@@ -14,7 +14,7 @@ ENV APP_HOME=/home/geekhunter
 # RUN addgroup geekhunter root
 
 # install psycopg2 dependencies
-RUN apk update && apk add postgresql-dev gcc python3-dev musl-dev
+RUN apk update && apk add postgresql-dev gcc python3-dev musl-dev jpeg-dev zlib-dev
 
 # install dependencies
 RUN pip install --upgrade pip

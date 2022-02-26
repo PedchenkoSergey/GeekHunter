@@ -1,0 +1,31 @@
+{% extends 'employee_app/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container mt-5">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Vacancy</th>
+                <th scope="col">Status</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for offer in offers %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ offer.title }}</td>
+                    <td>{{ offer.vacancy }}</td>
+                    <td>{{ offer.status }}</td>
+                    <td>
+                        <a class="btn btn-warning {% if offer.status == 'ACCEPTED' %} disabled {% endif %}" href="{% url 'employee:offer_answer' offer.pk %}">Answer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

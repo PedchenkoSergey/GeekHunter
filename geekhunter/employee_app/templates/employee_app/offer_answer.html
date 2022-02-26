@@ -1,0 +1,16 @@
+{% extends 'employee_app/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <p><span class="text fw-bold">Title: </span>{{ offer.title }}</p>
+        <p><span class="text fw-bold">Vacancy: </span>{{ offer.vacancy }}</p>
+        <p><span class="text fw-bold">Text: </span>{{ offer.text }}</p>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" class="btn btn-success" name="accept" value="accept">
+            <input type="submit" class="btn btn-danger" name="decline" value="decline">
+        </form>
+    </div>
+{% endblock %}
