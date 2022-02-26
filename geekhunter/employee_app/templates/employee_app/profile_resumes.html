@@ -18,8 +18,8 @@
                 <tr>
                     <th scope="row">{{ forloop.counter }}</th>
                     <td>{{ resume.title }}</td>
-                    <td>{{ resume.status }}</td>
-                    <td>{{ resume.moderation_status }}</td>
+                    <td>{{ resume.get_status_display|capfirst }}</td>
+                    <td>{{ resume.get_moderation_status_display|capfirst }}</td>
                     <td>
                         <a class="btn btn-info" href="{% url 'employee:resume_detail' resume.id %}">View</a>
                         <a class="btn btn-warning" href="{% url 'employee:resume_edit' resume.id %}">Edit</a>

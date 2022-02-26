@@ -225,6 +225,11 @@ class EmployeeOfferAnswerView(FormView):
     def get_context_data(self, **kwargs):
         context = super(EmployeeOfferAnswerView, self).get_context_data(**kwargs)
         context['offer'] = Offer.objects.get(id=self.kwargs['pk'])
+        resume_id = context['offer'].resume.id
+        context['resume'] = Resume.objects.get(id=resume_id)
+        context['experiencies'] = Experience.objects.filter(resume_id=resume_id)
+        context['educations'] = Education.objects.filter(resume_id=resume_id)
+        context['courses'] = Courses.objects.filter(resume_id=resume_id)
         return context
 
     def post(self, request, *args, **kwargs):

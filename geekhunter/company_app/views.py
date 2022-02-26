@@ -9,11 +9,11 @@ from django.views import View
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 
 from employee_app.models import FavoriteVacancies, Resume
-from .forms.CompanyCardEditForm import CompanyCardEditForm
-from .forms.CompanyOfferForm import CompanyOfferForm
-from .forms.VacancyCreationForm import VacancyCreationForm
-from .forms.VacancyEditForm import VacancyEditForm
-from .models import Card, Vacancy, Company, Offer
+from company_app.forms.CompanyCardEditForm import CompanyCardEditForm
+from company_app.forms.CompanyOfferForm import CompanyOfferForm
+from company_app.forms.VacancyCreationForm import VacancyCreationForm
+from company_app.forms.VacancyEditForm import VacancyEditForm
+from company_app.models import Card, Vacancy, Company, Offer
 
 
 class CompanyCardView(DetailView):
@@ -171,7 +171,7 @@ class MakeOfferView(FormView):
 
     def get_form_kwargs(self):
         kwargs = super(MakeOfferView, self).get_form_kwargs()
-        kwargs['resume_id'] = self.kwargs['resume_id']
+        kwargs['resume_id'] = Resume.objects.filter(id=self.kwargs['resume_id'])
         kwargs['request'] = self.request
         return kwargs
 

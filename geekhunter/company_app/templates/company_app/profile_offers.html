@@ -22,7 +22,7 @@
                     <td>{{ offer.title }}</td>
                     <td>{{ offer.resume }}</td>
                     <td>{{ offer.vacancy }}</td>
-                    <td>{{ offer.status }}</td>
+                    <td>{{ offer.get_status_display|capfirst }}</td>
                     <td>{{ offer.feedback }}</td>
                     <td>
                         <a href="{% url 'company:offer_delete' offer.id %}" class="btn btn-danger">delete</a>

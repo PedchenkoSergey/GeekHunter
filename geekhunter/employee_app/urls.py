@@ -1,7 +1,7 @@
 from django.urls import path
 
 
-from .views import EmployeeProfileView, EmployeeProfileResumeView, ResumeCreationView, ResumeDetailView, \
+from employee_app.views import EmployeeProfileView, EmployeeProfileResumeView, ResumeCreationView, ResumeDetailView, \
     ResumeDeleteView, ResumeEditView, ResumesView, ResumeEntityDeleteView, EmployeeOffersView, EmployeeOfferAnswerView
 
 app_name = 'employee_app'

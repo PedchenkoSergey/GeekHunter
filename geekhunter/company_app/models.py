@@ -38,9 +38,9 @@ class Card(models.Model):
 
     ]
     MODERATION_STATUSES = [
-        ('UNDER_REVIEW', 'under_review'),
+        ('UNDER_REVIEW', 'under review'),
         ('APPROVED', 'approved'),
-        ('NOT_APPROVED', 'not_approved'),
+        ('NOT_APPROVED', 'declined'),
     ]
     company = models.OneToOneField(Company, on_delete=models.CASCADE, primary_key=True)
     title = models.CharField(_('title'), max_length=200, blank=False)
@@ -65,9 +65,9 @@ class Vacancy(models.Model):
 
     ]
     MODERATION_STATUSES = [
-        ('UNDER_REVIEW', 'under_review'),
+        ('UNDER_REVIEW', 'under review'),
         ('APPROVED', 'approved'),
-        ('NOT_APPROVED', 'not_approved'),
+        ('NOT_APPROVED', 'declined'),
     ]
     title = models.CharField(_('title'), max_length=200, blank=False)
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='vacancies')
@@ -89,9 +89,9 @@ class Vacancy(models.Model):
 
 class Offer(models.Model):
     STATUS_CHOICES = [
-        ('SENT', 'sent'),
-        ('ACCEPTED', 'accepted'),
-        ('NOT_ACCEPTED', 'not_accepted'),
+        ('SENT', 'отправлено'),
+        ('ACCEPTED', 'принято'),
+        ('NOT_ACCEPTED', 'отклонено'),
     ]
     title = models.CharField(_('title'), max_length=200, blank=False)
     status = models.CharField(_('status'), choices=STATUS_CHOICES, max_length=20, default='SENT')
