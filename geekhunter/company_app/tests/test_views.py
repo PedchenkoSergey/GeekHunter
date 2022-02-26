@@ -180,4 +180,10 @@ class CompanyAppTestCase(TestCase):
         new_vacancy = Vacancy.objects.get(title=self.new_vacancy_credentials['title'])
         self.assertEqual(self.new_vacancy_credentials['title'], new_vacancy.title)
 
+    def test_view_favorite_vacancies_create(self):
+        self.user.user_permissions.add(Permission.objects.get(codename='view_vacancy'))
+        self.client.login(username='employee', password="password")
 
+        response = self.client.post('/company/vacancies', data={'vacancy': self.vacancy.id})
+
+        self.assertEqual(self.REDIRECT_RESPONSE_CODE, response.status_code)
