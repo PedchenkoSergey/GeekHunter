@@ -13,10 +13,11 @@ from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, FormView, DetailView, DeleteView, UpdateView
 
-from company_app.models import FavoriteResume, Offer, HrManager
+from company_app.models import FavoriteResume, Offer, HrManager, Vacancy
 from employee_app.forms.EmployeeOfferAnswerForm import EmployeeOfferAnswerForm
+from employee_app.forms.EmployeeResponseForm import EmployeeResponseForm
 from employee_app.forms.EmployeeResumeForm import EmployeeResumeForm
-from employee_app.models import Employee, Resume, Experience, Education, Courses
+from employee_app.models import Employee, Resume, Experience, Education, Courses, Response
 
 
 class EmployeeProfileView(View):
@@ -260,3 +261,46 @@ class EmployeeOfferAnswerView(FormView):
         offer.save()
 
         return HttpResponseRedirect(self.success_url)
+
+
+class MakeResponseView(FormView):
+    form_class = EmployeeResponseForm
+    template_name = 'employee_app/make_response.html'
+    success_url = reverse_lazy('company:vacancies')
+
+    def get_form_kwargs(self):
+        kwargs = super(MakeResponseView, self).get_form_kwargs()
+        kwargs['vacancy_id'] = Vacancy.objects.filter(id=self.kwargs['vacancy_id'])
+        kwargs['request'] = self.request
+        return kwargs
+
+    def get_initial(self):
+        initial = super(MakeResponseView, self).get_initial()
+        initial['vacancy'] = Vacancy.objects.get(id=self.kwargs['vacancy_id'])
+        return initial
+
+    def post(self, request, *args, **kwargs):
+        response = Response(
+            title=request.POST.get('title'),
+            text=request.POST.get('text'),
+            resume=Resume.objects.get(id=request.POST.get('resume')),
+            vacancy=Vacancy.objects.get(id=request.POST.get('vacancy'))
+        )
+        response.save()
+
+        return HttpResponseRedirect(self.success_url)
+
+
+class EmployeeResponsesListView(ListView):
+    template_name = 'employee_app/profile_responses.html'
+    context_object_name = 'responses'
+
+    def get_queryset(self):
+        return Response.objects.filter(resume__employee=self.request.user.id)
+
+
+class ResponseDeleteView(DeleteView):
+    model = Offer
+    template_name = 'employee_app/response_delete.html'
+    context_object_name = 'response'
+    success_url = reverse_lazy('employee:profile_responses')

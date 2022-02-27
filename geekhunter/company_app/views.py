@@ -8,12 +8,13 @@ from django.urls import reverse_lazy, reverse
 from django.views import View
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 
-from employee_app.models import FavoriteVacancies, Resume, Employee
 from company_app.forms.CompanyCardEditForm import CompanyCardEditForm
 from company_app.forms.CompanyOfferForm import CompanyOfferForm
+from company_app.forms.CompanyResponseAnswerForm import CompanyResponseAnswerForm
 from company_app.forms.VacancyCreationForm import VacancyCreationForm
 from company_app.forms.VacancyEditForm import VacancyEditForm
 from company_app.models import Card, Vacancy, Company, Offer
+from employee_app.models import FavoriteVacancies, Resume, Employee, Experience, Education, Courses, Response
 
 
 class CompanyCardView(DetailView):
@@ -224,3 +225,38 @@ class OfferDeleteView(DeleteView):
     template_name = 'company_app/offer_delete.html'
     context_object_name = 'offer'
     success_url = reverse_lazy('company:profile_offers')
+
+
+class CompanyResponsesView(ListView):
+    template_name = 'company_app/profile_responses.html'
+    context_object_name = 'responses'
+
+    def get_queryset(self):
+        return Response.objects.filter(vacancy__company=self.request.user.id).filter(status__in=['SENT', 'ACCEPTED'])
+
+
+class CompanyResponseAnswerView(FormView):
+    template_name = 'company_app/response_answer.html'
+    form_class = CompanyResponseAnswerForm
+    success_url = reverse_lazy('company:profile_responses')
+
+    def get_context_data(self, **kwargs):
+        context = super(CompanyResponseAnswerView, self).get_context_data(**kwargs)
+        context['response'] = Response.objects.get(id=self.kwargs['pk'])
+        resume_id = context['response'].resume.id
+        context['resume'] = Resume.objects.get(id=resume_id)
+        context['experiencies'] = Experience.objects.filter(resume_id=resume_id)
+        context['educations'] = Education.objects.filter(resume_id=resume_id)
+        context['courses'] = Courses.objects.filter(resume_id=resume_id)
+        return context
+
+    def post(self, request, *args, **kwargs):
+        response = self.get_context_data()['response']
+        response.feedback = request.POST.get('feedback')
+        if 'accept' in request.POST:
+            response.status = 'ACCEPTED'
+        else:
+            response.status = 'NOT_ACCEPTED'
+        response.save()
+
+        return HttpResponseRedirect(self.success_url)

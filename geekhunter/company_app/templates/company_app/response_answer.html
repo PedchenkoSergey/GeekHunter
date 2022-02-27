@@ -1,0 +1,28 @@
+{% extends 'employee_app/base.html' %}
+{% load static %}
+
+{% block content %}
+    <a class="btn btn-outline-dark mt-3 ms-3" href="javascript:history.go(-1)">Назад</a>
+
+    <div class="container d-flex justify-content-center">
+        <div class="w-50">
+            <p><span class="text fw-bold">Title: </span>{{ response.title }}</p>
+            <p><span class="text fw-bold">Vacancy: </span><a href="" data-bs-toggle="modal"
+                                                             data-bs-target="#show-vacancy">{{ response.vacancy }}</a></p>
+            <p><span class="text fw-bold">Resume: </span><a href="" data-bs-toggle="modal"
+                                                            data-bs-target="#show-resume">{{ response.resume }}</a></p>
+            <p><span class="text fw-bold">Text: </span>{{ response.text }}</p>
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="d-flex justify-content-center">
+                    <input type="submit" class="btn btn-success w-50" name="accept" value="Принять">
+                    <input type="submit" class="btn btn-danger w-50 ms-1" name="decline" value="Отклонить">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {% include 'company_app/includes/inc_response_answer_vacancy.html' %}
+    {% include 'company_app/includes/inc_response_answer_resume.html' %}
+{% endblock %}

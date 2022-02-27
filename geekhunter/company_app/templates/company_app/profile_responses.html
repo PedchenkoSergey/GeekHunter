@@ -1,4 +1,4 @@
-{% extends 'employee_app/base.html' %}
+{% extends 'company_app/base.html' %}
 {% load static %}
 
 {% block content %}
@@ -14,15 +14,15 @@
             </tr>
             </thead>
             <tbody>
-            {% for offer in offers %}
+            {% for response in responses %}
                 <tr>
                     <th scope="row">{{ forloop.counter }}</th>
-                    <td>{{ offer.title }}</td>
-                    <td>{{ offer.vacancy }}</td>
-                    <td>{{ offer.get_status_display|capfirst }}</td>
+                    <td>{{ response.title }}</td>
+                    <td>{{ response.vacancy }}</td>
+                    <td>{{ response.get_status_display|capfirst }}</td>
                     <td>
-                        <a class="btn btn-warning {% if offer.status == 'ACCEPTED' %} disabled {% endif %}"
-                           href="{% url 'employee:offer_answer' offer.pk %}">Ответить</a>
+                        <a class="btn btn-warning {% if response.status == 'ACCEPTED' %} disabled {% endif %}"
+                           href="{% url 'company:response_answer' response.pk %}">Ответить</a>
                     </td>
                 </tr>
             {% endfor %}

@@ -77,9 +77,9 @@ class Courses(models.Model):
 
 class Response(models.Model):
     STATUS_CHOICES = [
-        ('SENT', 'sent'),
-        ('ACCEPTED', 'accepted'),
-        ('NOT_ACCEPTED', 'declined'),
+        ('SENT', 'отправлено'),
+        ('ACCEPTED', 'принято'),
+        ('NOT_ACCEPTED', 'отклонено'),
     ]
     title = models.CharField(_('title'), max_length=200, blank=False)
     status = models.CharField(_('status'), choices=STATUS_CHOICES, max_length=20, default='SENT')
