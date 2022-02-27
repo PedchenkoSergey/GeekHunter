@@ -1,0 +1,29 @@
+<div class="modal fade" id="show-vacancy" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Вакансия {{ response.vacancy }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card bg-dark bg-gradient text-white w-100">
+                    <div class="card-body">
+                        <a class="clearfix text-warning"
+                           href="#">
+                            <h5 class="card-title float-start">{{ response.vacancy.title }}</h5>
+                            <span class="badge bg-success float-end">{{ response.vacancy.salary }}$</span>
+                        </a>
+                        <div class="vstack fst-italic mb-3">
+                            <a class="text-decoration-none text-muted" href="{% url 'company:company_card' response.vacancy.company.id %}"><small
+                                    class="card-text">{{ response.vacancy.company }}</small></a>
+                            <small class="text-muted">{{ response.vacancy.location }}</small>
+                        </div>
+                        <p class="card-text">{{ response.vacancy.description }}</p>
+                        <small class="text-muted float-end">{{ response.vacancy.updated_at }}</small>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

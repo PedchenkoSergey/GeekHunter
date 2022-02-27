@@ -12,6 +12,7 @@ class CompanyOfferForm(forms.ModelForm):
         self.fields['resume'].initial = self.resume_id.first()
         self.fields['vacancy'].queryset = Vacancy.objects.filter(company_id=self.request.user.id, status='ACTIVE',
                                                                  moderation_status='APPROVED')
+        self.fields['vacancy'].initial = self.fields['vacancy'].queryset.first()
 
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'

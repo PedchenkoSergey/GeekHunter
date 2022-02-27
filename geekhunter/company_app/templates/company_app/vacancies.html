@@ -23,13 +23,13 @@
                         <small class="text-muted">{{ vacancy.location }}</small>
                     </div>
                     <p class="card-text">{{ vacancy.description }}</p>
-                    <div class="btn-group">
-                       <form action="{% url 'company:vacancies'%}" method="post">
-                           {% csrf_token %}
-                           <input class="btn btn-warning" type="submit" value="To favorites">
-                           <input type=hidden name=vacancy value="{{ vacancy.id }}">
-                       </form>
-                        </a>
+                    <div class="d-flex">
+                        <a href="{% url 'employee:make_response' vacancy.id %}" type="button" class="btn btn-warning me-1">Откликнуться</a>
+                        <form action="{% url 'company:vacancies' %}" method="post">
+                            {% csrf_token %}
+                            <input class="btn btn-warning" type="submit" value="To favorites">
+                            <input type=hidden name=vacancy value="{{ vacancy.id }}">
+                        </form>
                     </div>
                     <small class="text-muted float-end">{{ vacancy.updated_at }}</small>
                 </div>

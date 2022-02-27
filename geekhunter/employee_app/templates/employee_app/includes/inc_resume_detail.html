@@ -57,8 +57,3 @@
     </div>
     <hr>
 {% endif %}
-{% if request.user.is_company %}
-    <div class="d-flex justify-content-center mb-2">
-        <a class="btn btn-success" href="{% url 'company:make_offer' resume.id %}">Предложить вакансию</a>
-    </div>
-{% endif %}

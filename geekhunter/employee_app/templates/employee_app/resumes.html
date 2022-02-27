@@ -20,13 +20,13 @@
                     <div class="vstack fst-italic mb-3">
                         <small class="card-text">{{ resume.employee }}</small>
                     </div>
-                    <div class="btn-group">
-                       <form action="{% url 'employee:resumes'%}" method="post">
-                           {% csrf_token %}
-                           <input class="btn btn-warning" type="submit" value="To favorites">
-                           <input type=hidden name=resume value="{{ resume.id }}">
-                       </form>
-                        </a>
+                    <div class="d-flex">
+                        <a href="{% url 'company:make_offer' resume.id %}" type="button" class="btn btn-warning me-1">Offer</a>
+                        <form action="{% url 'employee:resumes' %}" method="post">
+                            {% csrf_token %}
+                            <input class="btn btn-warning" type="submit" value="To favorites">
+                            <input type=hidden name=resume value="{{ resume.id }}">
+                        </form>
                     </div>
                     <small class="text-muted float-end">{{ resume.updated_at }}</small>
                 </div>
