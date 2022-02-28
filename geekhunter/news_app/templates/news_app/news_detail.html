@@ -26,7 +26,15 @@
                         <img src="/media/{{ post.photo }}" class="w-100" alt="">
                     {% endif %} 
                 </div>
-                <a role="button" type="button" class="btn btn-primary" href="javascript:history.go(-1)">Back</a>
+                <div class="d-grid gap-2 d-md-block btn-group" role="group">
+                    <a role="button" type="button" class="btn btn-primary" href="javascript:history.go(-1)">Назад</a>
+                    {% if perms.news_app.change_news %}
+                        <a role="button" type="button" class="btn btn-warning" href="{% url 'news:post_edit' post.pk %}">Редактировать</a>
+                    {% endif %}
+                    {% if perms.news_app.delete_news %}
+                        <a role="button" type="button" class="btn btn-danger" href="{% url 'news:post_delete' post.pk %}">Удалить</a>
+                    {% endif %}
+                </div>
             </div>
 
         </div>
