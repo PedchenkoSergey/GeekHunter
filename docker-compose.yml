@@ -5,10 +5,13 @@ services:
     build: ./geekhunter
     # command: python manage.py runserver 0.0.0.0:8000  # use if we run internal django srv
     command: sh -c "python manage.py migrate && python manage.py loaddata fixtures/db.json && python manage.py collectstatic --noinput && gunicorn geekhunter.wsgi:application --bind 0.0.0.0:8000"
+
+    # command: gunicorn geekhunter.wsgi:application --bind 0.0.0.0:8000
     # volumes:  # in production we comment this section because we do not change the files itself
     #   - ./geekhunter/:/home/geekhunter/  
     volumes:
-      - pgstatic:/home/geekhunter/static/:ro
+      - pgstatic:/home/geekhunter/web/static/
+      - pgmedia:/home/geekhunter/web/media/:rw
 
     # ports:  # if we use dev environment without nginx
     #   - 8000:8000
@@ -28,8 +31,8 @@ services:
   nginx:
     build: ./nginx
     volumes:
-      - pgstatic:/home/geekhunter/static/:ro
-      - ./geekhunter/media/:/home/geekhunter/media/:rw
+      - pgstatic:/home/geekhunter/web/static/
+      - pgmedia:/home/geekhunter/web/media/:rw
     ports:
       - 5050:80
     depends_on:
@@ -37,3 +40,4 @@ services:
 
 volumes:
   pgstatic:
+  pgmedia:

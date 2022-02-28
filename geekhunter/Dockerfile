@@ -15,8 +15,8 @@ RUN addgroup -S geekhunter && adduser -S geekhunter -G geekhunter
 # RUN addgroup geekhunter root
 # Create all required directories:
 RUN mkdir $APP_HOME
-RUN mkdir $APP_HOME/staticfiles
-# RUN mkdir $APP_HOME/mediafiles
+RUN mkdir $APP_HOME/static
+RUN mkdir $APP_HOME/media
 WORKDIR $APP_HOME
 
 # install psycopg2 dependencies
@@ -28,10 +28,10 @@ COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 
 # copy project
-COPY . .
+COPY . $APP_HOME
 
-# # chown all the files to the app user
-RUN chown -R geekhunter:geekhunter $APP
+# # # chown all the files to the app user
+# RUN chown -R geekhunter:geekhunter $APP_HOME
 
-# # change to the geekhunter user
-USER geekhunter
+# # # change to the geekhunter user
+# USER geekhunter
