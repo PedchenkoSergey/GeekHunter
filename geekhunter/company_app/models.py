@@ -28,7 +28,7 @@ class FavoriteResume(models.Model):
     hr_manager = models.ForeignKey(HrManager, on_delete=models.CASCADE, related_name='hr_managers')
 
     def __str__(self):
-        return f"{self.resume.__str__()} {self.hr_manager.__str__()}"
+        return f"{self.resume.__str__()} {self.resume.employee}"
 
 
 class Card(models.Model):

@@ -3,6 +3,7 @@ import json
 from django.apps import apps
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.core import serializers
+from django.db.models import Q
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.http import HttpResponseRedirect, JsonResponse
@@ -166,7 +167,7 @@ class ResumesView(PermissionRequiredMixin, ListView):
     template_name = 'employee_app/resumes.html'
     extra_context = {
         'title': 'резюме',
-        'favorite_resumes': 'favorite_resumes',
+        # 'favorite_resumes': 'favorite_resumes',
     }
 
     context_object_name = 'resumes'
@@ -176,14 +177,34 @@ class ResumesView(PermissionRequiredMixin, ListView):
         if 'pk' in self.kwargs:
             return Resume.objects.filter(
                 employee_id=self.kwargs.get('pk'),
-                status='ACTIVE'
+                status='ACTIVE',
+                moderation_status='APPROVED'
             ).order_by(*self.ordering)
         else:
-            return Resume.objects.filter(status='ACTIVE').order_by(*self.ordering)
+            search_resume = self.request.GET.get('search')
+            if search_resume:
+                resumes = Resume.objects.filter(status='ACTIVE', moderation_status='APPROVED').filter(
+                    Q(title__icontains=search_resume) |
+                    Q(experience_resumes__position__icontains=search_resume) |
+                    Q(education_resumes__specialization__icontains=search_resume) |
+                    Q(courses_resumes__specialization__icontains=search_resume)
+                ).order_by(*self.ordering)
+                return set(resumes)
+            return Resume.objects.filter(status='ACTIVE', moderation_status='APPROVED').order_by(*self.ordering)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['favorite_resumes'] = FavoriteResume.objects.filter(hr_manager=self.request.user.id)
+        search_resume = self.request.GET.get('search')
+        if search_resume:
+            context['favorite_resumes'] = FavoriteResume.objects.filter(hr_manager=self.request.user.id).filter(
+                Q(resume__title__icontains=search_resume) |
+                Q(resume__experience_resumes__position__icontains=search_resume) |
+                Q(resume__education_resumes__specialization__icontains=search_resume) |
+                Q(resume__courses_resumes__specialization__icontains=search_resume)
+            )
+            context['favorite_resumes'] = set(context['favorite_resumes'])
+        else:
+            context['favorite_resumes'] = FavoriteResume.objects.filter(hr_manager=self.request.user.id)
         return context
 
     def post(self, request, *args, **kwargs):
