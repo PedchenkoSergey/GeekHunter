@@ -2,6 +2,7 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.views import FormView
 from django.core import serializers
 from django.core.files.storage import default_storage
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
@@ -34,7 +35,6 @@ class VacanciesView(PermissionRequiredMixin, ListView):
     template_name = 'company_app/vacancies.html'
     extra_context = {
         'title': 'вакансии',
-        'favorite_vacancies': 'favorite_vacancies',
     }
     context_object_name = 'vacancies'
     ordering = ['-updated_at']
@@ -47,11 +47,27 @@ class VacanciesView(PermissionRequiredMixin, ListView):
                 status='ACTIVE'
             ).order_by(*self.ordering)
         else:
+            search_vacancy = self.request.GET.get('search')
+            if search_vacancy:
+                return Vacancy.objects.filter(moderation_status='APPROVED', status='ACTIVE').filter(
+                    Q(title__icontains=search_vacancy) |
+                    Q(company__name__icontains=search_vacancy) |
+                    Q(location__icontains=search_vacancy)
+                ).order_by(*self.ordering)
+
             return Vacancy.objects.filter(moderation_status='APPROVED', status='ACTIVE').order_by(*self.ordering)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['favorite_vacancies'] = FavoriteVacancies.objects.filter(employee=self.request.user.id)
+        search_vacancy = self.request.GET.get('search')
+        if search_vacancy:
+            context['favorite_vacancies'] = FavoriteVacancies.objects.filter(employee=self.request.user.id).filter(
+                Q(vacancy__title__icontains=search_vacancy) |
+                Q(vacancy__company__name__icontains=search_vacancy) |
+                Q(vacancy__location__icontains=search_vacancy)
+            )
+        else:
+            context['favorite_vacancies'] = FavoriteVacancies.objects.filter(employee=self.request.user.id)
         return context
 
     def post(self, request, *args, **kwargs):
