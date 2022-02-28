@@ -3,19 +3,22 @@ import json
 from django.apps import apps
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.core import serializers
-from django.db.models.signals import pre_save, post_save
+from django.db.models import Q
+from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, FormView, DetailView, DeleteView, UpdateView
 
-from company_app.models import FavoriteResume
+from company_app.models import FavoriteResume, Offer, HrManager, Vacancy
+from employee_app.forms.EmployeeOfferAnswerForm import EmployeeOfferAnswerForm
+from employee_app.forms.EmployeeResponseForm import EmployeeResponseForm
 from employee_app.forms.EmployeeResumeForm import EmployeeResumeForm
-from employee_app.models import Employee, Resume, Experience, Education, Courses
+from employee_app.models import Employee, Resume, Experience, Education, Courses, Response
 
 
 class EmployeeProfileView(View):
@@ -164,7 +167,6 @@ class ResumesView(PermissionRequiredMixin, ListView):
     template_name = 'employee_app/resumes.html'
     extra_context = {
         'title': 'резюме',
-        'favorite_resumes': 'favorite_resumes',
     }
 
     context_object_name = 'resumes'
@@ -174,16 +176,54 @@ class ResumesView(PermissionRequiredMixin, ListView):
         if 'pk' in self.kwargs:
             return Resume.objects.filter(
                 employee_id=self.kwargs.get('pk'),
-                status='ACTIVE'
+                status='ACTIVE',
+                moderation_status='APPROVED'
             ).order_by(*self.ordering)
         else:
-            return Resume.objects.filter(status='ACTIVE').order_by(*self.ordering)
+            search_resume = self.request.GET.get('search')
+            if search_resume:
+                resumes = Resume.objects.filter(status='ACTIVE', moderation_status='APPROVED').filter(
+                    Q(title__icontains=search_resume) |
+                    Q(experience_resumes__position__icontains=search_resume) |
+                    Q(education_resumes__specialization__icontains=search_resume) |
+                    Q(courses_resumes__specialization__icontains=search_resume)
+                ).order_by(*self.ordering)
+                return set(resumes)
+            return Resume.objects.filter(status='ACTIVE', moderation_status='APPROVED').order_by(*self.ordering)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['favorite_resumes'] = FavoriteResume.objects.filter(hr_manager=self.request.user.id)
-
+        search_resume = self.request.GET.get('search')
+        if search_resume:
+            context['favorite_resumes'] = FavoriteResume.objects.filter(hr_manager=self.request.user.id).filter(
+                Q(resume__title__icontains=search_resume) |
+                Q(resume__experience_resumes__position__icontains=search_resume) |
+                Q(resume__education_resumes__specialization__icontains=search_resume) |
+                Q(resume__courses_resumes__specialization__icontains=search_resume)
+            )
+            context['favorite_resumes'] = set(context['favorite_resumes'])
+        else:
+            context['favorite_resumes'] = FavoriteResume.objects.filter(hr_manager=self.request.user.id)
         return context
+
+    def post(self, request, *args, **kwargs):
+        resume_id = request.POST.get('resume')
+        resume = Resume.objects.get(id=resume_id)
+        hr_manager = HrManager.objects.get(user_id=self.request.user.id)
+
+        favorite_resume = FavoriteResume.objects.filter(
+            resume=resume,
+            hr_manager=hr_manager,
+        )
+
+        if not favorite_resume:
+            favorite_resume = FavoriteResume.objects.create(
+                resume=resume,
+                hr_manager=hr_manager,
+            )
+            favorite_resume.save()
+
+        return HttpResponseRedirect(reverse('employee_app:resumes'))
 
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -206,3 +246,81 @@ def resume_status_change(sender, instance, **kwargs):
         for item in Resume.objects.filter(employee=instance.employee).exclude(id=instance.id):
             item.status = 'DRAFT'
             item.save()
+
+
+class EmployeeOffersView(ListView):
+    template_name = 'employee_app/profile_offers.html'
+    context_object_name = 'offers'
+
+    def get_queryset(self):
+        return Offer.objects.filter(resume__employee=self.request.user.id).filter(status__in=['SENT', 'ACCEPTED'])
+
+
+class EmployeeOfferAnswerView(FormView):
+    template_name = 'employee_app/offer_answer.html'
+    form_class = EmployeeOfferAnswerForm
+    success_url = reverse_lazy('employee:profile_offers')
+
+    def get_context_data(self, **kwargs):
+        context = super(EmployeeOfferAnswerView, self).get_context_data(**kwargs)
+        context['offer'] = Offer.objects.get(id=self.kwargs['pk'])
+        resume_id = context['offer'].resume.id
+        context['resume'] = Resume.objects.get(id=resume_id)
+        context['experiencies'] = Experience.objects.filter(resume_id=resume_id)
+        context['educations'] = Education.objects.filter(resume_id=resume_id)
+        context['courses'] = Courses.objects.filter(resume_id=resume_id)
+        return context
+
+    def post(self, request, *args, **kwargs):
+        offer = self.get_context_data()['offer']
+        offer.feedback = request.POST.get('feedback')
+        if 'accept' in request.POST:
+            offer.status = 'ACCEPTED'
+        else:
+            offer.status = 'NOT_ACCEPTED'
+        offer.save()
+
+        return HttpResponseRedirect(self.success_url)
+
+
+class MakeResponseView(FormView):
+    form_class = EmployeeResponseForm
+    template_name = 'employee_app/make_response.html'
+    success_url = reverse_lazy('company:vacancies')
+
+    def get_form_kwargs(self):
+        kwargs = super(MakeResponseView, self).get_form_kwargs()
+        kwargs['vacancy_id'] = Vacancy.objects.filter(id=self.kwargs['vacancy_id'])
+        kwargs['request'] = self.request
+        return kwargs
+
+    def get_initial(self):
+        initial = super(MakeResponseView, self).get_initial()
+        initial['vacancy'] = Vacancy.objects.get(id=self.kwargs['vacancy_id'])
+        return initial
+
+    def post(self, request, *args, **kwargs):
+        response = Response(
+            title=request.POST.get('title'),
+            text=request.POST.get('text'),
+            resume=Resume.objects.get(id=request.POST.get('resume')),
+            vacancy=Vacancy.objects.get(id=request.POST.get('vacancy'))
+        )
+        response.save()
+
+        return HttpResponseRedirect(self.success_url)
+
+
+class EmployeeResponsesListView(ListView):
+    template_name = 'employee_app/profile_responses.html'
+    context_object_name = 'responses'
+
+    def get_queryset(self):
+        return Response.objects.filter(resume__employee=self.request.user.id)
+
+
+class ResponseDeleteView(DeleteView):
+    model = Offer
+    template_name = 'employee_app/response_delete.html'
+    context_object_name = 'response'
+    success_url = reverse_lazy('employee:profile_responses')

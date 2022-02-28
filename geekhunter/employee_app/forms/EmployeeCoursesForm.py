@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import formset_factory
 
-from ..models import Courses
+from employee_app.models import Courses
 
 
 class EmployeeCoursesForm(forms.ModelForm):

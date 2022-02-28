@@ -1,6 +1,6 @@
 from django import forms
 
-from ..models import Card
+from company_app.models import Card
 from .widgets import BigTextarea
 
 

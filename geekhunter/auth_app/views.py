@@ -3,8 +3,8 @@ from django.contrib.auth.views import LoginView, LogoutView, FormView
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 
-from .forms.UserLoginForm import PortalUserLoginForm
-from .forms.UserRegisterForm import PortalUserRegisterForm
+from auth_app.forms.UserLoginForm import PortalUserLoginForm
+from auth_app.forms.UserRegisterForm import PortalUserRegisterForm
 
 
 class PortalUserLoginView(LoginView):

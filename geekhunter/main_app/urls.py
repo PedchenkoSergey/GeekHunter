@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import index, UserProfileView
+from main_app.views import index, UserProfileView
 
 app_name = 'main_app'
 

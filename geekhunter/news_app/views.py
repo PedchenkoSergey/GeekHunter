@@ -9,6 +9,10 @@ from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 
 from news_app.forms.PostCreationForm import PostCreationForm
 from news_app.forms.PostEditForm import PostEditForm
+
+from django.shortcuts import render, get_object_or_404
+
+
 from news_app.models import News
 
 

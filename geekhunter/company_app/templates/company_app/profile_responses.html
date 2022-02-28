@@ -1,0 +1,32 @@
+{% extends 'company_app/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container mt-5">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Vacancy</th>
+                <th scope="col">Status</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for response in responses %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ response.title }}</td>
+                    <td>{{ response.vacancy }}</td>
+                    <td>{{ response.get_status_display|capfirst }}</td>
+                    <td>
+                        <a class="btn btn-warning {% if response.status == 'ACCEPTED' %} disabled {% endif %}"
+                           href="{% url 'company:response_answer' response.pk %}">Ответить</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

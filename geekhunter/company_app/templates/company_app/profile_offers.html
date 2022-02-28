@@ -1,0 +1,35 @@
+{% extends 'company_app/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container mt-5">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Resume</th>
+                <th scope="col">Vacancy</th>
+                <th scope="col">Status</th>
+                <th scope="col">Feedback</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for offer in offers %}
+                <tr class="{% if offer.status == 'ACCEPTED' %} table-success {% elif offer.status == 'NOT_ACCEPTED' %} table-danger {% else %} table-warning {% endif %} ">
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ offer.title }}</td>
+                    <td>{{ offer.resume }}</td>
+                    <td>{{ offer.vacancy }}</td>
+                    <td>{{ offer.get_status_display|capfirst }}</td>
+                    <td>{{ offer.feedback }}</td>
+                    <td>
+                        <a href="{% url 'company:offer_delete' offer.id %}" class="btn btn-danger">delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

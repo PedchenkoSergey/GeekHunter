@@ -347,3 +347,11 @@ class EmployeeAppTestCase(TestCase):
         new_experience = Experience.objects.get(company='tesla')
 
         self.assertEqual('dev', new_experience.position)
+
+    def test_view_favorite_resumes_create(self):
+        self.user.user_permissions.add(Permission.objects.get(codename='view_resume'))
+        self.client.login(username='mycompany', password="password")
+
+        response = self.client.post('/employee/resumes', data={'resume': self.resume.id})
+
+        self.assertEqual(self.REDIRECT_RESPONSE_CODE, response.status_code)
