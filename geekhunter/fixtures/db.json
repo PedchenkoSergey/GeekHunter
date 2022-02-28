@@ -1,10 +1,1227 @@
 [
     {
+        "model": "admin.logentry",
+        "pk": 1,
+        "fields": {
+            "action_time": "2022-02-26T10:14:25.117Z",
+            "user": 1,
+            "content_type": 20,
+            "object_id": "3",
+            "object_repr": "Peloton boss John Foley to step down as firm axes 2, 800 jobs",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Photo\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 2,
+        "fields": {
+            "action_time": "2022-02-26T10:15:12.936Z",
+            "user": 1,
+            "content_type": 20,
+            "object_id": "1",
+            "object_repr": "UK chip firm Arm sale by Softbank collapses amid competition fears",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Photo\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 3,
+        "fields": {
+            "action_time": "2022-02-26T10:15:40.309Z",
+            "user": 1,
+            "content_type": 8,
+            "object_id": "3",
+            "object_repr": "Yandx",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Logo\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 4,
+        "fields": {
+            "action_time": "2022-02-26T10:15:45.708Z",
+            "user": 1,
+            "content_type": 8,
+            "object_id": "2",
+            "object_repr": "Googl",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Logo\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 5,
+        "fields": {
+            "action_time": "2022-02-26T10:15:50.909Z",
+            "user": 1,
+            "content_type": 8,
+            "object_id": "1",
+            "object_repr": "IT-helpers",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Logo\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 6,
+        "fields": {
+            "action_time": "2022-02-26T10:15:54.391Z",
+            "user": 1,
+            "content_type": 20,
+            "object_id": "2",
+            "object_repr": "Meta told to overhaul policies over doxxing fears",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Photo\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 7,
+        "fields": {
+            "action_time": "2022-02-26T10:20:48.842Z",
+            "user": 1,
+            "content_type": 8,
+            "object_id": "1",
+            "object_repr": "IT-helpers",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Logo\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 8,
+        "fields": {
+            "action_time": "2022-02-26T10:20:53.669Z",
+            "user": 1,
+            "content_type": 8,
+            "object_id": "2",
+            "object_repr": "Googl",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Logo\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 9,
+        "fields": {
+            "action_time": "2022-02-26T10:21:04.993Z",
+            "user": 1,
+            "content_type": 8,
+            "object_id": "3",
+            "object_repr": "Yandx",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Logo\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 10,
+        "fields": {
+            "action_time": "2022-02-26T10:26:44.339Z",
+            "user": 1,
+            "content_type": 20,
+            "object_id": "3",
+            "object_repr": "Peloton boss John Foley to step down as firm axes 2, 800 jobs",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Photo\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 11,
+        "fields": {
+            "action_time": "2022-02-26T10:27:19.917Z",
+            "user": 1,
+            "content_type": 20,
+            "object_id": "2",
+            "object_repr": "Meta told to overhaul policies over doxxing fears",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Photo\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 12,
+        "fields": {
+            "action_time": "2022-02-26T10:27:59.690Z",
+            "user": 1,
+            "content_type": 20,
+            "object_id": "1",
+            "object_repr": "UK chip firm Arm sale by Softbank collapses amid competition fears",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Photo\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 13,
+        "fields": {
+            "action_time": "2022-02-28T13:24:11.368Z",
+            "user": 1,
+            "content_type": 3,
+            "object_id": "1",
+            "object_repr": "Moderator",
+            "action_flag": 1,
+            "change_message": "[{\"added\": {}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 14,
+        "fields": {
+            "action_time": "2022-02-28T13:26:01.783Z",
+            "user": 1,
+            "content_type": 3,
+            "object_id": "2",
+            "object_repr": "Employer",
+            "action_flag": 1,
+            "change_message": "[{\"added\": {}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 15,
+        "fields": {
+            "action_time": "2022-02-28T13:27:14.878Z",
+            "user": 1,
+            "content_type": 3,
+            "object_id": "3",
+            "object_repr": "Worker",
+            "action_flag": 1,
+            "change_message": "[{\"added\": {}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 16,
+        "fields": {
+            "action_time": "2022-02-28T13:27:27.753Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "2",
+            "object_repr": "hr_manager_one",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Employee\", \"Company\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 17,
+        "fields": {
+            "action_time": "2022-02-28T13:27:33.509Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "3",
+            "object_repr": "hr_manager_two",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Employee\", \"Company\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 18,
+        "fields": {
+            "action_time": "2022-02-28T13:27:39.000Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "4",
+            "object_repr": "hr_manager_three",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Employee\", \"Company\"]}}]"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 1,
+        "fields": {
+            "name": "Can add log entry",
+            "content_type": 1,
+            "codename": "add_logentry"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 2,
+        "fields": {
+            "name": "Can change log entry",
+            "content_type": 1,
+            "codename": "change_logentry"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 3,
+        "fields": {
+            "name": "Can delete log entry",
+            "content_type": 1,
+            "codename": "delete_logentry"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 4,
+        "fields": {
+            "name": "Can view log entry",
+            "content_type": 1,
+            "codename": "view_logentry"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 5,
+        "fields": {
+            "name": "Can add permission",
+            "content_type": 2,
+            "codename": "add_permission"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 6,
+        "fields": {
+            "name": "Can change permission",
+            "content_type": 2,
+            "codename": "change_permission"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 7,
+        "fields": {
+            "name": "Can delete permission",
+            "content_type": 2,
+            "codename": "delete_permission"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 8,
+        "fields": {
+            "name": "Can view permission",
+            "content_type": 2,
+            "codename": "view_permission"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 9,
+        "fields": {
+            "name": "Can add group",
+            "content_type": 3,
+            "codename": "add_group"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 10,
+        "fields": {
+            "name": "Can change group",
+            "content_type": 3,
+            "codename": "change_group"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 11,
+        "fields": {
+            "name": "Can delete group",
+            "content_type": 3,
+            "codename": "delete_group"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 12,
+        "fields": {
+            "name": "Can view group",
+            "content_type": 3,
+            "codename": "view_group"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 13,
+        "fields": {
+            "name": "Can add content type",
+            "content_type": 4,
+            "codename": "add_contenttype"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 14,
+        "fields": {
+            "name": "Can change content type",
+            "content_type": 4,
+            "codename": "change_contenttype"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 15,
+        "fields": {
+            "name": "Can delete content type",
+            "content_type": 4,
+            "codename": "delete_contenttype"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 16,
+        "fields": {
+            "name": "Can view content type",
+            "content_type": 4,
+            "codename": "view_contenttype"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 17,
+        "fields": {
+            "name": "Can add session",
+            "content_type": 5,
+            "codename": "add_session"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 18,
+        "fields": {
+            "name": "Can change session",
+            "content_type": 5,
+            "codename": "change_session"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 19,
+        "fields": {
+            "name": "Can delete session",
+            "content_type": 5,
+            "codename": "delete_session"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 20,
+        "fields": {
+            "name": "Can view session",
+            "content_type": 5,
+            "codename": "view_session"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 21,
+        "fields": {
+            "name": "Can add user",
+            "content_type": 6,
+            "codename": "add_portaluser"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 22,
+        "fields": {
+            "name": "Can change user",
+            "content_type": 6,
+            "codename": "change_portaluser"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 23,
+        "fields": {
+            "name": "Can delete user",
+            "content_type": 6,
+            "codename": "delete_portaluser"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 24,
+        "fields": {
+            "name": "Can view user",
+            "content_type": 6,
+            "codename": "view_portaluser"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 25,
+        "fields": {
+            "name": "Can add card",
+            "content_type": 7,
+            "codename": "add_card"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 26,
+        "fields": {
+            "name": "Can change card",
+            "content_type": 7,
+            "codename": "change_card"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 27,
+        "fields": {
+            "name": "Can delete card",
+            "content_type": 7,
+            "codename": "delete_card"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 28,
+        "fields": {
+            "name": "Can view card",
+            "content_type": 7,
+            "codename": "view_card"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 29,
+        "fields": {
+            "name": "Can add company",
+            "content_type": 8,
+            "codename": "add_company"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 30,
+        "fields": {
+            "name": "Can change company",
+            "content_type": 8,
+            "codename": "change_company"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 31,
+        "fields": {
+            "name": "Can delete company",
+            "content_type": 8,
+            "codename": "delete_company"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 32,
+        "fields": {
+            "name": "Can view company",
+            "content_type": 8,
+            "codename": "view_company"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 33,
+        "fields": {
+            "name": "Can add favorite resume",
+            "content_type": 9,
+            "codename": "add_favoriteresume"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 34,
+        "fields": {
+            "name": "Can change favorite resume",
+            "content_type": 9,
+            "codename": "change_favoriteresume"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 35,
+        "fields": {
+            "name": "Can delete favorite resume",
+            "content_type": 9,
+            "codename": "delete_favoriteresume"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 36,
+        "fields": {
+            "name": "Can view favorite resume",
+            "content_type": 9,
+            "codename": "view_favoriteresume"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 37,
+        "fields": {
+            "name": "Can add hr manager",
+            "content_type": 10,
+            "codename": "add_hrmanager"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 38,
+        "fields": {
+            "name": "Can change hr manager",
+            "content_type": 10,
+            "codename": "change_hrmanager"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 39,
+        "fields": {
+            "name": "Can delete hr manager",
+            "content_type": 10,
+            "codename": "delete_hrmanager"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 40,
+        "fields": {
+            "name": "Can view hr manager",
+            "content_type": 10,
+            "codename": "view_hrmanager"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 41,
+        "fields": {
+            "name": "Can add offer",
+            "content_type": 11,
+            "codename": "add_offer"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 42,
+        "fields": {
+            "name": "Can change offer",
+            "content_type": 11,
+            "codename": "change_offer"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 43,
+        "fields": {
+            "name": "Can delete offer",
+            "content_type": 11,
+            "codename": "delete_offer"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 44,
+        "fields": {
+            "name": "Can view offer",
+            "content_type": 11,
+            "codename": "view_offer"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 45,
+        "fields": {
+            "name": "Can add vacancy",
+            "content_type": 12,
+            "codename": "add_vacancy"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 46,
+        "fields": {
+            "name": "Can change vacancy",
+            "content_type": 12,
+            "codename": "change_vacancy"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 47,
+        "fields": {
+            "name": "Can delete vacancy",
+            "content_type": 12,
+            "codename": "delete_vacancy"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 48,
+        "fields": {
+            "name": "Can view vacancy",
+            "content_type": 12,
+            "codename": "view_vacancy"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 49,
+        "fields": {
+            "name": "Can add employee",
+            "content_type": 13,
+            "codename": "add_employee"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 50,
+        "fields": {
+            "name": "Can change employee",
+            "content_type": 13,
+            "codename": "change_employee"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 51,
+        "fields": {
+            "name": "Can delete employee",
+            "content_type": 13,
+            "codename": "delete_employee"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 52,
+        "fields": {
+            "name": "Can view employee",
+            "content_type": 13,
+            "codename": "view_employee"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 53,
+        "fields": {
+            "name": "Can add resume",
+            "content_type": 14,
+            "codename": "add_resume"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 54,
+        "fields": {
+            "name": "Can change resume",
+            "content_type": 14,
+            "codename": "change_resume"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 55,
+        "fields": {
+            "name": "Can delete resume",
+            "content_type": 14,
+            "codename": "delete_resume"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 56,
+        "fields": {
+            "name": "Can view resume",
+            "content_type": 14,
+            "codename": "view_resume"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 57,
+        "fields": {
+            "name": "Can add response",
+            "content_type": 15,
+            "codename": "add_response"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 58,
+        "fields": {
+            "name": "Can change response",
+            "content_type": 15,
+            "codename": "change_response"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 59,
+        "fields": {
+            "name": "Can delete response",
+            "content_type": 15,
+            "codename": "delete_response"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 60,
+        "fields": {
+            "name": "Can view response",
+            "content_type": 15,
+            "codename": "view_response"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 61,
+        "fields": {
+            "name": "Can add favorite vacancies",
+            "content_type": 16,
+            "codename": "add_favoritevacancies"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 62,
+        "fields": {
+            "name": "Can change favorite vacancies",
+            "content_type": 16,
+            "codename": "change_favoritevacancies"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 63,
+        "fields": {
+            "name": "Can delete favorite vacancies",
+            "content_type": 16,
+            "codename": "delete_favoritevacancies"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 64,
+        "fields": {
+            "name": "Can view favorite vacancies",
+            "content_type": 16,
+            "codename": "view_favoritevacancies"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 65,
+        "fields": {
+            "name": "Can add experience",
+            "content_type": 17,
+            "codename": "add_experience"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 66,
+        "fields": {
+            "name": "Can change experience",
+            "content_type": 17,
+            "codename": "change_experience"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 67,
+        "fields": {
+            "name": "Can delete experience",
+            "content_type": 17,
+            "codename": "delete_experience"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 68,
+        "fields": {
+            "name": "Can view experience",
+            "content_type": 17,
+            "codename": "view_experience"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 69,
+        "fields": {
+            "name": "Can add education",
+            "content_type": 18,
+            "codename": "add_education"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 70,
+        "fields": {
+            "name": "Can change education",
+            "content_type": 18,
+            "codename": "change_education"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 71,
+        "fields": {
+            "name": "Can delete education",
+            "content_type": 18,
+            "codename": "delete_education"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 72,
+        "fields": {
+            "name": "Can view education",
+            "content_type": 18,
+            "codename": "view_education"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 73,
+        "fields": {
+            "name": "Can add courses",
+            "content_type": 19,
+            "codename": "add_courses"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 74,
+        "fields": {
+            "name": "Can change courses",
+            "content_type": 19,
+            "codename": "change_courses"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 75,
+        "fields": {
+            "name": "Can delete courses",
+            "content_type": 19,
+            "codename": "delete_courses"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 76,
+        "fields": {
+            "name": "Can view courses",
+            "content_type": 19,
+            "codename": "view_courses"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 77,
+        "fields": {
+            "name": "Can add news",
+            "content_type": 20,
+            "codename": "add_news"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 78,
+        "fields": {
+            "name": "Can change news",
+            "content_type": 20,
+            "codename": "change_news"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 79,
+        "fields": {
+            "name": "Can delete news",
+            "content_type": 20,
+            "codename": "delete_news"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 80,
+        "fields": {
+            "name": "Can view news",
+            "content_type": 20,
+            "codename": "view_news"
+        }
+    },
+    {
+        "model": "auth.group",
+        "pk": 1,
+        "fields": {
+            "name": "Moderator",
+            "permissions": [
+                25,
+                26,
+                27,
+                28,
+                45,
+                46,
+                47,
+                48,
+                53,
+                54,
+                55,
+                56,
+                77,
+                78,
+                79,
+                80
+            ]
+        }
+    },
+    {
+        "model": "auth.group",
+        "pk": 2,
+        "fields": {
+            "name": "Employer",
+            "permissions": [
+                25,
+                26,
+                27,
+                28,
+                45,
+                46,
+                47,
+                48,
+                56,
+                80
+            ]
+        }
+    },
+    {
+        "model": "auth.group",
+        "pk": 3,
+        "fields": {
+            "name": "Worker",
+            "permissions": [
+                48,
+                57,
+                58,
+                59,
+                60,
+                53,
+                54,
+                55,
+                56,
+                80
+            ]
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 1,
+        "fields": {
+            "app_label": "admin",
+            "model": "logentry"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 2,
+        "fields": {
+            "app_label": "auth",
+            "model": "permission"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 3,
+        "fields": {
+            "app_label": "auth",
+            "model": "group"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 4,
+        "fields": {
+            "app_label": "contenttypes",
+            "model": "contenttype"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 5,
+        "fields": {
+            "app_label": "sessions",
+            "model": "session"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 6,
+        "fields": {
+            "app_label": "auth_app",
+            "model": "portaluser"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 7,
+        "fields": {
+            "app_label": "company_app",
+            "model": "card"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 8,
+        "fields": {
+            "app_label": "company_app",
+            "model": "company"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 9,
+        "fields": {
+            "app_label": "company_app",
+            "model": "favoriteresume"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 10,
+        "fields": {
+            "app_label": "company_app",
+            "model": "hrmanager"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 11,
+        "fields": {
+            "app_label": "company_app",
+            "model": "offer"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 12,
+        "fields": {
+            "app_label": "company_app",
+            "model": "vacancy"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 13,
+        "fields": {
+            "app_label": "employee_app",
+            "model": "employee"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 14,
+        "fields": {
+            "app_label": "employee_app",
+            "model": "resume"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 15,
+        "fields": {
+            "app_label": "employee_app",
+            "model": "response"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 16,
+        "fields": {
+            "app_label": "employee_app",
+            "model": "favoritevacancies"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 17,
+        "fields": {
+            "app_label": "employee_app",
+            "model": "experience"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 18,
+        "fields": {
+            "app_label": "employee_app",
+            "model": "education"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 19,
+        "fields": {
+            "app_label": "employee_app",
+            "model": "courses"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 20,
+        "fields": {
+            "app_label": "news_app",
+            "model": "news"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "2288zdglh5lhonz9qamqmin794fysa9x",
+        "fields": {
+            "session_data": ".eJxVjMsOwiAQRf-FtSFAGR4u3fsNZIaHVA0kpV0Z_12bdKHbe865LxZwW2vYRl7CnNiZeXb63QjjI7cdpDu2W-ext3WZie8KP-jg157y83K4fwcVR_3WEoqLpEgXKCI6AqG0FxmslFYjYkQy1grIzic5OTBp0k6DymSKnzyw9wfgpjdU:1nNuyJ:dlXga3AqG0YEdbIDsUFhJzF8NAO_vvtO7pKUCpQKqjc",
+            "expire_date": "2022-03-12T11:10:43.178Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "8lh7aefbfcrrc8l2o3yoh1ceeanzftcb",
+        "fields": {
+            "session_data": ".eJxVjDsOwjAQBe_iGlne-E9Jzxmstb1LAsiR4qRC3B0ipYD2zcx7iYTbOqat05KmKs4CxOl3y1ge1HZQ79husyxzW5cpy12RB-3yOld6Xg7372DEPn7rqMFC1KUOXhkeeKDMqKwLJujMxSIDGdBkMiuLHhx7R6ayVlARQxTvD9kMN_s:1nNw0a:1hs6T5yIT9MBzReRMkI71CNW8nIu5ibLiF6QnrYX77w",
+            "expire_date": "2022-03-12T12:17:08.219Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "efj54iwzj7yke7xs0s507rw3nbuzo4k3",
+        "fields": {
+            "session_data": ".eJxVjDsOwjAQBe_iGlne-E9Jzxmstb1LAsiR4qRC3B0ipYD2zcx7iYTbOqat05KmKs4CxOl3y1ge1HZQ79husyxzW5cpy12RB-3yOld6Xg7372DEPn7rqMFC1KUOXhkeeKDMqKwLJujMxSIDGdBkMiuLHhx7R6ayVlARQxTvD9kMN_s:1nOfpB:Kyv8fNpJOxKrMRqWqsTYAniquIk3S22FuQvNFT5i90I",
+            "expire_date": "2022-03-14T13:12:25.809Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "iuipzt9xn8nc26pms5vfwqu65eutwbum",
+        "fields": {
+            "session_data": ".eJxVjDsOwjAQBe_iGlne-E9Jzxmstb1LAsiR4qRC3B0ipYD2zcx7iYTbOqat05KmKs4CxOl3y1ge1HZQ79husyxzW5cpy12RB-3yOld6Xg7372DEPn7rqMFC1KUOXhkeeKDMqKwLJujMxSIDGdBkMiuLHhx7R6ayVlARQxTvD9kMN_s:1nNugr:hFnoi4nQCqdapAeIf2DKEeElSxUTq_SqNB0llQnKNuU",
+            "expire_date": "2022-03-12T10:52:41.013Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "pe3ttkdjmjar103b8oxy2guylcsye7hf",
+        "fields": {
+            "session_data": ".eJxVjDsOwjAQBe_iGlne-E9Jzxmstb1LAsiR4qRC3B0ipYD2zcx7iYTbOqat05KmKs4CxOl3y1ge1HZQ79husyxzW5cpy12RB-3yOld6Xg7372DEPn7rqMFC1KUOXhkeeKDMqKwLJujMxSIDGdBkMiuLHhx7R6ayVlARQxTvD9kMN_s:1nNzWo:VkspCHA79dc4m1AiQmIdJ-PACAFsAecYwsnvOiJfAiU",
+            "expire_date": "2022-03-12T16:02:38.351Z"
+        }
+    },
+    {
         "model": "auth_app.portaluser",
         "pk": 1,
         "fields": {
             "password": "pbkdf2_sha256$320000$8ol1LUyPWPYiE93JgM138S$EUmVo8p+Mvd1gdlgmZRSXEo2TTOUkpLWXsrhmGMDAWs=",
-            "last_login": "2022-02-08T14:09:02.084Z",
+            "last_login": "2022-02-28T13:12:25.806Z",
             "is_superuser": true,
             "username": "admin",
             "first_name": "",
@@ -16,6 +1233,7 @@
             "is_company": false,
             "phone": "+79876543211",
             "email": "admin@mail.mail",
+            "avatar": "",
             "groups": [],
             "user_permissions": []
         }
@@ -25,18 +1243,19 @@
         "pk": 2,
         "fields": {
             "password": "pbkdf2_sha256$320000$KJYP9nsdsLmbRexhhwrM1v$An41aKJ8iw0vzaCtgXaBxVwLKAUXZ70vNvIU+JtvI04=",
-            "last_login": "2022-02-08T14:07:48.457Z",
+            "last_login": "2022-02-08T14:07:48Z",
             "is_superuser": false,
             "username": "hr_manager_one",
             "first_name": "John",
             "last_name": "Smith",
             "is_staff": false,
             "is_active": true,
-            "date_joined": "2022-02-08T13:55:36.470Z",
-            "is_employee": true,
-            "is_company": false,
+            "date_joined": "2022-02-08T13:55:36Z",
+            "is_employee": false,
+            "is_company": true,
             "phone": "+79876543210",
             "email": "hr_manager_one@mail.mail",
+            "avatar": "",
             "groups": [],
             "user_permissions": [
                 48
@@ -48,18 +1267,19 @@
         "pk": 3,
         "fields": {
             "password": "pbkdf2_sha256$320000$Du2t0AgkjR7BmVrdXDbbWw$AZImUw/VOP8KBkCUDqaO23gOK4cyMM3IWdBbNzwFES4=",
-            "last_login": "2022-02-08T13:56:19.732Z",
+            "last_login": "2022-02-08T13:56:19Z",
             "is_superuser": false,
             "username": "hr_manager_two",
             "first_name": "Ivan",
             "last_name": "Ivanov",
             "is_staff": false,
             "is_active": true,
-            "date_joined": "2022-02-08T13:56:19.390Z",
-            "is_employee": true,
-            "is_company": false,
+            "date_joined": "2022-02-08T13:56:19Z",
+            "is_employee": false,
+            "is_company": true,
             "phone": "+789754654213",
             "email": "hr_manager_two@mail.mail",
+            "avatar": "",
             "groups": [],
             "user_permissions": [
                 48
@@ -71,18 +1291,19 @@
         "pk": 4,
         "fields": {
             "password": "pbkdf2_sha256$320000$cJk3bqFD8Lx4khyVpnEyhl$94e4wLABNUgh0tMJetHPIeoyNUmSLNQgiDr/jQWQT4U=",
-            "last_login": "2022-02-08T13:57:00.952Z",
+            "last_login": "2022-02-08T13:57:00Z",
             "is_superuser": false,
             "username": "hr_manager_three",
             "first_name": "Olga",
             "last_name": "Petrova",
             "is_staff": false,
             "is_active": true,
-            "date_joined": "2022-02-08T13:57:00.595Z",
-            "is_employee": true,
-            "is_company": false,
+            "date_joined": "2022-02-08T13:57:00Z",
+            "is_employee": false,
+            "is_company": true,
             "phone": "+7989865632",
             "email": "hr_manager_three@mail.mail",
+            "avatar": "",
             "groups": [],
             "user_permissions": [
                 48
@@ -106,6 +1327,7 @@
             "is_company": false,
             "phone": "+7456454789",
             "email": "applicant_one@mail.mail",
+            "avatar": "",
             "groups": [],
             "user_permissions": [
                 48
@@ -129,6 +1351,7 @@
             "is_company": false,
             "phone": "+745678991231",
             "email": "applicant_two@mail.mail",
+            "avatar": "",
             "groups": [],
             "user_permissions": [
                 48
@@ -152,6 +1375,7 @@
             "is_company": false,
             "phone": "+1545789321",
             "email": "applicant_three@mail.mail",
+            "avatar": "",
             "groups": [],
             "user_permissions": [
                 48
@@ -175,8 +1399,57 @@
             "is_company": true,
             "phone": "+15465465789",
             "email": "hr_manager_four@mail.mail",
+            "avatar": "",
             "groups": [],
             "user_permissions": []
+        }
+    },
+    {
+        "model": "auth_app.portaluser",
+        "pk": 9,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$dk9HICaA2SQhEQaQF5MgMs$XBUqmliUZ0HydKusLOTkI48bRyRwIBZ/Fl71tbUi9LU=",
+            "last_login": "2022-02-26T12:15:45.740Z",
+            "is_superuser": false,
+            "username": "company",
+            "first_name": "com",
+            "last_name": "pany",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2022-02-26T10:30:28.814Z",
+            "is_employee": false,
+            "is_company": true,
+            "phone": "76867867",
+            "email": "company@com.pany",
+            "avatar": "",
+            "groups": [],
+            "user_permissions": [
+                56
+            ]
+        }
+    },
+    {
+        "model": "auth_app.portaluser",
+        "pk": 10,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$cjxl3VXF0wGqeQv50p0B0w$u7QQUZVs2lzmrK+T05IIBZen3C+/NEazQqESWMDPCsQ=",
+            "last_login": "2022-02-26T11:10:15.029Z",
+            "is_superuser": false,
+            "username": "employee",
+            "first_name": "emp",
+            "last_name": "loyee",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2022-02-26T10:30:48.904Z",
+            "is_employee": true,
+            "is_company": false,
+            "phone": "926386283",
+            "email": "employee@emp.loyee",
+            "avatar": "user_photo/employee_user_avatar.png",
+            "groups": [],
+            "user_permissions": [
+                48
+            ]
         }
     },
     {
@@ -185,7 +1458,8 @@
         "fields": {
             "name": "IT-helpers",
             "specialization": "Providing IT staff outsourcing to the US and EU Cusotomers",
-            "short_description": "IT outsource"
+            "short_description": "IT outsource",
+            "logo": ""
         }
     },
     {
@@ -194,7 +1468,8 @@
         "fields": {
             "name": "Googl",
             "specialization": "The leading search and context advertisement provider",
-            "short_description": "WWW Search"
+            "short_description": "WWW Search",
+            "logo": ""
         }
     },
     {
@@ -203,7 +1478,8 @@
         "fields": {
             "name": "Yandx",
             "specialization": "The Russian based search provider and multiservice company",
-            "short_description": "Russian search"
+            "short_description": "Russian search",
+            "logo": ""
         }
     },
     {
@@ -212,7 +1488,18 @@
         "fields": {
             "name": "компания hr_manager_four",
             "specialization": "",
-            "short_description": ""
+            "short_description": "",
+            "logo": ""
+        }
+    },
+    {
+        "model": "company_app.company",
+        "pk": 9,
+        "fields": {
+            "name": "компания company",
+            "specialization": "123",
+            "short_description": "123",
+            "logo": "company_logo/company_9_logo.png"
         }
     },
     {
@@ -241,6 +1528,13 @@
         "pk": 8,
         "fields": {
             "company": 8
+        }
+    },
+    {
+        "model": "company_app.hrmanager",
+        "pk": 9,
+        "fields": {
+            "company": 9
         }
     },
     {
@@ -296,6 +1590,19 @@
         }
     },
     {
+        "model": "company_app.card",
+        "pk": 9,
+        "fields": {
+            "title": "123",
+            "about": "123",
+            "awards": "123",
+            "priorities": "123",
+            "status": "DRAFT",
+            "moderation_status": "UNDER_REVIEW",
+            "error_text": ""
+        }
+    },
+    {
         "model": "company_app.vacancy",
         "pk": 1,
         "fields": {
@@ -304,8 +1611,8 @@
             "description": "We are looking for a Python Developer to join our engineering team and help us develop and maintain various software products.  Python Developer responsibilities include writing and testing code, debugging programs and integrating applications with third-party web services. To be successful in this role, you should have experience using server-side logic and work well in a team.  Ultimately, you’ll build highly responsive web applications that align with our business needs.",
             "salary": "2200-2400",
             "location": "Moscow",
-            "created_at": "2022-02-08 14:16:33.916Z",
-            "updated_at": "2022-02-08 14:16:33.916Z",
+            "created_at": "2022-02-08T14:16:33.916Z",
+            "updated_at": "2022-02-08T14:16:33.916Z",
             "status": "ACTIVE",
             "moderation_status": "APPROVED",
             "error_text": ""
@@ -320,8 +1627,8 @@
             "description": "We are looking for a skilled react.js developer to join our front-end development team. In this role, you will   be responsible for developing and implementing user interface components using React.js concepts and workflows such as Redux, Flux, and Webpack. You will also be responsible for profiling and improving front-end performance and documenting our front-end codebase.  To ensure success as a react.js developer, you should have in-depth knowledge of JavaScript and React concepts, excellent front-end coding skills, and a good understanding of progressive web applications. Ultimately, a top-class react.js developer should be able to design and build modern user interface components to  enhance application performance.",
             "salary": "2500-2800",
             "location": "Saint-Petersburg",
-            "created_at": "2022-02-08 14:17:27.159Z",
-            "updated_at": "2022-02-08 14:17:27.159Z",
+            "created_at": "2022-02-08T14:17:27.159Z",
+            "updated_at": "2022-02-08T14:17:27.159Z",
             "status": "ACTIVE",
             "moderation_status": "APPROVED",
             "error_text": ""
@@ -352,8 +1659,8 @@
             "description": "We are looking for a .Net developer to build software using languages and technologies of the .NET framework. You will create applications from scratch, configure existing systems and provide user  support.  In this role, you should be able to write functional code with a sharp eye for spotting defects. You should be a team player and excellent communicator. If you are also passionate about the .NET framework and software design/architecture, we’d like to meet you.  Your goal will be to work with internal teams to design, develop and maintain software.",
             "salary": "1500-1800",
             "location": "London",
-            "created_at": "2022-02-08 14:19:06.162Z",
-            "updated_at": "2022-02-08 14:19:06.162Z",
+            "created_at": "2022-02-08T14:19:06.162Z",
+            "updated_at": "2022-02-08T14:19:06.162Z",
             "status": "ACTIVE",
             "moderation_status": "APPROVED",
             "error_text": ""
@@ -368,8 +1675,8 @@
             "description": "We are looking for a Machine Learning (ML) Engineer to help us create artificial intelligence products.  Machine Learning Engineer responsibilities include creating machine learning models and retraining     systems. To do this job successfully, you need exceptional skills in statistics and programming. If you also have knowledge of data science and software engineering, we’d like to meet you.  Your ultimate goal will be to shape and build efficient self-learning applications.",
             "salary": "2750-3200",
             "location": "Kazan",
-            "created_at": "2022-02-08 14:19:46.066Z",
-            "updated_at": "2022-02-08 14:19:46.066Z",
+            "created_at": "2022-02-08T14:19:46.066Z",
+            "updated_at": "2022-02-08T14:19:46.066Z",
             "status": "ACTIVE",
             "moderation_status": "APPROVED",
             "error_text": ""
@@ -384,11 +1691,51 @@
             "description": "The Artificial Intelligence Engineer is an IT expert whose mission is to develop intelligent algorithms capable of learning,     analysing and predicting future events. Their role is to create machines capable of reasoning like the human brain.   The AI engineer is therefore also a researcher: he or she analyses the functioning of the human brain in order to build computer programs with the same cognitive abilities as humans.   The Artificial Intelligence engineer can specialise in different areas such as Machine Learning or Deep Learning, which are derived from AI. Machine Learning is based on algorithms and decision trees, while Deep Learning is based on neural networks.",
             "salary": "2500-3000",
             "location": "Ekaterinburg",
-            "created_at": "2022-02-08 14:20:36.231Z",
-            "updated_at": "2022-02-08 14:20:36.232Z",
+            "created_at": "2022-02-08T14:20:36.231Z",
+            "updated_at": "2022-02-08T14:20:36.232Z",
             "status": "ACTIVE",
             "moderation_status": "APPROVED",
             "error_text": ""
+        }
+    },
+    {
+        "model": "company_app.vacancy",
+        "pk": 7,
+        "fields": {
+            "title": "test",
+            "company": 9,
+            "description": "kruto u nas",
+            "salary": "292929",
+            "location": "zdes'",
+            "created_at": "2022-02-26T11:08:46.720Z",
+            "updated_at": "2022-02-26T11:08:46.720Z",
+            "status": "ACTIVE",
+            "moderation_status": "APPROVED",
+            "error_text": ""
+        }
+    },
+    {
+        "model": "company_app.offer",
+        "pk": 1,
+        "fields": {
+            "title": "давай у нас работатб",
+            "status": "NOT_ACCEPTED",
+            "text": "у нас круто",
+            "vacancy": 7,
+            "resume": 4,
+            "feedback": "не хочу"
+        }
+    },
+    {
+        "model": "company_app.offer",
+        "pk": 2,
+        "fields": {
+            "title": "qwe",
+            "status": "ACCEPTED",
+            "text": "qwe",
+            "vacancy": 7,
+            "resume": 4,
+            "feedback": "davay"
         }
     },
     {
@@ -422,11 +1769,17 @@
         "fields": {}
     },
     {
+        "model": "employee_app.employee",
+        "pk": 10,
+        "fields": {}
+    },
+    {
         "model": "employee_app.resume",
         "pk": 1,
         "fields": {
             "title": "DevOps Engineer",
             "status": "ACTIVE",
+            "moderation_status": "UNDER_REVIEW",
             "employee": 5,
             "created_at": "2022-02-08T14:14:41.476Z",
             "updated_at": "2022-02-08T14:14:41.476Z"
@@ -438,6 +1791,7 @@
         "fields": {
             "title": "Python Backend",
             "status": "ACTIVE",
+            "moderation_status": "UNDER_REVIEW",
             "employee": 6,
             "created_at": "2022-02-08T14:15:04.009Z",
             "updated_at": "2022-02-08T14:15:04.009Z"
@@ -449,9 +1803,63 @@
         "fields": {
             "title": "JS frontend",
             "status": "ACTIVE",
+            "moderation_status": "UNDER_REVIEW",
             "employee": 7,
             "created_at": "2022-02-08T14:15:23.317Z",
             "updated_at": "2022-02-08T14:15:23.317Z"
+        }
+    },
+    {
+        "model": "employee_app.resume",
+        "pk": 4,
+        "fields": {
+            "title": "resume",
+            "status": "ACTIVE",
+            "moderation_status": "UNDER_REVIEW",
+            "employee": 10,
+            "created_at": "2022-02-26T11:06:36.861Z",
+            "updated_at": "2022-02-26T11:06:36.861Z"
+        }
+    },
+    {
+        "model": "employee_app.experience",
+        "pk": 1,
+        "fields": {
+            "company": "test",
+            "period": "123",
+            "position": "`123",
+            "duties": "123",
+            "resume": 4
+        }
+    },
+    {
+        "model": "employee_app.education",
+        "pk": 1,
+        "fields": {
+            "educational_institution": "fdkjfu",
+            "specialization": "dkfj",
+            "year_of_ending": "dfdl",
+            "resume": 4
+        }
+    },
+    {
+        "model": "employee_app.education",
+        "pk": 2,
+        "fields": {
+            "educational_institution": "fasfa",
+            "specialization": "dfa",
+            "year_of_ending": "d",
+            "resume": 4
+        }
+    },
+    {
+        "model": "employee_app.courses",
+        "pk": 1,
+        "fields": {
+            "company": "123",
+            "specialization": "123",
+            "year_of_ending": "123",
+            "resume": 4
         }
     },
     {
@@ -461,6 +1869,7 @@
             "title": "UK chip firm Arm sale by Softbank collapses amid competition fears",
             "text": "Japanese conglomerate SoftBank has called off its planned sale of UK microchip designer Arm to US technology group Nvidia.  When the deal was first announced in September 2020 it was valued at around $40bn (£29.6bn).  SoftBank now aims to float Arm's shares on the stock market by the end of March next year.  The planned sale had faced     major regulatory hurdles in the UK, United States and European Union.  SoftBank and Nvidia agreed to end their sale agreement \"because of significant regulatory challenges preventing the consummation of the transaction, despite good faith efforts by the parties,\" the companies said in a joint statement to investors.",
             "topic": "Tech",
+            "photo": "",
             "status": "APPROVED",
             "created_at": "2022-02-08T14:12:18.456Z",
             "updated_at": "2022-02-08T14:12:18.456Z"
@@ -473,9 +1882,10 @@
             "title": "Meta told to overhaul policies over doxxing fears",
             "text": "Meta's Oversight Board has advised the social network to change its policy on allowing the sharing of people's addresses, even if the information is considered public.  Meta requested the advice last year - the first time it has asked the board to help define one of its policies.  It follows a series of leaks     on social media of high-profile people's addresses.  This so-called doxxing could cause real-world harms, the board advised.  Doxxing refers to the release of private information about individuals online, usually with malicious intent.",
             "topic": "Social",
+            "photo": "",
             "status": "APPROVED",
-            "created_at": "2022-02-08 14:12:41.120Z",
-            "updated_at": "2022-02-08 14:12:41.120Z"
+            "created_at": "2022-02-08T14:12:41.120Z",
+            "updated_at": "2022-02-08T14:12:41.120Z"
         }
     },
     {
@@ -485,6 +1895,7 @@
             "title": "Peloton boss John Foley to step down as firm axes 2, 800 jobs",
             "text": "The co-founder of exercise brand Peloton will step down from the leading the company as it plans to cut thousands of jobs.  John Foley, chief executive of the firm for 10 years, will be replaced by Barry McCarthy, the former chief financial officer of Spotify.  Peloton also confirmed it will cut about 2,            800 jobs globally due to a drop in demand for its products.  Amazon, Nike and Apple are rumoured to be interested in bidding for Peloton.  Peloton, which pairs its equipment with streaming and live exercise classes, had seen sales soar of its bikes and treadmills during the pandemic, but the post-lockdown return to gyms has left the firm worth less than a fifth of its peak $50bn valuation.  Mr Foley said Mr McCarthy was the \"right leader to take the company into its next phase of growth\". Mr Foley will become Peloton's executive chairman.",
             "topic": "Business",
+            "photo": "",
             "status": "APPROVED",
             "created_at": "2022-02-08T14:13:05.086Z",
             "updated_at": "2022-02-08T14:13:05.086Z"
