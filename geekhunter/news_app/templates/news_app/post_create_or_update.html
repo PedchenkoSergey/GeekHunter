@@ -1,0 +1,70 @@
+{% extends 'news_app/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="d-flex flex-column align-items-center">
+        <div class="card bg-dark bg-gradient text-black m-3 w-50 px-2">
+            <form class="" action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h1 class="h3 mt-5 mb-3 fw-normal text-white">
+                    {% if request.resolver_match.url_name == 'post_create' %}
+                        Создание
+                    {% else %}
+                        Изменение
+                    {% endif %}
+                    новости
+                </h1>
+                <div class="d-flex flex-nowrap">
+                    <div class="form-floating mb-1 w-75 pr-2">
+                        {{ form.title }}
+                        <label for="floatingInput">Тема</label>
+                    </div>
+
+                    <div class="form-floating mb-1 w-25 pl-2">
+                        {{ form.topic }}
+                        <label for="floatingInput">Раздел</label>
+                    </div>
+
+                </div>
+                <div class="form-floating mt-2 mb-2">
+                    {{ form.text }}
+                    <label for="floatingInput">Текст новости</label>
+                </div>
+                <div class="custom-file mt-2 mb-2 bg-light rounded">
+                    <label class="custom-file-label" for="Photo">{{ form.photo }}</label>
+                </div>
+                <div class="d-flex flex-nowrap justify-content-between">
+                    <div class="form-floating w-25">
+                        {{ form.status }}
+                        <label for="floatingSelect">Черновик?</label>
+                    </div>
+                    <button class="w-50 btn btn-lg btn-warning" type="submit">
+                        {% if request.resolver_match.url_name == 'post_create' %}
+                            Создать
+                        {% else %}
+                            Сохранить
+                        {% endif %}
+                    </button>
+                </div>
+                <div class="d-flex flex-nowrap justify-content-between mt-2">
+                    <a role="button" type="button" class="w-100 btn btn-primary btn-lg btn-block" href="javascript:history.go(-1)">
+                        Назад без сохранения
+                    </a>
+                </div>
+                <p class="mt-2 mb-3 text-muted">© GeekHunterDev</p>
+                {% if form.errors %}
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <p class="mt-5 mb-3 text-muted"> {{ field.label }}: {{ error|escape }}</p>
+                        {% endfor %}
+                    {% endfor %}
+                {% endif %}
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
