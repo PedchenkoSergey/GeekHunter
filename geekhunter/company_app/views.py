@@ -35,7 +35,6 @@ class VacanciesView(PermissionRequiredMixin, ListView):
     template_name = 'company_app/vacancies.html'
     extra_context = {
         'title': 'вакансии',
-        'favorite_vacancies': 'favorite_vacancies',
     }
     context_object_name = 'vacancies'
     ordering = ['-updated_at']

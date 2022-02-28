@@ -167,7 +167,6 @@ class ResumesView(PermissionRequiredMixin, ListView):
     template_name = 'employee_app/resumes.html'
     extra_context = {
         'title': 'резюме',
-        # 'favorite_resumes': 'favorite_resumes',
     }
 
     context_object_name = 'resumes'
