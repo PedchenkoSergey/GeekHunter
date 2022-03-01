@@ -2,8 +2,16 @@
 {% load static %}
 
 {% block content %}
-    <h1>{{ employee }}</h1>
-    <p><a href="{% url 'employee:profile_resumes' %}">Мои резюме</a></p>
-    <p><a href="{% url 'employee:profile_responses' %}">Мои отклики</a></p>
-    <p><a href="{% url 'employee:profile_offers' %}">Мои предложения</a></p>
+    <div class="container d-flex justify-content-center mt-5">
+        <div class="d-flex flex-column w-25">
+            <p><a class="btn btn-outline-warning w-100 text-dark text-decoration-none"
+                  href="{% url 'employee:profile_resumes' %}">Мои резюме</a></p>
+            <p><a class="btn btn-outline-warning w-100 text-dark text-decoration-none"
+                  href="{% url 'employee:profile_responses' %}">Мои отклики</a>
+            </p>
+            <p><a class="btn btn-outline-warning w-100 text-dark text-decoration-none"
+                  href="{% url 'employee:profile_offers' %}">Мои предложения</a>
+            </p>
+        </div>
+    </div>
 {% endblock %}
