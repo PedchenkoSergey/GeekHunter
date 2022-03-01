@@ -7,7 +7,17 @@
         <div class="card bg-dark bg-gradient text-white m-3 w-50">
             <ul class="list-group list-group-flush">
                 {% for favorite_vacancy in favorite_vacancies %}
-                    <li class="list-group-item">{{ favorite_vacancy }}</li>
+                    <li class="list-group-item d-flex justify-content-between">{{ favorite_vacancy }}
+                        <div class="btn-group h-100">
+                            <a class="btn btn-warning btn-sm"
+                               href="{% url 'employee:make_response' favorite_vacancy.vacancy.id %}">Откликнуться</a>
+                            <form method="post" action="{% url 'company:favorite_vacancy_delete' favorite_vacancy.id %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="favorite_vacancy" value="{{ favorite_vacancy.id }}">
+                                <input class="btn btn-danger btn-sm" type="submit" value="Удалить">
+                            </form>
+                        </div>
+                    </li>
                 {% endfor %}
             </ul>
         </div>
@@ -25,7 +35,8 @@
                     </div>
                     <p class="card-text">{{ vacancy.description }}</p>
                     <div class="d-flex">
-                        <a href="{% url 'employee:make_response' vacancy.id %}" type="button" class="btn btn-warning me-1">Откликнуться</a>
+                        <a href="{% url 'employee:make_response' vacancy.id %}" type="button"
+                           class="btn btn-warning me-1">Откликнуться</a>
                         <form action="{% url 'company:vacancies' %}" method="post">
                             {% csrf_token %}
                             <input class="btn btn-warning" type="submit" value="To favorites">

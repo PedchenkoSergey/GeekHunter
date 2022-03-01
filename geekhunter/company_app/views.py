@@ -8,6 +8,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views import View
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView
+from django.views.generic.edit import DeletionMixin
 
 from company_app.forms.CompanyCardEditForm import CompanyCardEditForm
 from company_app.forms.CompanyOfferForm import CompanyOfferForm
@@ -88,6 +89,16 @@ class VacanciesView(PermissionRequiredMixin, ListView):
             favorite_vacancy.save()
 
         return HttpResponseRedirect(reverse('company_app:vacancies'))
+
+
+class FavoriteVacancyDeleteView(View, DeletionMixin):
+    model = FavoriteVacancies
+    success_url = reverse_lazy('company:vacancies')
+
+    def post(self, request, *args, **kwargs):
+        favorite_vacancy = FavoriteVacancies.objects.get(id=request.POST.get('favorite_vacancy'))
+        favorite_vacancy.delete()
+        return HttpResponseRedirect(self.success_url)
 
 
 class VacancyCreationView(FormView):
