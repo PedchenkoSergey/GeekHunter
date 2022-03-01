@@ -1,18 +1,14 @@
-from django.core.files.storage import default_storage
-from django.utils.decorators import method_decorator
-from django.contrib.auth.decorators import login_required
-from django.urls import reverse_lazy, reverse
 from django.contrib.auth.views import FormView
 from django.core import serializers
+from django.core.files.storage import default_storage
 from django.http import HttpResponseRedirect
+from django.urls import reverse_lazy, reverse
+from django.utils.decorators import method_decorator
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 
+from news_app.decorators import superuser_required
 from news_app.forms.PostCreationForm import PostCreationForm
 from news_app.forms.PostEditForm import PostEditForm
-
-from django.shortcuts import render, get_object_or_404
-
-
 from news_app.models import News
 
 
@@ -58,7 +54,7 @@ class PostDetailView(DetailView):
         return context
 
 
-# @method_decorator(login_required, name='dispatch')
+@method_decorator(superuser_required, name='get')
 class PostCreationView(FormView):
     template_name = 'news_app/post_create_or_update.html'
     form_class = PostCreationForm
@@ -89,6 +85,7 @@ class PostCreationView(FormView):
         return HttpResponseRedirect(reverse('news_app:news'))
 
 
+@method_decorator(superuser_required, name='get')
 class PostEditView(UpdateView):
     template_name = 'news_app/post_create_or_update.html'
     queryset = News.objects.all()
@@ -97,6 +94,7 @@ class PostEditView(UpdateView):
     success_url = reverse_lazy('news_app:news')
 
 
+@method_decorator(superuser_required, name='get')
 class PostDeleteView(DeleteView):
     model = News
     template_name = 'news_app/post_delete.html'
