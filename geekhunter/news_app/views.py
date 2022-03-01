@@ -100,6 +100,9 @@ class PostEditView(UpdateView):
     model = News
     form_class = PostEditForm
     success_url = reverse_lazy('news_app:news')
+    extra_context = {
+        'title': 'редактирование новости'
+    }
 
 
 @method_decorator(superuser_required, name='get')
@@ -108,3 +111,6 @@ class PostDeleteView(DeleteView):
     template_name = 'news_app/post_delete.html'
     context_object_name = 'post'
     success_url = reverse_lazy('news_app:news')
+    extra_context = {
+        'title': 'удаление новости'
+    }

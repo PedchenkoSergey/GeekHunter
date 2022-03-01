@@ -40,6 +40,9 @@ class EmployeeProfileView(View):
 class EmployeeProfileResumeView(ListView):
     template_name = 'employee_app/profile_resumes.html'
     context_object_name = 'resumes'
+    extra_context = {
+        'title': 'мои резюме'
+    }
 
     def get_queryset(self):
         return Resume.objects.filter(employee_id=self.request.user.id)
@@ -148,7 +151,7 @@ class ResumeDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         resume_id = self.get_object().id
-        context['title'] = self.get_object().title
+        context['title'] = 'Просмотр резюме'
         context['experiencies'] = Experience.objects.filter(resume_id=resume_id)
         context['educations'] = Education.objects.filter(resume_id=resume_id)
         context['courses'] = Courses.objects.filter(resume_id=resume_id)
@@ -160,6 +163,9 @@ class ResumeDeleteView(DeleteView):
     template_name = 'employee_app/resume_delete.html'
     context_object_name = 'resume'
     success_url = reverse_lazy('employee:profile_resumes')
+    extra_context = {
+        'title': 'удаление резюме'
+    }
 
 
 class ResumesView(PermissionRequiredMixin, ListView):
@@ -260,6 +266,9 @@ def resume_status_change(sender, instance, **kwargs):
 class EmployeeOffersView(ListView):
     template_name = 'employee_app/profile_offers.html'
     context_object_name = 'offers'
+    extra_context = {
+        'title': 'мои предложения'
+    }
 
     def get_queryset(self):
         return Offer.objects.filter(resume__employee=self.request.user.id).filter(status__in=['SENT', 'ACCEPTED'])
@@ -269,6 +278,9 @@ class EmployeeOfferAnswerView(FormView):
     template_name = 'employee_app/offer_answer.html'
     form_class = EmployeeOfferAnswerForm
     success_url = reverse_lazy('employee:profile_offers')
+    extra_context = {
+        'title': 'ответ на предложение'
+    }
 
     def get_context_data(self, **kwargs):
         context = super(EmployeeOfferAnswerView, self).get_context_data(**kwargs)
@@ -296,6 +308,9 @@ class MakeResponseView(FormView):
     form_class = EmployeeResponseForm
     template_name = 'employee_app/make_response.html'
     success_url = reverse_lazy('company:vacancies')
+    extra_context = {
+        'title': 'Отклик на вакансию'
+    }
 
     def get_form_kwargs(self):
         kwargs = super(MakeResponseView, self).get_form_kwargs()
@@ -323,6 +338,9 @@ class MakeResponseView(FormView):
 class EmployeeResponsesListView(ListView):
     template_name = 'employee_app/profile_responses.html'
     context_object_name = 'responses'
+    extra_context = {
+        'title': 'мои отклики'
+    }
 
     def get_queryset(self):
         return Response.objects.filter(resume__employee=self.request.user.id)
@@ -333,3 +351,6 @@ class ResponseDeleteView(DeleteView):
     template_name = 'employee_app/response_delete.html'
     context_object_name = 'response'
     success_url = reverse_lazy('employee:profile_responses')
+    extra_context = {
+        'title': 'удаление отклика'
+    }

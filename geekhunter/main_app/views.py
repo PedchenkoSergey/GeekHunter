@@ -40,6 +40,11 @@ class UserProfileView(FormView):
         form = UserProfileForm(instance=PortalUser.objects.get(id=self.request.user.id))
         return form
 
+    def get_context_data(self, **kwargs):
+        context = super(UserProfileView, self).get_context_data()
+        context['title'] = f'Профиль {self.request.user.username}'
+        return context
+
     def post(self, request, *args, **kwargs):
         user = PortalUser.objects.get(id=request.user.id)
         credentials = {}
