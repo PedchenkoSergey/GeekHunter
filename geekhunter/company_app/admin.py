@@ -2,12 +2,12 @@ from django.contrib import admin, messages
 from django.contrib.admin import SimpleListFilter
 from django.utils.translation import ngettext
 
-from .models import Company, HrManager, FavoriteResume, Card, Vacancy, Offer
 from .forms.AdminCompanyCardForm import AdminCompanyCardFrom
 from .forms.AdminVacancyForm import AdminVacancyFrom
+from .models import Company, HrManager, FavoriteResume, Card, Vacancy, Offer
 
 
-class ForReviewFilter(SimpleListFilter):
+class CompanyAppForReviewFilter(SimpleListFilter):
     title = 'Admin useful filters'
     parameter_name = 'moderation_status'
 
@@ -44,7 +44,7 @@ def make_declined(modeladmin, request, queryset):
 @admin.register(Card)
 class AdminCard(admin.ModelAdmin):
     list_display = ('title', 'about', 'moderation_status', 'status')
-    list_filter = (ForReviewFilter,)
+    list_filter = (CompanyAppForReviewFilter,)
     form = AdminCompanyCardFrom
     fieldsets = (
         ('General Information', {
@@ -64,7 +64,7 @@ class AdminCard(admin.ModelAdmin):
 @admin.register(Vacancy)
 class AdminVacancy(admin.ModelAdmin):
     list_display = ('title', 'moderation_status', 'status')
-    list_filter = (ForReviewFilter,)
+    list_filter = (CompanyAppForReviewFilter,)
     form = AdminVacancyFrom
     fieldsets = (
         ('General Information', {
@@ -81,7 +81,11 @@ class AdminVacancy(admin.ModelAdmin):
     actions = [make_approved, make_declined]
 
 
+@admin.register(Offer)
+class AdminOffer(admin.ModelAdmin):
+    list_display = ('title', 'resume', 'status',)
+
+
 admin.site.register(Company)
 admin.site.register(HrManager)
 admin.site.register(FavoriteResume)
-admin.site.register(Offer)
