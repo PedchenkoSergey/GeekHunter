@@ -182,13 +182,12 @@ class ResumesView(PermissionRequiredMixin, ListView):
         else:
             search_resume = self.request.GET.get('search')
             if search_resume:
-                resumes = Resume.objects.filter(status='ACTIVE', moderation_status='APPROVED').filter(
+                return Resume.objects.filter(status='ACTIVE', moderation_status='APPROVED').filter(
                     Q(title__icontains=search_resume) |
                     Q(experience_resumes__position__icontains=search_resume) |
                     Q(education_resumes__specialization__icontains=search_resume) |
                     Q(courses_resumes__specialization__icontains=search_resume)
-                ).order_by(*self.ordering)
-                return set(resumes)
+                ).order_by(*self.ordering).distinct()
             return Resume.objects.filter(status='ACTIVE', moderation_status='APPROVED').order_by(*self.ordering)
 
     def get_context_data(self, **kwargs):
@@ -200,8 +199,7 @@ class ResumesView(PermissionRequiredMixin, ListView):
                 Q(resume__experience_resumes__position__icontains=search_resume) |
                 Q(resume__education_resumes__specialization__icontains=search_resume) |
                 Q(resume__courses_resumes__specialization__icontains=search_resume)
-            )
-            context['favorite_resumes'] = set(context['favorite_resumes'])
+            ).distinct()
         else:
             context['favorite_resumes'] = FavoriteResume.objects.filter(hr_manager=self.request.user.id)
         return context
