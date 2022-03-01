@@ -13,6 +13,7 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, FormView, DetailView, DeleteView, UpdateView
+from django.views.generic.edit import DeletionMixin
 
 from company_app.models import FavoriteResume, Offer, HrManager, Vacancy
 from employee_app.forms.EmployeeOfferAnswerForm import EmployeeOfferAnswerForm
@@ -222,6 +223,16 @@ class ResumesView(PermissionRequiredMixin, ListView):
             favorite_resume.save()
 
         return HttpResponseRedirect(reverse('employee_app:resumes'))
+
+
+class FavoriteResumeDeleteView(View, DeletionMixin):
+    model = FavoriteResume
+    success_url = reverse_lazy('employee:resumes')
+
+    def post(self, request, *args, **kwargs):
+        favorite_vacancy = FavoriteResume.objects.get(id=request.POST.get('favorite_resume'))
+        favorite_vacancy.delete()
+        return HttpResponseRedirect(self.success_url)
 
 
 @method_decorator(csrf_exempt, name='dispatch')
