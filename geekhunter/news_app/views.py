@@ -1,6 +1,7 @@
 from django.contrib.auth.views import FormView
 from django.core import serializers
 from django.core.files.storage import default_storage
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
@@ -22,14 +23,21 @@ class PostListView(ListView):
     extra_context = {
         'title': 'Новости',
     }
-
     paginate_by = 3
+    ordering = ['-created_at']
 
     # Название шаблона
     template_name = 'news_app/news_list.html'
 
     def get_queryset(self):
-        return News.objects.filter(status='APPROVED').order_by('-created_at')
+        search_news = self.request.GET.get('search')
+        if search_news:
+            return News.objects.filter(status='APPROVED').filter(
+                Q(title__icontains=search_news) |
+                Q(topic__icontains=search_news) |
+                Q(text__icontains=search_news)
+            ).order_by(*self.ordering)
+        return News.objects.filter(status='APPROVED').order_by(*self.ordering)
 
 
 class PostDetailView(DetailView):
