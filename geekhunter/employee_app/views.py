@@ -119,6 +119,7 @@ class ResumeEditView(UpdateView):
             resume = Resume.objects.get(id=body['pk'])
             resume.title = body['title']
             resume.status = body['status']
+            resume.moderation_status = 'UNDER_REVIEW'
             resume.save()
             for key in body['fields']:
                 for value in body["fields"][key]:

@@ -176,6 +176,7 @@ class CompanyCardEditView(UpdateView):
         card.awards = request.POST.get('card-awards')
         card.priorities = request.POST.get('card-priorities')
         card.status = request.POST.get('card-status')
+        card.moderation_status = 'UNDER_REVIEW'
 
         if request.FILES:
             logo = request.FILES['company-logo']
