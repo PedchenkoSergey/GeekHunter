@@ -8,6 +8,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views import View
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView
+from django.views.generic.edit import DeletionMixin
 
 from company_app.forms.CompanyCardEditForm import CompanyCardEditForm
 from company_app.forms.CompanyOfferForm import CompanyOfferForm
@@ -90,6 +91,16 @@ class VacanciesView(PermissionRequiredMixin, ListView):
         return HttpResponseRedirect(reverse('company_app:vacancies'))
 
 
+class FavoriteVacancyDeleteView(View, DeletionMixin):
+    model = FavoriteVacancies
+    success_url = reverse_lazy('company:vacancies')
+
+    def post(self, request, *args, **kwargs):
+        favorite_vacancy = FavoriteVacancies.objects.get(id=request.POST.get('favorite_vacancy'))
+        favorite_vacancy.delete()
+        return HttpResponseRedirect(self.success_url)
+
+
 class VacancyCreationView(FormView):
     template_name = 'company_app/vacancy_create_or_update.html'
     form_class = VacancyCreationForm
@@ -135,6 +146,9 @@ class CompanyCardEditView(UpdateView):
     model = Card
     form_class = CompanyCardEditForm
     success_url = reverse_lazy('company:profile')
+    extra_context = {
+        'title': 'Редактирование карточки'
+    }
 
     def get_context_data(self, **kwargs):
         context = super(CompanyCardEditView, self).get_context_data(**kwargs)
@@ -162,6 +176,7 @@ class CompanyCardEditView(UpdateView):
         card.awards = request.POST.get('card-awards')
         card.priorities = request.POST.get('card-priorities')
         card.status = request.POST.get('card-status')
+        card.moderation_status = 'UNDER_REVIEW'
 
         if request.FILES:
             logo = request.FILES['company-logo']
@@ -180,6 +195,9 @@ class CompanyCardEditView(UpdateView):
 class CompanyProfileVacanciesView(ListView):
     template_name = 'company_app/profille_vacancies.html'
     context_object_name = 'vacancies'
+    extra_context = {
+        'title': 'Мои вакансии'
+    }
 
     def get_queryset(self):
         return Vacancy.objects.filter(company_id=self.request.user.id)
@@ -191,6 +209,9 @@ class VacancyEditView(UpdateView):
     model = Vacancy
     form_class = VacancyEditForm
     success_url = reverse_lazy('company_app:profile_vacancies')
+    extra_context = {
+        'title': 'Редактирование вакансии'
+    }
 
 
 class VacancyDeleteView(DeleteView):
@@ -198,12 +219,18 @@ class VacancyDeleteView(DeleteView):
     template_name = 'company_app/vacancy_delete.html'
     context_object_name = 'vacancy'
     success_url = reverse_lazy('company:profile_vacancies')
+    extra_context = {
+        'title': 'удаление вакансии'
+    }
 
 
 class MakeOfferView(FormView):
     form_class = CompanyOfferForm
     template_name = 'company_app/make_offer.html'
     success_url = reverse_lazy('employee:resumes')
+    extra_context = {
+        'title': 'Предложение вакансии',
+    }
 
     def get_form_kwargs(self):
         kwargs = super(MakeOfferView, self).get_form_kwargs()
@@ -231,6 +258,9 @@ class MakeOfferView(FormView):
 class CompanyOffersListView(ListView):
     template_name = 'company_app/profile_offers.html'
     context_object_name = 'offers'
+    extra_context = {
+        'title': 'Мои предложения'
+    }
 
     def get_queryset(self):
         return Offer.objects.filter(vacancy__company=self.request.user.id)
@@ -241,11 +271,17 @@ class OfferDeleteView(DeleteView):
     template_name = 'company_app/offer_delete.html'
     context_object_name = 'offer'
     success_url = reverse_lazy('company:profile_offers')
+    extra_context = {
+        'title': 'удаление предложения'
+    }
 
 
 class CompanyResponsesView(ListView):
     template_name = 'company_app/profile_responses.html'
     context_object_name = 'responses'
+    extra_context = {
+        'title': 'мои отклики'
+    }
 
     def get_queryset(self):
         return Response.objects.filter(vacancy__company=self.request.user.id).filter(status__in=['SENT', 'ACCEPTED'])
@@ -255,6 +291,9 @@ class CompanyResponseAnswerView(FormView):
     template_name = 'company_app/response_answer.html'
     form_class = CompanyResponseAnswerForm
     success_url = reverse_lazy('company:profile_responses')
+    extra_context = {
+        'title': 'ответ на отклик'
+    }
 
     def get_context_data(self, **kwargs):
         context = super(CompanyResponseAnswerView, self).get_context_data(**kwargs)

@@ -7,7 +7,17 @@
         <div class="card bg-gradient text-white m-3 w-50">
             <ul class="list-group list-group-flush">
                 {% for favorite_resume in favorite_resumes %}
-                    <li class="list-group-item">{{ favorite_resume }}</li>
+                    <li class="list-group-item d-flex justify-content-between">{{ favorite_resume }}
+                        <div class="btn-group h-100">
+                            <a class="btn btn-warning btn-sm"
+                               href="{% url 'company:make_offer' favorite_resume.resume.id %}">Offer</a>
+                            <form method="post" action="{% url 'employee:favorite_resume_delete' favorite_resume.id %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="favorite_resume" value="{{ favorite_resume.id }}">
+                                <input class="btn btn-danger btn-sm" type="submit" value="Удалить">
+                            </form>
+                        </div>
+                    </li>
                 {% endfor %}
             </ul>
         </div>

@@ -13,6 +13,7 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, FormView, DetailView, DeleteView, UpdateView
+from django.views.generic.edit import DeletionMixin
 
 from company_app.models import FavoriteResume, Offer, HrManager, Vacancy
 from employee_app.forms.EmployeeOfferAnswerForm import EmployeeOfferAnswerForm
@@ -39,6 +40,9 @@ class EmployeeProfileView(View):
 class EmployeeProfileResumeView(ListView):
     template_name = 'employee_app/profile_resumes.html'
     context_object_name = 'resumes'
+    extra_context = {
+        'title': 'мои резюме'
+    }
 
     def get_queryset(self):
         return Resume.objects.filter(employee_id=self.request.user.id)
@@ -115,6 +119,7 @@ class ResumeEditView(UpdateView):
             resume = Resume.objects.get(id=body['pk'])
             resume.title = body['title']
             resume.status = body['status']
+            resume.moderation_status = 'UNDER_REVIEW'
             resume.save()
             for key in body['fields']:
                 for value in body["fields"][key]:
@@ -147,7 +152,7 @@ class ResumeDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         resume_id = self.get_object().id
-        context['title'] = self.get_object().title
+        context['title'] = 'Просмотр резюме'
         context['experiencies'] = Experience.objects.filter(resume_id=resume_id)
         context['educations'] = Education.objects.filter(resume_id=resume_id)
         context['courses'] = Courses.objects.filter(resume_id=resume_id)
@@ -159,6 +164,9 @@ class ResumeDeleteView(DeleteView):
     template_name = 'employee_app/resume_delete.html'
     context_object_name = 'resume'
     success_url = reverse_lazy('employee:profile_resumes')
+    extra_context = {
+        'title': 'удаление резюме'
+    }
 
 
 class ResumesView(PermissionRequiredMixin, ListView):
@@ -182,13 +190,12 @@ class ResumesView(PermissionRequiredMixin, ListView):
         else:
             search_resume = self.request.GET.get('search')
             if search_resume:
-                resumes = Resume.objects.filter(status='ACTIVE', moderation_status='APPROVED').filter(
+                return Resume.objects.filter(status='ACTIVE', moderation_status='APPROVED').filter(
                     Q(title__icontains=search_resume) |
                     Q(experience_resumes__position__icontains=search_resume) |
                     Q(education_resumes__specialization__icontains=search_resume) |
                     Q(courses_resumes__specialization__icontains=search_resume)
-                ).order_by(*self.ordering)
-                return set(resumes)
+                ).order_by(*self.ordering).distinct()
             return Resume.objects.filter(status='ACTIVE', moderation_status='APPROVED').order_by(*self.ordering)
 
     def get_context_data(self, **kwargs):
@@ -200,8 +207,7 @@ class ResumesView(PermissionRequiredMixin, ListView):
                 Q(resume__experience_resumes__position__icontains=search_resume) |
                 Q(resume__education_resumes__specialization__icontains=search_resume) |
                 Q(resume__courses_resumes__specialization__icontains=search_resume)
-            )
-            context['favorite_resumes'] = set(context['favorite_resumes'])
+            ).distinct()
         else:
             context['favorite_resumes'] = FavoriteResume.objects.filter(hr_manager=self.request.user.id)
         return context
@@ -224,6 +230,16 @@ class ResumesView(PermissionRequiredMixin, ListView):
             favorite_resume.save()
 
         return HttpResponseRedirect(reverse('employee_app:resumes'))
+
+
+class FavoriteResumeDeleteView(View, DeletionMixin):
+    model = FavoriteResume
+    success_url = reverse_lazy('employee:resumes')
+
+    def post(self, request, *args, **kwargs):
+        favorite_vacancy = FavoriteResume.objects.get(id=request.POST.get('favorite_resume'))
+        favorite_vacancy.delete()
+        return HttpResponseRedirect(self.success_url)
 
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -251,6 +267,9 @@ def resume_status_change(sender, instance, **kwargs):
 class EmployeeOffersView(ListView):
     template_name = 'employee_app/profile_offers.html'
     context_object_name = 'offers'
+    extra_context = {
+        'title': 'мои предложения'
+    }
 
     def get_queryset(self):
         return Offer.objects.filter(resume__employee=self.request.user.id).filter(status__in=['SENT', 'ACCEPTED'])
@@ -260,6 +279,9 @@ class EmployeeOfferAnswerView(FormView):
     template_name = 'employee_app/offer_answer.html'
     form_class = EmployeeOfferAnswerForm
     success_url = reverse_lazy('employee:profile_offers')
+    extra_context = {
+        'title': 'ответ на предложение'
+    }
 
     def get_context_data(self, **kwargs):
         context = super(EmployeeOfferAnswerView, self).get_context_data(**kwargs)
@@ -287,6 +309,9 @@ class MakeResponseView(FormView):
     form_class = EmployeeResponseForm
     template_name = 'employee_app/make_response.html'
     success_url = reverse_lazy('company:vacancies')
+    extra_context = {
+        'title': 'Отклик на вакансию'
+    }
 
     def get_form_kwargs(self):
         kwargs = super(MakeResponseView, self).get_form_kwargs()
@@ -314,6 +339,9 @@ class MakeResponseView(FormView):
 class EmployeeResponsesListView(ListView):
     template_name = 'employee_app/profile_responses.html'
     context_object_name = 'responses'
+    extra_context = {
+        'title': 'мои отклики'
+    }
 
     def get_queryset(self):
         return Response.objects.filter(resume__employee=self.request.user.id)
@@ -324,3 +352,6 @@ class ResponseDeleteView(DeleteView):
     template_name = 'employee_app/response_delete.html'
     context_object_name = 'response'
     success_url = reverse_lazy('employee:profile_responses')
+    extra_context = {
+        'title': 'удаление отклика'
+    }

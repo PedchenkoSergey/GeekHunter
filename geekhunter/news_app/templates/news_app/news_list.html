@@ -3,13 +3,14 @@
 
 {% block content %}
     <div class="container">
-        <h1>Новости:</h1>
         {% if perms.news_app.delete_news %}
-            <div class="d-grid gap-2 d-md-block">
-                <a role="button" type="button" class="btn btn-warning" href="{% url 'news:post_create' %}">Создать новость</a>
+            <div class="d-grid gap-2 d-md-block mt-3">
+                <a role="button" type="button" class="btn btn-warning" href="{% url 'news:post_create' %}">Создать
+                    новость</a>
             </div>
+            <div class="dropdown-divider mb-4"></div>
         {% endif %}
-        <div class="dropdown-divider mb-4"></div>
+        {% include 'news_app/includes/inc_search_bar.html' %}
         <div class="d-flex flex-column flex-wrap mb-2">
             {% include 'main_app/includes/inc_news.html' %}
         </div>
